@@ -10,6 +10,9 @@
 *.ckpt
 *.pt
 
+# Crawled data (regenerate with `python -m navigator crawl`)
+data/
+
 # Python
 __pycache__/
 *.py[cod]
