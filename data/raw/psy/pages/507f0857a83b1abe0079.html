@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>MMZ | Home</title>
+        <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Reservationssystem des MMZ">
+        <meta name="author" content="Alex Regenass, Institut für Psychologie, Universität Bern">
+    </head>
+    <body>
+        <div id="wrap">
+            <!-- Navigation -->
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <div class="container">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="/">MMZ</a>
+                        <div class="nav-collapse">
+                            <ul class='nav pull-left'><li class="active"><a href="/home/index"><i class="icon-home" title="Startseite"></i></a></li><li><a href="/home/agb">AGB</a></li><li><a href="/home/contact">Kontakt</a></li></ul><ul class='nav pull-right'><li><a href="/session/login"><i class="icon-user"></i> Anmelden</a></li></ul>                        </div>
+                    </div>
+                </div>
+            </div>
+
+             <!-- Message of the day -->
+            
+            <!-- Content -->
+            <div class="container">
+                
+<div class="hero-unit">
+    <h1>MMZ <small>Multimedia-Zentrum des Instituts für Psychologie</small></h1>
+    <p>Reservation von Räumen und Arbeitsplätzen, Ausleihe von Geräten.</p>
+            <p><a href="/session/login" class="btn btn-primary btn-large btn-success">Anmelden</a></p>
+    </div>
+
+<div class="row">
+    <div class="span8">
+        <h2>Wo wir helfen können</h2>
+        <ul>
+            <li>Technische Unterstützung bei der Planung von Experimenten </li>
+            <li>Informatik-Support für das Institut für Psychologie (Mac und Windows), Einkauf von Hardware und Software</li>
+            <li>Hilfe bei Fragen zu Videoschnitt und Bild- oder Tonbearbeitung</li>
+            <li>Anleitung zur digitalen Auswertung von Datenerhebungen</li>
+            <li>Support bei der Digitalisierung und Archivierung alter Daten (Video, Foto, Audio, Papier)</li>
+            <li>Entwicklung von Geräten für Forschung und Experimente</li>
+            <li>Ausleihe von Geräten</li>
+        </ul>
+    </div>
+    <!--
+    Farben wie bei .alert-info, padding führt zu Umbruch...
+    <div class="span4" style="background-color: rgb(217, 237, 247);border-bottom-color: rgb(188, 232, 241);border-left-color: rgb(188, 232, 241);border-right-color: rgb(188, 232, 241);border-top-color: rgb(188, 232, 241);color: rgb(58, 135, 173);text-align:center;">
+    -->
+   <div class="span4 alert-info" style="text-align:center;">
+        <h3>Ausleihe</h3>
+        <p>Montag-Freitag 10:00-12:00 Uhr</p>
+        <h3>Öffnungszeiten</h3>
+        <p>Montag-Donnerstag 09:00-12:30 / 13:30-17:00 Uhr</p>
+        <p>Freitag 09:00-12:30 / 13:30-16:00 Uhr</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span4">
+        <h2>Räume</h2>
+        <p>Hier können Räume reserviert werden, die dem Institut für Psychologie zugeteilt sind. Alle anderen Räume (z.B. Seminar- oder Vorlesungsräume) müssen über das <a href="http://www.hoerraeume.unibe.ch/">Hörraum-Zentrum</a> reserviert werden.</p>
+    </div>
+    <div class="span4">
+        <h2>Arbeitsplätze</h2>
+        <p>Im Raum A311 stehen drei Arbeitsplätze zur Verfügung. Diese sind ausgerüstet mit Software für Videoschnitt und Digitalisierung, Audio-Aufnahme (Digitalisierung alter Tonmedien), Bildbearbeitung für Publikationen, Scan-Möglichkeiten für Dokumente (Massenscanner) sowie analoger Fotos (Dias, Negative).</p>
+    </div>
+    <div class="span4">
+        <h2>Geräte</h2>
+        <p>Verleih von Geräten wie Diktiergeräte, Video- und Fotokameras, Beamern sowie Computerzubehör zu Studien- und Experimentalzwecken. Bitte die speziellen Ausleihzeiten beachten! Falls Fragen oder Unsicherheiten bezüglich der Gerätebedienung bestehen, bitte vorgängig Kontakt mit dem <a href="mailto:mmz@psy.unibe.ch">MMZ-Team</a> aufnehmen.</p>
+    </div>
+</div>
+
+
+            </div>
+
+            <div id="push"></div>
+
+        </div>
+
+        <div id="footer">
+            <div class="container">
+                <p class="muted">
+                    Institut für Psychologie, Universität Bern (3.4.5)
+                </p>
+            </div>
+        </div>
+
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- close alert after 5 seconds if there is one -->
+    <script type="text/javascript">
+        setTimeout(function () {
+            $('.alert-fade').alert('close')
+        }, 5000)
+    </script>
+    </body>
+</html>

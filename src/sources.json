@@ -1,0 +1,19 @@
+{
+  "_comment": "Extra sources on top of Docs/unibe_sous_domaines_publics_etendus.xlsx. Add a new institution by appending an entry here; no code change needed.",
+  "sources": [
+    {
+      "id": "artorg",
+      "name": "ARTORG Center for Biomedical Engineering Research",
+      "url": "https://www.artorg.unibe.ch/",
+      "institution": "ARTORG",
+      "seed_paths": ["/research/", "/about_us/people/"]
+    },
+    {
+      "id": "dcberne",
+      "name": "Diabetes Center Berne",
+      "url": "https://www.dcberne.com/",
+      "institution": "Diabetes Center Berne",
+      "seed_paths": []
+    }
+  ]
+}

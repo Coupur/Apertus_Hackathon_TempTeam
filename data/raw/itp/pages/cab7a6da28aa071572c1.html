@@ -1,0 +1,791 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Seminar "Fields and Strings"</title>
+<!-- 2014-10-31 Fri 09:58 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Susanne Reffert" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="worg-classic.css" />
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
+
+<body>
+
+<div id="content">
+<h1 class="title">Seminar "Fields and Strings"</h1>
+</div>
+<br>
+<p>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-3">Time/Place:</h2>
+<div class="outline-text-2" id="text-2">
+
+<p>
+<!-- In the Spring Semester 25, the seminar takes place on Tuesdays 10:15-12:00 in room ExWi 119.--!>
+
+ In the Autumn Semester 26, the seminar takes place on Thursday at 14:15 in room ExWi B116. </p>
+</div>
+</div>
+
+
+ <div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">Schedule:</h2>
+<div class="outline-text-2" id="text-3">
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Speaker</th>
+    <th>Title</th>
+     <tr>
+     <td>24.09.26</td>
+    <td>Federico Mele (ITP)</td>
+    <td>Free energies and Phases of the phi^6 vector model at large charge and large N</td>
+  </tr>
+       <tr>
+     <td>08.10.26</td>
+    <td>Maximilian Schwick (ITP)</td>
+    <td>From Non-Perturbative Hermitian Matrix Models to 3d Gravity</td>
+  </tr>
+  <tr>
+     <td>15.10.26</td>
+    <td>Victor Gorbenko (EPFL)</td>
+    <td>Non-local symmetries of local effective theories</td>
+  </tr>
+  <tr>
+      <td>22.10.26</td>
+    <td>Chiara Saffirio (U. Basel)</td>
+    <td>TBA</td>
+  </tr>
+    <tr>
+      <td>29.10.26</td>
+    <td>Johan Hendriksson (CERN)</td>
+    <td>TBA</td>
+  </tr>
+    <tr>
+      <td>12.11.26</td>
+    <td>Yineng Zhou (UniGe)</td>
+    <td>Three Hamiltonians are Sufficient for Unitary k-Design in Temporal Ensemble</td>
+  </tr>
+      <tr>
+      <td>19.11.26</td>
+    <td>Monica Guica (CERN/EPFL)</td>
+    <td>TBA</td>
+  </tr>
+       </table>
+</div>
+</div>
+
+<!--
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">Past seminars:</h2>
+<div class="outline-text-2" id="text-3">
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Speaker</th>
+    <th>Title</th>
+  </tr>
+     <td>17.3.26</td>
+    <td>Fiona Seibold (EPFL)</td>
+    <td>Scattering on effective strings and membranes</td>
+  </tr>
+  <tr>
+     <td>24.3.26</td>
+    <td>Martin Schnabl (FZU Prag)</td>
+    <td>BCFT RG flows from open string field theory</td>
+  </tr>
+      <td>14.4.26</td>
+    <td>Tomas Reis (CERN)</td>
+    <td>Renormalon Echoes from the Crystal Phase</td>
+  </tr>
+        <td>21.4.26</td>
+    <td>David Osten (U. Worclaw)</td>
+    <td>An integrable sector for the membrane</td>
+  </tr>
+      <td>28.4.26</td>
+    <td>Jesse Woods (ITP)</td>
+    <td>TBA</td>
+  </tr>
+    <td>5.5.26</td>
+    <td>Eliezer Rabinovici (Hebrew U.)</td>
+    <td>TBA</td>
+  </tr>
+      <td>19.5.26</td>
+    <td>Nicola Dondi (ICTP)</td>
+    <td>TBA</td>
+  </tr>
+       <tr>
+     <td>25.9.25</td>
+    <td>Jesse Woods (ITP)</td>
+    <td>Comments on QED3 in a Magnetic Field</td>
+  </tr>
+  <tr>
+     <td>9.10.2025</td>
+    <td>Jahmall Bersini (ITP)</td>
+    <td>A Semiclassical Approach to Neutral Heavy Operators in Conformal Field Theory</td>
+  </tr>
+      <td>16.10.2025</td>
+    <td>Barak Gabai (EPFL)</td>
+    <td>Bootstrapping 2 point functions in Matrix Quantum Mechanics</td>
+  </tr>
+   <tr>
+     <td>23.10.2025</td>
+    <td>Christoph Keller (U. Arizona)</td>
+    <td>Scales in Holographic 2d CFTs</td>
+  </tr>
+  <tr>
+     <td>30.10.2025</td>
+    <td>Ethan Torres (CERN)</td>
+    <td>QCD String Axions and M-theory</td>
+  </tr>
+  <tr>
+     <td>06.11.2025</td>
+    <td>Adèle Le Borgne (ITP)</td>
+    <td>Trapping-potential dependence of the unitary Fermi gas at the BCS-BEC crossover</td>
+  </tr>
+    <tr>
+     <td>20.11.2025</td>
+    <td>Maximilian Schwick (ITP)</td>
+    <td>Resurgence and the Gross-Neveu Model in 2d</td>
+  </tr>
+      <tr>
+     <td>4.12.2025</td>
+    <td>Nicolò Petri (INFN Torino)</td>
+    <td>Boson stars and the Weak Gravity Conjecture in AdS</td>
+  </tr>
+       <tr>
+     <td>25.2.25</td>
+    <td>Jesse Woods (ITP)</td>
+    <td>TBA</td>
+  </tr>
+       <tr>
+     <td>11.3.2025</td>
+    <td>Maximilian Schwick (UniGe)</td>
+    <td>TBA</td>
+  </tr>
+         <tr>
+     <td>25.3.2025</td>
+    <td>Nicolò Petri (INFN Torino)</td>
+    <td>TBA</td>
+  </tr>
+           <tr>
+     <td>1.4.2025</td>
+    <td>Luigi Tizzano (CERN)</td>
+    <td>TBA</td>
+  </tr>
+    <td>28.02.2023</td>
+    <td>Marco Meineri (EPFL)</td>
+    <td>Defects in conformal field theory</td>
+  </tr>
+    <tr>
+     <td>21.03.2023</td>
+    <td>Matthew Dodelson (CERN)</td>
+    <td>Zeroing in on thermal correlators</td>
+  </tr>
+   <tr>
+     <td>28.03.2023</td>
+    <td>Oleg Antipin (Ruder Boskovic Institute)</td>
+    <td>Gauge theories at large charges</td>
+  </tr>
+       <tr>
+     <td>04.04.2023</td>
+    <td>Sinya Aoki (YITP)</td>
+    <td>Energy (non-)conservation and an alternative conserved charge in a curved spacetime</td>
+      </tr>
+     <tr>
+     <td>23.05.2023</td>
+    <td>Daniill Krichevskiy (ITP Bern)</td>
+    <td>Non-relativistic CFT: Fermi gas in a harmonic trap</td>
+  </tr>
+     <tr>
+     <td>30.05.2023</td>
+    <td>Kara Farnsworth (UniGe)</td>
+    <td>Hamiltonian Truncation and Effective Field Theory</td>
+  </tr>
+       <tr>
+     <td>13.06.2023</td>
+    <td>Jahmall Bersini (IPMU)</td>
+    <td>The θ-angle physics at finite baryon density</td>
+  </tr>
+         <tr>
+     <td>20.06.2023</td>
+    <td>Arnab Kundu (Saha Inst.)</td>
+    <td>Driven CFT & Holography</td>
+  </tr>
+      <tr>
+     <td>29.9.2022</td>
+    <td>Giacomo Sberveglieri (ITP Bern)</td>
+    <td>TBA</td>
+  </tr>
+    <tr>
+     <td>13.10.2022</td>
+    <td>Jun-ichi Sakamoto (U. Torino)</td>
+    <td>2d Integrable field theories from 4d CS theory with 2d systems and its lattice discretization</td>
+  </tr>
+    <tr>
+     <td>20.10.2022</td>
+    <td>Anastasios Petkou (U. Thessaloniki)</td>
+    <td>Some remarks on thermal CFTs and massless Feynman graphs</td>
+  </tr>
+   <tr>
+     <td>27.10.2022</td>
+    <td>Fabio Apruzzi (U. Padova)</td>
+    <td>Non-Invertible Symmetries from Holography and Branes</td>
+  </tr>
+     <tr>
+     <td>10.11.2022</td>
+    <td>Alessandro Pini (U. Torino)</td>
+    <td>Localization vs holography in 4d N=2 SCFTs</td>
+  </tr>
+    <tr>
+     <td>17.11.2022</td>
+    <td>Paolo Soresina (CERN)</td>
+    <td>TBA</td>
+  </tr>
+    <tr>
+     <td>1.12.2022</td>
+    <td>Rafael Moser (ITP Bern)</td>
+    <td>TBA</td>
+  </tr>
+   <tr>
+     <td>8.12.2022</td>
+    <td>Francesco Galvagno (ETHZ)</td>
+    <td>TBA</td>
+  </tr>
+
+      <tr>
+     <td>31.03.2021</td>
+    <td>Thiago Araujo (ITP Bern)</td>
+    <td>TBA</td>
+  </tr>
+      <tr>
+     <td>21.04.2021</td>
+    <td>Vito Pellizzani (ITP Bern)</td>
+    <td>TBA</td>
+  </tr>
+      <tr>
+     <td>05.05.2021</td>
+    <td>Nicola Dondi (ITP Bern)</td>
+    <td>TBA</td>
+  </tr>
+   <tr>
+     <td>02.06.2021</td>
+    <td>Donald Youmans (ITP Bern)</td>
+    <td>TBA</td>
+  </tr>
+        <tr>
+     <td>3.12.2020</td>
+    <td>Ioannis Kalogerakis (ITP Bern)</td>
+    <td>TBA</td>
+  </tr>
+      <tr>
+     <td>5.11.2020</td>
+    <td>Donald Youmans (ITP Bern)</td>
+    <td>TBA</td>
+  </tr>
+     <tr>
+     <td>22.10.2020</td>
+    <td>Thiago Araujo (ITP Bern)</td>
+    <td>Remarks on affine Yangians and plane partitions fermion-boson duality</td>
+  </tr>
+      <tr>
+     <td>08.10.2020</td>
+    <td>Vito Pellizzani (ITP Bern)</td>
+    <td>Near-Schrödinger dynamics at large charge</td>
+  </tr>
+<tr>
+     <td>24.09.2020</td>
+    <td>Nicola Dondi (ITP Bern)</td>
+    <td>The a-theorem in the large-N expansion</td>
+  </tr>
+  <tr>
+     <td>12.12.2019</td>
+    <td>Thiago Araujo (ITP Bern)</td>
+    <td>TBA</td>
+  </tr>
+        <tr>
+     <td>5.12.2019</td>
+    <td>Hongliang Jiang (ITP Bern)</td>
+    <td>TBA</td>
+         </tr>
+ <tr>
+     <td>28.11.2019</td>
+    <td>Gabriel Cuomo (EPFL)</td>
+    <td>The epsilon expansion meets semiclassics</td>
+  </tr>
+ <tr>
+     <td>7.11.2019</td>
+    <td>Andrew Gasbarro (ITP)</td>
+    <td>Curved Lattice Field Theory for CFT Data</td>
+  </tr>
+        <tr>
+     <td>24.10.2019</td>
+    <td>Marco Serone (SISSA)</td>
+    <td>Conformality Loss, Walking, and 4d Complex CFTs at Weak Coupling</td>
+  </tr>
+   <tr>
+     <td>10.10.2019</td>
+    <td>Ioannis Kalogerakis (ITP Bern)</td>
+    <td>Black Holes and Holographic Quantum Mechanics</td>
+  </tr>
+  <tr>
+     <td>14.5.2019</td>
+    <td>Vladimir Kazakov (ENS)</td>
+    <td>Conformal Fishnet Theory in any dimension</td>
+  </tr>
+     <tr>
+     <td>30.4.2019</td>
+    <td>Cristina Diamantini (U. Perugia)</td>
+    <td>Superinsulators: strings in the Lab</td>
+  </tr>
+    <tr>
+      <td>16.4.2019</td>
+    <td>Masataka Watanabe (CERN)</td>
+    <td>Chern-Simons-matter theory at large baryon number</td>
+  </tr>
+  <tr>
+     <td>9.4.2019</td>
+    <td>Wolfgang Lerche (CERN)</td>
+    <td>On Matrix Factorizations, Residue Pairings and Homological Mirror Symmetry</td>
+  </tr>
+         <tr>
+     <td>19.3.2019</td>
+    <td>Stephan Stieberger (MPI Munich)</td>
+    <td>Strings on the Celestial Sphere</td>
+  </tr>
+         <tr>
+     <td>26.2.2019</td>
+    <td>Mohab Abou Zeid (U. Göttingen)</td>
+    <td>T-duality in (2,1) superspace and SKT geometry</td>
+  </tr>
+     <tr>
+     <td>07.2.2019</td>
+    <td>Kentaroh Yoshida (U. Kyoto)</td>
+    <td>Generalized supergravity and Weyl anomaly cancellation</td>
+  </tr>
+      <tr>
+     <td>23.1.2019</td>
+    <td>Fotis Farakos (KU Leuven)</td>
+    <td>FI terms in supergravity without gauged R-symmetry</td>
+  </tr>
+          <tr>
+     <td>13.12.2018</td>
+    <td>Marco Billò (U. Torino)</td>
+    <td>Matrix models for N=2 SYM theories</td>
+  </tr>
+      <tr>
+     <td>06.12.2018</td>
+    <td>Alessandro Sfondrini (ETHZ)</td>
+    <td>TBA</td>
+  </tr>
+        <tr>
+     <td>15.11.2018</td>
+    <td>Keita Nii (ITP)</td>
+    <td>Seiberg N-ality</td>
+  </tr>
+     <tr>
+     <td>8.11.2018</td>
+    <td>Seung Joo Lee (CERN)</td>
+    <td>Tensionless Strings and Quantum Gravity Conjectures</td>
+  </tr>
+         <tr>
+     <td>1.11.2018</td>
+    <td>Alexander Zhiboedov (CERN)</td>
+    <td>Conformal Bootstrap At Large Charge</td>
+  </tr>
+    <tr>
+     <td>25.10.2018</td>
+    <td>Costas Bachas (ENS)</td>
+    <td>Some lessons from/for Supergravity in AdS4/CFT3</td>
+  </tr>
+      <tr>
+           <td>18.10.2018</td>
+    <td>Hongliang Jiang (ITP)</td>
+    <td>Quantum Entanglement and Flat Holography </td>
+  </tr>
+     <td>4.10.2018</td>
+    <td>Gabriele Tartaglino-Mazzucchelli (ITP)</td>
+    <td>Higher-derivative invariants in 6D supergravity</td>
+  </tr>
+   <tr>
+     <td>27.9.2018</td>
+    <td>Samuel Favrod (ETHZ)</td>
+    <td>The large-charge expansion for Schroedinger systems</td>
+  </tr>
+  <tr>
+     <td>20.9.2018</td>
+    <td>Anton de la Fuente (EPFL)</td>
+    <td>The superfluid universality class of large charge operators</td>
+  </tr>
+  <tr>
+     <td>22.5.2018</td>
+    <td>Yuta Sekiguchi (ITP)</td>
+    <td>On the extent of supersymmetry breaking via T-duality</td>
+  </tr>
+  <tr>
+     <td>29.5.2018</td>
+    <td>Srijit Bhattacharjee (IIIT Allahabad)</td>
+    <td>Mass inflation instability in Black Holes</td>
+  </tr>
+  <tr>
+     <td>24.4.2018</td>
+    <td>Raphael Belliard (DESY)</td>
+    <td>Emergent quantum geometry from heavy charges in CFT and applications</td>
+  </tr>
+   <tr>
+     <td>17.4.2018</td>
+    <td>Jan Plefka (HU Berlin)</td>
+    <td>Soft theorems and hidden symmetries in gluon and graviton scattering</td>
+  </tr>
+  <tr>
+     <td>27.3.2018</td>
+    <td>Ahmad Zein Assi (ITP)</td>
+    <td>N=2* from String Theory</td>
+  </tr>
+  <tr>
+     <td>20.3.2018</td>
+    <td>Subodh Patil (NBI)</td>
+    <td>Tensor bounds on the hidden universe</td>
+  </tr>
+  <tr>
+     <td>13.3.2018</td>
+    <td>Orestis Loukas (ITP)</td>
+    <td>Holographic Superfluids at Large Charge, Part II</td>
+<tr>
+     <td>6.3.2018</td>
+    <td>Orestis Loukas (ITP)</td>
+    <td>Holographic Superfluids at Large Charge</td>
+  </tr>
+     <tr>
+     <td>20.2.2018</td>
+    <td>Kumar Narain (ICTP)</td>
+    <td>Boundary conditions and localization on AdS</td>
+  </tr>
+   <tr>
+     <td>14.12.2017</td>
+    <td>Chrysoula Markou (UPMC, Paris)</td>
+    <td>Nonlinear Supersymmetry</td>
+  </tr>
+    <tr>
+     <td>7.12.2017</td>
+    <td>Amit Sever (CERN)</td>
+    <td>S-matrix bootstrap for large N confining gauge theories</td>
+  </tr>
+  <tr>
+    <td>23.11.2017</td>
+    <td>Florent Baume (EPFL)</td>
+    <td>Gauge Enhancements in F-theory via Mordell–Weil Torsion</td>
+  </tr>
+     <tr>
+   <td>16.11.2017</td>
+    <td>Antonio Amariti (INFN Milano)</td>
+    <td>4d/3d reduction of (super)symmetry enhancements</td>
+  </tr>
+    <tr>
+   <td>9.11.2017</td>
+    <td>Jun Nian (IHES)</td>
+    <td>Gravity dual of 2d N=(2,2)* SYM theory and integrable models</td>
+  </tr>
+   <tr>
+      <td>2.11.2017</td>
+    <td>Keita Nii (ITP)</td>
+    <td>3d Deconfinement method & S-confining gauge theories </td>
+  </tr>
+       <tr>
+       <td>26.10.2017</td>
+    <td>Adrian Lewandowksi (ITP)</td>
+    <td>Asymptotic propagators for mixed spin-1/2 fermions</td>
+  </tr>
+  <tr>
+        <td>12.10.2017</td>
+    <td>Marine Samsonyan (CERN)</td>
+    <td>The Supercurrent and Einstein equations in the Superconformal formulation</td>
+  </tr>
+  <tr>
+     <td>5.10.2017</td>
+    <td>Amihay Hanany (Imperial College)</td>
+    <td>5 dimensional gauge theories and the Higgs branch at infinite coupling</td>
+  </tr>
+  <tr>
+       <td>28.9.2017</td>
+    <td>Alessandra Gnecchi (CERN)</td>
+    <td>Aspects of black holes and holography in gauged Supergravity</td>
+  </tr>
+  <tr>
+          <td>19.9.2017</td>
+    <td>Deb Sarkar (ITP Bern)</td>
+    <td>Entanglement reconstruction of asymptotically AdS metric from conformal field theory</td>
+    </tr>
+    <tr>
+             <td>13.7.2017</td>
+    <td>Chong-Sun Chu (NTHU)</td>
+    <td> Holography of BCFT</td>
+  </tr>
+<tr>
+             <td>11.7.2017</td>
+    <td>Kentaroh Yoshida (Kyoto University)</td>
+    <td> Yang-Baxter deformations and generalized supergravity</td>
+  </tr>
+       <td>13.6.2017</td>
+    <td>Maxime Gabella</td>
+    <td>BPS graphs: from spectral networks to BPS quivers</td>
+  </tr>
+              <tr>
+    <td>16.05.2017</td>
+    <td>Antonio Amariti (ITP Bern)</td>
+    <td>2d c-extremization from toric geometry</td>
+  </tr>
+    <tr>
+    <td>9.5.2017</td>
+    <td>Luca Cassia (Milano Bicocca)</td>
+    <td>4D SCFTs compactified on a Riemann surface</td>
+  </tr>
+            <tr>
+    <td>2.05.2017</td>
+    <td>Yuta Sekiguchi (ITP Bern)</td>
+    <td>Journal Club: 1606.05632</td>
+  </tr>
+      <tr>
+    <td>25.4.2017</td>
+    <td>David Pirtskhalava (EPFL)</td>
+    <td>Superfluids and CFT data</td>
+  </tr>
+       <tr>
+    <td>11.4.2017</td>
+    <td>Orestis Loukas (ITP Bern)</td>
+    <td>Journal Club: 1107.3987</td>
+  </tr>
+       <tr>
+    <td>4.4.2017</td>
+    <td>Per Berglund (New Hampshire)</td>
+    <td>A Generalized Construction of Calabi-Yau Manifolds and Mirror Symmetry</td>
+  </tr>
+            <tr>
+    <td>28.03.2017</td>
+    <td>Carlo Angelantonj (Torino)</td>
+    <td>Strings on the Omega background. Facts and ideas</td>
+  </tr>
+           <tr>
+    <td>14.03.2017</td>
+    <td>Konstantinos Siampos (ITP Bern)</td>
+    <td>All-loop non-abelian Thirring model</td>
+  </tr>
+   <tr>
+    <td>28.02.2017</td>
+    <td>Ignatios Antoniadis (ITP Bern)</td>
+    <td>Aspects of string phenomenology and scale hierarchies</td>
+  </tr>
+       <tr>
+    <td>9.2.2017</td>
+    <td>Andreas Stergiou (CERN)</td>
+    <td>Mixed Correlator 4D N=1 Superconformal Bootstrap</td>
+  </tr>
+         <tr>
+    <td>2.2.2017</td>
+    <td>Antonio Amariti (ITP Bern)</td>
+    <td>Journal Club: 3d-3d correspondence</td>
+  </tr>
+        <tr>
+   <td>15.12.2016</td>
+    <td>Nezhla Aghaei (ITP Bern)</td>
+    <td>Journal Club: 1605.0399, "Toda Theory From Six Dimensions"</td>
+  </tr>
+   <tr>
+    <td>08.12.2016</td>
+    <td>Robin Rickenbach (ITP Bern)</td>
+    <td>Gauge/Bethe correspondence for spin chains with rank 2 symmetry algebra</td>
+  </tr>
+      <tr>
+    <td>01.12.2016</td>
+    <td>Benjamin Assel (CERN)</td>
+    <td>M5-branes on an elliptic fibration</td>
+  </tr>
+  <tr>
+    <td>24.11.2016</td>
+    <td>Cyril Closset (CERN)</td>
+    <td>The three-dimensional A-twist and supersymmetric partition functions</td>
+  </tr>
+      <tr>
+    <td>17.11.2016</td>
+    <td>Domenico Orlando (ITP Bern)</td>
+    <td>Compensating strong coupling with large charge</td>
+  </tr>
+  <tr>
+    <td>10.11.2016</td>
+    <td>Samson Shatashvili (Trinity College Dublin)</td>
+    <td>Gauge theory angle at integrability</td>
+  </tr>  
+     <tr>
+    <td>03.11.2016</td>
+    <td>Antonio Amariti (ITP Bern)</td>
+    <td>Exact R-symmetry from attractors in gauged supergravity</td>
+  </tr>
+  <tr>
+    <td>27.10.2016</td>
+    <td>Yuta Sekiguchi (ITP Bern)</td>
+    <td>Basic concepts in supersymmetric gauge theories from branes</td>
+  </tr>
+    <tr>
+    <td>20.10.2016</td>
+    <td>Ben Hoare (ETHZ)</td>
+    <td>Integrable deformations of AdS superstrings</td>
+  </tr>
+  <tr>
+    <td>13.10.2016</td>
+    <td>Nezhla Aghaei (ITP Bern)</td>
+    <td>Quantization of super Teichmueller theory</td>
+  </tr>
+ </table>
+</div>
+</div>
+--!>
+
+</div>
+</body>
+</html>

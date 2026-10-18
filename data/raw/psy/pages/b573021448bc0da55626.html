@@ -1,0 +1,744 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de">
+<head>
+<title></title>
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; font-src 'self' data:;  style-src 'self' 'unsafe-inline'; object-src 'none'; script-src 'self' 'unsafe-inline' 'sha256-0Y8Ezm35v9xLxxEtcaf+nTkFvFutEQcKx8Iuq2xJpOY='; img-src 'self' blob: data: https://via.placeholder.com/;" />
+<meta http-equiv="WebKit-CSP" content="default-src 'self'; font-src 'self' data:;  style-src 'self' 'unsafe-inline'; object-src 'none'; script-src 'self' 'unsafe-inline' 'sha256-0Y8Ezm35v9xLxxEtcaf+nTkFvFutEQcKx8Iuq2xJpOY='; img-src 'self' blob: data: https://via.placeholder.com/;" />
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta charset="UTF-8">
+<meta name="description" content="">
+<meta name="author" content="Simon Maurer, TPF, University of Bern">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" type="text/css" href="/css/ext/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/ext/fontawesome.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/ext/datatables.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/ext/bootstrap-select.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/ext/jquery-confirm.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/ext/flatpickr.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/ext/iconselect.css" />
+<link rel="stylesheet" type="text/css" href="/css/ext/editor.main.css" />
+<link rel="stylesheet" type="text/css" href="/css/ext/query-builder.default.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/ext/query-builder.bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="/css/ext/bootstrap4-toggle.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/ext/easymde.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/ext/dataTables.contextualActions.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/ext/jstree3.3.16.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/ext/styles.min.css?v=v7.6.3" />
+<link rel="stylesheet" type="text/css" href="/css/ak_background.css" />
+<link rel="stylesheet" type="text/css" href="/css/ak_blue.css" />
+<link rel="stylesheet" type="text/css" href="/css/ak_border.css" />
+<link rel="stylesheet" type="text/css" href="/css/ak_border_neu.css" />
+<link rel="stylesheet" type="text/css" href="/css/ak_darkblue.css" />
+<link rel="stylesheet" type="text/css" href="/css/ak_darkbrown.css" />
+<link rel="stylesheet" type="text/css" href="/css/ak_darkgrey.css" />
+<link rel="stylesheet" type="text/css" href="/css/ak_lightpurple.css" />
+<link rel="stylesheet" type="text/css" href="/css/ak_lightpurple2.css" />
+<link rel="stylesheet" type="text/css" href="/css/ak_orange.css" />
+<link rel="stylesheet" type="text/css" href="/css/ak_purple.css" />
+<link rel="stylesheet" type="text/css" href="/css/ak_styles.css" />
+<link rel="stylesheet" type="text/css" href="/css/custom_progress.css" />
+<link rel="stylesheet" type="text/css" href="/css/ein_background.css" />
+<link rel="stylesheet" type="text/css" href="/css/ein_border.css" />
+<link rel="stylesheet" type="text/css" href="/css/ein_darkgreen.css" />
+<link rel="stylesheet" type="text/css" href="/css/ein_green.css" />
+<link rel="stylesheet" type="text/css" href="/css/ein_grey.css" />
+<link rel="stylesheet" type="text/css" href="/css/ein_light.css" />
+<link rel="stylesheet" type="text/css" href="/css/ein_lightgreen.css" />
+<link rel="stylesheet" type="text/css" href="/css/ein_lightgreen2.css" />
+<link rel="stylesheet" type="text/css" href="/css/end_background.css" />
+<link rel="stylesheet" type="text/css" href="/css/end_blue.css" />
+<link rel="stylesheet" type="text/css" href="/css/end_brown.css" />
+<link rel="stylesheet" type="text/css" href="/css/end_darkblue.css" />
+<link rel="stylesheet" type="text/css" href="/css/end_darkgrey.css" />
+<link rel="stylesheet" type="text/css" href="/css/end_lightblue.css" />
+<link rel="stylesheet" type="text/css" href="/css/end_lightbrown.css" />
+<link rel="stylesheet" type="text/css" href="/css/end_lightgrey.css" />
+<link rel="stylesheet" type="text/css" href="/css/lavender.css" />
+<link rel="stylesheet" type="text/css" href="/css/my-nav_brown.css" />
+<link rel="stylesheet" type="text/css" href="/css/my-nav_pink.css" />
+<link rel="stylesheet" type="text/css" href="/css/my-nav_yellow.css" />
+<link rel="stylesheet" type="text/css" href="/css/nav-btn-brown.css" />
+<link rel="stylesheet" type="text/css" href="/css/nav-btn-ski.css" />
+<link rel="stylesheet" type="text/css" href="/css/psy_background.css" />
+<link rel="stylesheet" type="text/css" href="/css/psy_beige.css" />
+<link rel="stylesheet" type="text/css" href="/css/psy_border.css" />
+<link rel="stylesheet" type="text/css" href="/css/psy_brown.css" />
+<link rel="stylesheet" type="text/css" href="/css/psy_darkbrown.css" />
+<link rel="stylesheet" type="text/css" href="/css/psy_darkgreen.css" />
+<link rel="stylesheet" type="text/css" href="/css/psy_green.css" />
+<link rel="stylesheet" type="text/css" href="/css/psy_lightbrown.css" />
+<link rel="stylesheet" type="text/css" href="/css/psy_lightgreen.css" />
+<link rel="stylesheet" type="text/css" href="/css/schrift-weiss.css" />
+<link rel="stylesheet" type="text/css" href="/css/ski_background.css" />
+<link rel="stylesheet" type="text/css" href="/css/ski_border.css" />
+<link rel="stylesheet" type="text/css" href="/css/ski_border_input.css" />
+<link rel="stylesheet" type="text/css" href="/css/ski_darkblue.css" />
+<link rel="stylesheet" type="text/css" href="/css/ski_darkgreen.css" />
+<link rel="stylesheet" type="text/css" href="/css/ski_darkpink.css" />
+<link rel="stylesheet" type="text/css" href="/css/ski_lightblue.css" />
+<link rel="stylesheet" type="text/css" href="/css/ski_lightgreen.css" />
+<link rel="stylesheet" type="text/css" href="/css/ski_lightpink.css" />
+<link rel="stylesheet" type="text/css" href="/css/ski_lightyellow.css" />
+<link rel="stylesheet" type="text/css" href="/css/ski_pink.css" />
+<link rel="stylesheet" type="text/css" href="/css/ski_pinkk.css" />
+<link rel="stylesheet" type="text/css" href="/css/ski_yellow.css" />
+<link rel="stylesheet" type="text/css" href="/css/teilnahme_background.css" />
+<link rel="stylesheet" type="text/css" href="/css/teilnahme_card.css" />
+<link rel="stylesheet" type="text/css" href="/css/ub_background.css" />
+<link rel="stylesheet" type="text/css" href="/css/ub_blue.css" />
+<link rel="stylesheet" type="text/css" href="/css/ub_darkblue.css" />
+<link rel="stylesheet" type="text/css" href="/css/ub_darkgreen.css" />
+<link rel="stylesheet" type="text/css" href="/css/ub_green.css" />
+<link rel="stylesheet" type="text/css" href="/css/ub_lightblue.css" />
+<link rel="stylesheet" type="text/css" href="/css/ub_lightblue2.css" />
+<link rel="stylesheet" type="text/css" href="/css/ub_lightgreen.css" />
+<link rel="stylesheet" type="text/css" href="/css/ub_purple.css" />
+<link rel="stylesheet" type="text/css" href="/css/ueb_border.css" />
+<link rel="stylesheet" type="text/css" href="/css/zentriert.css" />
+<link rel="stylesheet" type="text/css" href="/server/component/nav/css/nav.css" />
+<link rel="stylesheet" type="text/css" href="/server/component/footer/footer.css" />
+<script src="/js/ext/jquery.min.js" type="text/javascript"></script>
+<script src="/js/ext/runtime.js" type="text/javascript"></script>
+<script src="/js/ext/bootstrap.bundle.min.js" type="text/javascript"></script>
+<script src="/js/ext/datatables.min.js" type="text/javascript"></script>
+<script src="/js/ext/bootstrap-select.min.js" type="text/javascript"></script>
+<script src="/js/ext/jquery-confirm.min.js" type="text/javascript"></script>
+<script src="/js/ext/flatpickr.min.js" type="text/javascript"></script>
+<script src="/js/ext/flatpickr.de.min.js" type="text/javascript"></script>
+<script src="/js/ext/html2pdf.bundle.min.js" type="text/javascript"></script>
+<script src="/js/ext/iconselect.js" type="text/javascript"></script>
+<script src="/js/ext/iscroll.js" type="text/javascript"></script>
+<script src="/js/ext/jquery-ui.min.js" type="text/javascript"></script>
+<script src="/js/ext/jsoneditor.min.js" type="text/javascript"></script>
+<script src="/js/ext/moment.min.js" type="text/javascript"></script>
+<script src="/js/ext/jquery-extendext.js" type="text/javascript"></script>
+<script src="/js/ext/query-builder.standalone.min.js" type="text/javascript"></script>
+<script src="/js/ext/bootstrap4-toggle.min.js" type="text/javascript"></script>
+<script src="/js/ext/easymde.min.js" type="text/javascript"></script>
+<script src="/js/ext/dataTables.contextualActions.min.js" type="text/javascript"></script>
+<script src="/js/ext/css-format-monaco.min.js" type="text/javascript"></script>
+<script src="/js/ext/jstree3.3.16.min.js" type="text/javascript"></script>
+<script src="/js/ext/styles.min.js?v=v7.6.3" type="text/javascript"></script>
+<script src="/server/component/footer/footer.js" type="text/javascript"></script>
+    <script>const BASE_PATH = "";</script>
+    <style type="text/css">
+        body {
+    font-size: 18px;    
+}
+
+
+
+
+
+@media only screen and (max-width: 768px) {
+  * {
+    padding: 3px !important;
+    font-size: 16px !important;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-size: 16px !important;
+  }
+
+  /* Headings - make bold and larger than regular text */
+  h1 {
+    font-size: 26px !important;
+    font-weight: bold !important;
+  }
+
+  h2 {
+    font-size: 22px !important;
+    font-weight: bold !important;
+  }
+
+   h3 {
+    font-size: 18px !important;
+    font-weight: bold !important;
+  }
+
+  /* Fix bullet alignment inside cards/lists */
+  ul, ol {
+    padding-left: 20px !important; /* Restore enough space for bullets */
+    margin-left: 0 !important;
+  }
+
+  li {
+    padding-left: 0 !important;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .mobile-highlight {
+    font-weight: bold !important;
+    padding: 5px !important;
+    margin: 3mm !important;
+    font-size: 16px !important;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .mobile-highlight1 {
+    font-weight: light !important;
+    padding: 3px !important;
+    font-size: 16px !important;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .mobile-highlight2 {
+    font-weight: bold !important;
+    padding: 1px !important;
+    font-size: 16px !important;
+  }
+}
+
+
+
+
+.gradient-1 {
+    background: linear-gradient(-45deg, #fceaea, #fdf7f7);
+    background-size: 400% 400%;
+    animation: gradientShift 30s ease infinite;
+}
+
+.gradient-2 {
+    background: linear-gradient(-45deg, #fff4e6, #fff8f1);
+    background-size: 400% 400%;
+    animation: gradientShift 30s ease infinite;
+}
+
+.gradient-3 {
+    background: linear-gradient(-45deg, #fef7cc, #fefbe5);
+    background-size: 400% 400%;
+    animation: gradientShift 30s ease infinite;
+}
+
+.gradient-4 {
+    background: linear-gradient(-45deg, #eaf7ea, #f4fbf4);
+    background-size: 400% 400%;
+    animation: gradientShift 30s ease infinite;
+}
+
+.gradient-5 {
+    background: linear-gradient(-45deg, #e6f2fb, #f1f8fd);
+    background-size: 400% 400%;
+    animation: gradientShift 30s ease infinite;
+}
+
+.gradient-6 {
+    background: linear-gradient(-45deg, #f5f0fb, #f8f4fb);
+    background-size: 400% 400%;
+    animation: gradientShift 30s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.gradient-einfuehrung {
+    background: linear-gradient(-45deg, #f8fcf7, #DDEEDA);
+    /* Pale sage */
+    background-size: 400% 400%;
+    animation: gradientShift 30s ease infinite;
+}
+
+.gradient-psychoedukation {
+    background: linear-gradient(-45deg, #fff7f1, #FFE2C5);
+    /* Apricot blush */
+    background-size: 400% 400%;
+    animation: gradientShift 30s ease infinite;
+}
+
+.gradient-skills {
+    background: linear-gradient(-45deg, #fff7f7, #FAD9D9);
+    /* Rosy blush */
+    background-size: 400% 400%;
+    animation: gradientShift 30s ease infinite;
+}
+
+.gradient-abschluss {
+    background: linear-gradient(-45deg, #f4faff, #D7E7FB);
+    /* Mist blue */
+    background-size: 400% 400%;
+    animation: gradientShift 30s ease infinite;
+}
+
+.gradient-aktionsplan {
+    background: linear-gradient(-45deg, #f9f7fe, #E6DEFB);
+    /* Periwinkle tint */
+    background-size: 400% 400%;
+    animation: gradientShift 30s ease infinite;
+}
+
+.gradient-vertiefung {
+    background: linear-gradient(-45deg, #fffef7, #FFF9D9);
+    /* Lemon Chiffon */
+    background-size: 400% 400%;
+    animation: gradientShift 30s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+.icon-pulse:hover {
+    animation: pulse 1s ease-in-out;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+
+.icon-float-fade {
+    animation: floatFade 6s ease-in-out infinite;
+    opacity: 0;
+    animation-delay: 0.3s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes floatFade {
+    0% {
+        opacity: 0;
+        transform: translateY(0px) scale(0.98);
+    }
+
+    10% {
+        opacity: 1;
+        transform: translateY(-2px) scale(1);
+    }
+
+    50% {
+        transform: translateY(-4px);
+    }
+
+    90% {
+        transform: translateY(-2px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+body {
+    background: linear-gradient(to bottom, #f8f6f3, #f4f2ef);
+    min-height: 100vh;
+    color: #333;
+    /* soft dark gray for all text */
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+}
+
+
+.sidebar {
+    background-color: #f8f6f3 !important;
+}
+
+h1 {
+    margin-bottom: 1rem;
+    color: #2f4f2f;
+    /* dark sage / soft green-black */
+    font-size: 1.5rem;
+    /* Optional: adjust size */
+    font-weight: 600;
+}
+
+line-height: 1.6;
+font-size: 1rem;
+
+/* or increase slightly if needed */
+p {
+    line-height: 1.6;
+    margin-bottom: 1.2rem;
+}
+
+img {
+    border-radius: 8px;
+    margin-top: 1.5rem;
+}
+
+.module-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+.card {
+    padding: 24px;
+    margin: 16px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Module-specific colors */
+.module-button.green {
+    background-color: #7CA386;
+}
+
+.module-button.orange {
+    background-color: #B47C54;
+}
+
+.module-button.purple {
+    background-color: #A1536D;
+}
+
+.module-button.blue {
+    background-color: #4F91D6;
+}
+
+.module-button.lavender {
+    background-color: #9D83C3;
+}
+
+.button-vertiefung {
+    background-color: #E5C65C;
+    /* soft golden contrast */
+    color: #fff;
+}
+
+/* Optional: Hover styles to give feedback */
+.module-button.green:hover {
+    background-color: #699072;
+}
+
+.module-button.orange:hover {
+    background-color: #9C6845;
+}
+
+.module-button.pink:hover {
+    background-color: #86485C;
+}
+
+.module-button.blue:hover {
+    background-color: #3E7CB8;
+}
+
+.module-button.purple:hover {
+    background-color: #866CAF;
+}
+
+.module-button.olive:hover {
+    background-color: #88882F;
+}
+
+.card-content {
+    padding: 16px;
+    flex-grow: 1;
+    /* fills the space above the button */
+}
+
+
+.ueb_border {
+    background-color: #FEF3C7;
+    /* Soft yellow */
+    border: 2px solid #E5C65C;
+    border-radius: 8px;
+    padding: 0.75rem;
+}
+
+.ueb_border select {
+    background-color: white;
+    /* White dropdown background */
+    color: black;
+    /* Black text */
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+.ueb_border option {
+    background-color: white;
+    /* Ensures dropdown options are white */
+    color: black;
+}
+
+.ueb_border {
+    margin: 1rem auto;
+}
+
+------------------------------ .teilnahme_background {
+    background-color: #a9cafa !important;
+    border-color: #a9cafa !important;
+}
+
+/* Your normal styles above */
+--------------------- section[name_*="formUserInputRecord"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+    display: block;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+---------------------------------------------------------- Mobile friendly version settings _        
+    </style>
+ <script src="/js/ext/loader.js" type="text/javascript"></script>
+   
+</head>
+<body class="ui-cms-body">
+<div class="container-fluid p-0">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="nav-menu">
+        <a class="navbar-brand" href="/home">
+            UKADO        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                            </ul>
+            <ul class="navbar-nav navbar-right">
+                <li class="nav-item">
+    <a class="nav-link " href="/login">
+                Login    </a>
+</li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<div class="m-3 fixed-bottom cms-edit border rounded">
+        <a class="text-dark" href="#top"><i class="p-3 fas fa-chevron-up"></i></a>
+</div>
+<div id="2814" class="row justify-content-around pt-3 pb-3 selfHelp-locale-de-CH style-section-2814" style="">
+    <div id="2815" class="col-4 selfHelp-locale-de-CH style-section-2815" style="">
+    </div><div id="2817" class="col-4 text-right selfHelp-locale-de-CH style-section-2817" style="">
+    </div></div><div id="section-2811" class="container teilnahme_background selfHelp-locale-de-CH style-section-2811">
+        <div id="section-3220" class="container-fluid text-center selfHelp-locale-de-CH style-section-3220">
+        <img src="/assets/unibe_logo.png" class="img-fluid  selfHelp-locale-de-CH style-section-3242" alt="" title="" width="", height="">
+<img src="/assets/OPTIBRIEF_logo.svg" class="img-fluid  selfHelp-locale-de-CH style-section-3221" alt="" title="" width="80%", height="">
+</div><h2 class="mx-3 zentriert selfHelp-locale-de-CH style-section-2822">
+    Studie zu einem digitalen Programm während der Wartezeit auf eine Psychotherapie</h2>
+<img src="/assets/Woman_Logo.svg" class="img-fluid px-3 w-100 h-60 selfHelp-locale-de-CH style-section-3194" alt="" title="" width="", height="">
+<div id="section-2824" class="container  selfHelp-locale-de-CH style-section-2824">
+        <div class="text-center  selfHelp-locale-de-CH style-section-2825">
+    <p><br></p>
+<h2>Leiden Sie unter Ängsten oder Depressionen?</h2>
+<p><br></p></div>
+<div class="text-dark text-center selfHelp-locale-de-CH style-section-2826">
+    <p class="mobile-highlight1">Viele Menschen sind von diesem Umstand betroffen. Im Rahmen einer wissenschaftlichen Studie der Universität Bern untersuchen wir das digitale Programm - UKADO - für Menschen, die potentiell unter einer Angsterkrankung oder depressiven Erkrankung leiden. </p> 
+<p><br></p></div>
+<a href="/studieninformation" id="2827" class="btn-block  selfHelp-locale-de-CH style-section-2827 btn btn-dark" data-data='null' data-confirmation='[]'>
+    <strong>Weiter zu Studieninformationen und Teilnahme</strong> (Hier klicken!)</a></div><div id="section-2829" class="card card-primary teilnahme_card selfHelp-locale-de-CH style-section-2829">
+    <div class="card-header collapsible collapsed">
+    <div class="d-flex align-items-baseline">
+        <strong>Was machen wir?</strong>        <div class="ml-auto">
+            <i class="card-icon-collapse ml-3 fas fa-angle-double-down"></i>
+                    </div>
+    </div>
+</div>
+    <div class="card-body collapse ">
+        <div class=" selfHelp-locale-de-CH style-section-2830">
+    <p>In der OPTIBRIEF-Studie untersuchen wir verschiedene Varianten einer digitalen Kurzintervention (UKADO) für Angst und Depression. Wir möchten herausfinden, welche Varianten am wirksamsten sind und wie sie funktionieren, um das <strong>Therapieprogramm</strong> für zukünftige Patient*innen <strong>zu optimieren</strong>. UKADO enthält verschiedene Informationen und Strategien um mit Ängsten und depressiven Symptomen umzugehen. </p></div>
+<div id="2831" class="text-center selfHelp-locale-de-CH style-section-2831" style="">
+    <img src="/assets/UKADO_final.svg" class="img-fluid w-50 selfHelp-locale-de-CH style-section-2832" alt="" title="" width="", height="">
+</div>    </div>
+</div>
+<div id="section-3227" class="card card-primary teilnahme_card selfHelp-locale-de-CH style-section-3227">
+    <div class="card-header collapsible collapsed">
+    <div class="d-flex align-items-baseline">
+        <strong>Was haben Sie davon? </strong>        <div class="ml-auto">
+            <i class="card-icon-collapse ml-3 fas fa-angle-double-down"></i>
+                    </div>
+    </div>
+</div>
+    <div class="card-body collapse ">
+        <div class=" selfHelp-locale-de-CH style-section-3228">
+    <p>Die hier verwendeten Versionen von UKADO wurden so noch nie getestet, daher bleibt der beschriebene Nutzen zunächst eine <strong>Annahme</strong>. Sie erhalten für die Teilnahme <strong>keine Entschädigung</strong>. Die Teilnahme an der Studie und die Nutzung von UKADO ist <strong>kostenlos</strong>. Eine Teilnahme bietet Ihnen möglicherweise folgende Vorteile: </p></div>
+<div id="3229" class="text-center selfHelp-locale-de-CH style-section-3229" style="">
+    <img src="/assets/Vorteile_teilnahme.svg" class="img-fluid  selfHelp-locale-de-CH style-section-3230" alt="" title="" width="", height="">
+</div>    </div>
+</div>
+<div id="section-2834" class="card card-primary teilnahme_card selfHelp-locale-de-CH style-section-2834">
+    <div class="card-header collapsible collapsed">
+    <div class="d-flex align-items-baseline">
+        <strong>Wer kann an der Studie teilnehmen? </strong>        <div class="ml-auto">
+            <i class="card-icon-collapse ml-3 fas fa-angle-double-down"></i>
+                    </div>
+    </div>
+</div>
+    <div class="card-body collapse ">
+        <div class=" selfHelp-locale-de-CH style-section-3231">
+    <p>Menschen, die aktuell auf einen Psychotherapieplatz warten (sich also für eine Therapie interessieren, aber vielleicht noch auf der Suche nach einem Platz sind und noch keinen Platz haben, oder auf einer Warteliste sind, oder einen Therapiestart haben, der aber noch mind. 14 Tage entfernt ist) und:</p>
+<p>●   Potentiell an einer Angsterkrankung und/oder depressiven Erkrankung leiden und erhöhte Angst und/oder Depressionswerte beim Fragebogen zeigen  </p>
+<p>●   mindestens 18 Jahre alt sind</p>
+<p>●   Internetzugang und gute Deutschkenntnisse haben</p>
+<p>●   Aktuell nicht bereits an einer Psychotherapie teilnehmen und für den Zeitraum von zwei Wochen nach Gruppenzuteilung nicht bereits schon eine Psychotherapiesitzung vereinbart haben </p>
+<p>●   sich nicht in einer akuten Krise befinden</p></div>
+    </div>
+</div>
+<div id="section-3222" class="card card-primary teilnahme_card selfHelp-locale-de-CH style-section-3222">
+    <div class="card-header collapsible collapsed">
+    <div class="d-flex align-items-baseline">
+         <strong>Details zum Ablauf</strong>        <div class="ml-auto">
+            <i class="card-icon-collapse ml-3 fas fa-angle-double-down"></i>
+                    </div>
+    </div>
+</div>
+    <div class="card-body collapse ">
+        <div class=" selfHelp-locale-de-CH style-section-3223">
+    <p>Wenn Sie teilnehmen, werden Sie gebeten, zu <strong>5 Messzeitpunkten</strong> (vor Beginn der Intervention, nach 2 Wochen, nach 5 Wochen, nach 9 Wochen und nach 6 Monaten) online Fragebogen auszufüllen und zu 2 Messzeitpunkten (vor Beginn der Intervention und nach 9 Wochen) an einem telefonischen Interview teilzunehmen. </p></div>
+<div id="3224" class="text-center selfHelp-locale-de-CH style-section-3224" style="">
+    <img src="/assets/ablauf_teilnahme.png" class="img-fluid  selfHelp-locale-de-CH style-section-3225" alt="" title="" width="", height="">
+<div class=" selfHelp-locale-de-CH style-section-3226">
+    <p>Mit den Fragebogen und den Interviews schätzen wir vor allem die Belastung durch die Symptome der Angst und Depression ein. Das diagnostische Interview dauert beim ersten Termin ca. 30-40 Minuten. Das Ausfüllen der Fragebögen dauert pro Messzeitpunkt ca. 30 Minuten.</p>
+<p>Im Weiteren werden Sie zufällig in eine von 8 Gruppen eingeteilt und können dann eine Version von UKADO nutzen. Die verschiedenen Versionen von UKADO unterscheiden sich insofern, als unterschiedliche Inhalte angeboten werden.
+Wir führen dieses Forschungsprojekt so aus, wie es die Gesetze in der Schweiz vorschreiben. Ausserdem beachten wir alle international anerkannten Richtlinien. Die zuständige Ethikkommission hat das Forschungsprojekt geprüft und bewilligt.</p></div>
+</div>    </div>
+</div>
+<div id="section-3232" class="card card-primary teilnahme_card selfHelp-locale-de-CH style-section-3232">
+    <div class="card-header collapsible collapsed">
+    <div class="d-flex align-items-baseline">
+        <strong>Welche Risiken sind mit einer Teilnahme verbunden?</strong>        <div class="ml-auto">
+            <i class="card-icon-collapse ml-3 fas fa-angle-double-down"></i>
+                    </div>
+    </div>
+</div>
+    <div class="card-body collapse ">
+        <div class=" selfHelp-locale-de-CH style-section-3233">
+    <p>Es gibt keine Hinweise darauf, dass die Teilnahme mit einem Risiko verbunden ist. Minimaler Stress wird für die Teilnehmer und Teilnehmerinnen während den Übungen der Intervention erwartet, vor allem wenn sie angeleitet werden Vermeidungsverhalten aufzugeben. Bei erhöhtem Stress steht Ihnen das Studienteam und trainierte Psychologinnen und Psychologen zur Verfügung, die Sie unterstützen und mit denen Sie Kontakt aufnehmen können.</p></div>
+    </div>
+</div>
+<div id="section-2845" class="card card-primary teilnahme_card selfHelp-locale-de-CH style-section-2845">
+    <div class="card-header collapsible collapsed">
+    <div class="d-flex align-items-baseline">
+        <strong>Datenschutz &amp; Rechte</strong>        <div class="ml-auto">
+            <i class="card-icon-collapse ml-3 fas fa-angle-double-down"></i>
+                    </div>
+    </div>
+</div>
+    <div class="card-body collapse ">
+        <div class=" selfHelp-locale-de-CH style-section-2846">
+    <p>Verschiedene Vorkehrungen, wie passwortgeschützte Accounts und Verschlüsselungen, wurden getroffen, um Ihnen einen ausreichenden Datenschutz gewährleisten zu können. Alle Daten werden vertraulich behandelt. Detaillierte Informationen erhalten Sie in der Studieninformation, die Sie unten herunterladen können. Wir nehmen den Schutz und die Vertraulichkeit Ihrer Daten sehr ernst. Alle Studienmitarbeitenden unterliegen der Schweigepflicht. Es werden alle gesetzlichen Regeln des Datenschutzes eingehalten.</p>
+<p>Sie entscheiden frei, ob Sie an der Studie teilnehmen wollen oder nicht. Niemand darf Sie dazu in irgendeiner Weise drängen oder dazu überreden. Auch wenn Sie sich entscheiden, teilzunehmen, können Sie jederzeit wieder aus der Studie aussteigen. Sie müssen Ihre Entscheidung nicht begründen. </p></div>
+    </div>
+</div>
+<div id="section-2850" class="card card-info  selfHelp-locale-de-CH style-section-2850">
+        <div class="card-body  show">
+        <div class=" selfHelp-locale-de-CH style-section-2851">
+    <h2><strong>Achtung!</strong></h2></div>
+<div class=" selfHelp-locale-de-CH style-section-2852">
+    <p>Internetbasierte Selbsthilfeinterventionen wie UKADO sind <strong>nicht für akute Krisensituationen</strong> geeignet. Wir sind nicht immer erreichbar und können in akuten Krisen nicht adäquat reagieren.</p>
+<hr class="my-8 border-t border-gray-200"> 
+<p>Sie stecken in einer akuten Krise, wenn Sie eine oder beide der folgenden Fragen mit &quot;ja&quot; beantworten:</p>
+<ul>
+<li>Haben Sie jetzt einen konkreten Todeswunsch oder haben Sie konkret geplant, sich etwas anzutun?</li>
+<li>Hat sich Ihr Zustand in der letzten Zeit so verschlimmert, dass Ihnen Selbstmord als akzeptable Lösung erscheint?
+<hr class="my-8 border-t border-gray-200"></li>
+</ul>
+<p>Wenn Sie sich in einer akuten Krise befinden, sprechen Sie bitte umgehend mit einem/einer <strong>Arzt/Ärztin oder Psychotherapeuten/Psychotherapeutin</strong> darüber oder wenden Sie sich an die international gültige Notrufnummer Tel. 112. Diese Nummer ist 24 Stunden täglich erreichbar.
+Wenn Sie gezielt eine/e Notfallpsychiater/in suchen, kann die Telefonauskunft (z.B. Tel. 1818) informieren. Fragen Sie zum Beispiel: Wer ist heute Notfallpsychiater/in im Bezirk Baden?</p></div>
+    </div>
+</div>
+<div id="section-2853" class="container pb-3 pt-5 selfHelp-locale-de-CH style-section-2853">
+        <h3 class="text-center selfHelp-locale-de-CH style-section-2854">
+    <strong>Studienteam</strong></h3>
+<div class="text-center selfHelp-locale-de-CH style-section-2855">
+    <p><span style="font-size: 18px;">Bei Fragen wenden Sie sich bitte an einen dieser Kontakte:</p></div>
+<div id="2856" class="card-deck pb-4 selfHelp-locale-de-CH style-section-2856" style="">
+    <div id="2862" class="text-center card no-borders mt-2 d-flex flex-column selfHelp-locale-de-CH style-section-2862" style="">
+    <div id="2863" class="text-center selfHelp-locale-de-CH style-section-2863" style="">
+    <img src="/assets/LLB.jpg" class="img-fluid card-img-top w-50 mb-3 selfHelp-locale-de-CH style-section-2864" alt="" title="" width="", height="">
+</div><div id="2865" class="card-footer mt-3 selfHelp-locale-de-CH style-section-2865" style="">
+    <div class=" selfHelp-locale-de-CH style-section-2866">
+    <p><strong>Studienleitung </strong></p>
+<body>
+    <a href=" https://www.kpp.psy.unibe.ch/ueber_uns/personen/dr_phil_bielinski_laura/index_ger.html "target="_blank"> Dr. Laura Luisa Bielinski </a> 
+<br>Klinische Psychologie und Psychotherapie
+<br>Institut für Psychologie
+<br>Universität Bern
+<br>Fabrikstrasse 8, 3012 Bern
+<br>laura.bielinski@unibe.ch
+    <br> +41 31 684 39 37
+</body></div>
+</div></div><div id="3439" class="text-center card no-borders mt-2 d-flex flex-column selfHelp-locale-de-CH style-section-3439" style="">
+    <div id="3440" class="text-center selfHelp-locale-de-CH style-section-3440" style="">
+    <img src="/assets/stefanie.jpg" class="img-fluid card-img-top w-50 mb-3 selfHelp-locale-de-CH style-section-3444" alt="" title="" width="", height="">
+</div><div id="3442" class="card-footer mt-3 selfHelp-locale-de-CH style-section-3442" style="">
+    <div class=" selfHelp-locale-de-CH style-section-3443">
+    <body>
+<a href=" https://www.kpp.psy.unibe.ch/ueber_uns/personen/dr_phil_bielinski_laura/index_ger.html "target="_blank"> Stefanie Arnold </a>
+<br>Klinische Psychologie und Psychotherapie
+<br>Institut für Psychologie
+<br>Universität Bern
+<br>Fabrikstrasse 8, 3012 Bern
+<br>stefanie.arnold@unibe.ch
+</body></div>
+</div></div><div id="2857" class="text-center card no-borders mt-2 d-flex flex-column selfHelp-locale-de-CH style-section-2857" style="">
+    <div id="2858" class="text-center selfHelp-locale-de-CH style-section-2858" style="">
+    <img src="/assets/TB.jpg" class="img-fluid card-img-top w-50 mb-3 selfHelp-locale-de-CH style-section-2859" alt="" title="" width="", height="">
+</div><div id="2860" class="card-footer mt-3 selfHelp-locale-de-CH style-section-2860" style="">
+    <div class=" selfHelp-locale-de-CH style-section-2861">
+    <body>
+<a href="https://www.kpp.psy.unibe.ch/ueber_uns/personen/berger/index_ger.html" target="_blank"> Prof. Dr. Thomas Berger</a>
+<br>Klinische Psychologie und Psychotherapie
+<br>Institut für Psychologie
+<br>Universität Bern
+<br>Fabrikstrasse 8, 3012 Bern
+<br>thomas.berger@unibe.ch
+<br>Tel. +41 31 684 34 07
+</body></div>
+</div></div></div><div class="text-center selfHelp-locale-de-CH style-section-3435">
+    <p><strong>Kooperierende Foren und Webseiten</strong></p></div>
+<div id="section-3434" class="card card-primary  selfHelp-locale-de-CH style-section-3434">
+        <div class="card-body  show">
+        <div class=" selfHelp-locale-de-CH style-section-3436">
+    <ul>
+<li><a href="https://www.depression-diskussion.de">https://www.depression-diskussion.de</a></li>
+<li><a href="https://www.psychic.de">https://www.psychic.de</a></li>
+<li><a href="https://www.trennungsschmerzen.de">https://www.trennungsschmerzen.de</a></li>
+</ul></div>
+    </div>
+</div>
+</div></div><a href="/studieninformation" id="3219" class="btn-block  selfHelp-locale-de-CH style-section-3219 btn btn-dark" data-data='null' data-confirmation='[]'>
+    <strong>Weiter zu Studieninformationen und Teilnahme</strong> (Hier klicken!)</a><div class="container-fluid bg-light p-3 d-flex align-items-center footer-holder">
+    <div class="footer flex-grow-1">
+                
+    </div>
+    <div id = "defaultLanguage"><select id=""   name="default_language_locale" class="bootstrapSelect selfhelpSelect form-control text-dark smallOverwitten selfHelp-locale-de-CH"  data-allow-clear="false" data-live-search="false" data-size="5" data-locked_after_submit="0">
+    <option data-hidden="true"></option>
+    <option value="2" selected="selected">
+    Deutsch (Schweiz)</option>
+<option value="3" >
+    English (GB)</option>
+</select></div>
+</div>
+</body>
+</html>

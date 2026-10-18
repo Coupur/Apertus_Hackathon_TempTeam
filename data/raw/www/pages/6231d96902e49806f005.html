@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="de" class="unibe_alumni">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <base href="/" />
+
+    <title>Home</title>
+
+    <title>Alumni UniBE –  Netzwerk der Universit&#228;t Bern</title>
+<meta name="description" content="Alumni UniBE ist das Netzwerk f&#252;r aktuelle und ehemalige 
+Studierende der Universit&#228;t Bern. Entdecke Angebote, Events und deine Community for Lifetime."/>
+<meta property="og:url" content="https://myalumni.unibe.ch/de/home/"/>
+<link rel="canonical" href="https://myalumni.unibe.ch/de/home/"/>
+
+
+    
+
+
+
+            <link rel="icon" type="image/png" sizes="16x16" href="/media/cgefhrir/favicon-16x16.png" />
+            <link rel="icon" type="image/png" sizes="32x32" href="/media/1hifa0kw/favicon-32x32.png" />
+
+
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="/assets/vendor/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/vendor/hs-mega-menu/dist/hs-mega-menu.min.css">
+
+    <link rel="stylesheet" href="/assets/vendor/swiper/swiper-bundle.min.css">
+
+    <link rel="stylesheet" href="/assets/vendor/leaflet/dist/leaflet.css">
+    
+    <link rel="stylesheet" href="_content/Gotho.BlazorPdf/blazorpdf.min.css" />
+    
+    <link rel="stylesheet" href="/css/blockgridlayout.css" />
+
+    <link rel="stylesheet" href="/css/theme-tw-default.min.css" />
+
+    <link rel="stylesheet" href="_content/Cropper.Blazor/cropper.min.css" />
+
+    <link rel="stylesheet" href="/Web.styles.css" />
+
+    
+    
+        <link rel="stylesheet" href="/css/mandants/unibe_alumni/styles.min.css" />
+
+        <link rel="stylesheet" href="/scripts/flatpickr/flatpickr.min.css" />
+        <link rel="stylesheet" href="/scripts/flatpickr/flatpickr-bootstrap.css" />
+        <script src="/scripts/flatpickr/flatpickr.min.js"></script>
+    
+    <script src="/scripts/flatpickr/l10n/de.js"></script>
+
+
+    <script referrerpolicy="origin" src="/assets/vendor/tinymce/tinymce.min.js"></script>
+
+
+    <script src="/assets/lib/pdfobject/pdfobject.min.js?v=M__7QZL45NJbU2UQjJIpR5gpbUEdl-kv7mBN76xQZ8s"></script>
+
+    <script>
+        languageCode = 'de';
+
+        // Fallback images
+        window.onImageError = function(event, which) {
+            try {
+                if (!which) {
+                    which = "logo";
+                }
+                const fallbacks = {
+                    logo: "",
+                    default: "/assets/fallback-images/gradient.png"
+                };
+
+                const toAbsoluteUrl = function(url) {
+                    if (!url) {
+                        return "";
+                    }
+
+                    try {
+                        return new URL(url, window.location.href).href;
+                    } catch {
+                        return url;
+                    }
+                };
+                
+                const target = event.target;
+                if (!target) {
+                    console.error("onImageError: No target element found");
+                    return;
+                }
+
+                if (target.tagName.toLowerCase() === 'img') {
+                    // Handle img tag
+                    const fallbackSrc = toAbsoluteUrl(fallbacks[which] || fallbacks.default);
+                    const currentSrc = toAbsoluteUrl(target.currentSrc || target.src);
+
+                    // Stop retry loops when the fallback itself is broken.
+                    if (!fallbackSrc || currentSrc === fallbackSrc) {
+                        return;
+                    }
+
+                    target.src = fallbackSrc;
+                } else {
+                    // Handle elements with background-image
+                    const fallbackUrl = toAbsoluteUrl(fallbacks[which] || fallbacks.default);
+                    if (!fallbackUrl) {
+                        return;
+                    }
+                    const newBgImage = `url('${fallbackUrl}')`;
+
+                    if (target.style.backgroundImage === newBgImage) {
+                        return;
+                    }
+
+                    target.style.backgroundImage = newBgImage;
+                }
+            } catch (error) {
+                console.error("Error in onImageError handler:", error);
+            }
+        }
+    </script>
+
+
+
+    <script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
+
+<!-- Copyright (c) 2000-2026 etracker GmbH. All rights reserved. No reproduction, publication or modification allowed without permission. -->
+<!-- etracker code 6.0 -->
+<script type="text/javascript">
+
+// var et_pagename = "";
+
+// var et_areas = "";
+</script>
+<script id="_etLoader" type="text/javascript" charset="UTF-8" data-block-cookies="true" data-secure-code="0hs8sb" src="//code.etracker.com/code/e.js" async></script>
+<!-- etracker code 6.0 end -->
+ 
+ 
+    
+
+    
+    
+</head>
+
+<body>
+    
+    
+<div id="tw-blazor-reconnect" class="fixed-top pe-none d-none" data-reconnect-delay="5000">
+    <div class="container mt-3">
+        <div class="row justify-content-center">
+            <div class="col-md-10 col-lg-8">
+                <div data-tw-reconnect-panel="retrying" class="alert alert-warning alert-dismissible shadow mb-0 pe-auto d-flex align-items-center gap-3">
+                    <div class="spinner-border spinner-border-sm flex-shrink-0" aria-hidden="true"></div>
+                    <div data-tw-reconnect-message>Die Verbindung wird wiederhergestellt &#x2026;</div>
+                    <button type="button" class="btn-close" aria-label="Schliessen" data-tw-reconnect-dismiss></button>
+                </div>
+
+                <div data-tw-reconnect-panel="failed" class="alert alert-light alert-dismissible d-none pe-auto border border-danger border-2">
+                    <div class="d-flex align-items-center">
+                        <div class="svg-icon svg-icon-lg text-danger error me-3">
+                            <!-- Error SVG -->
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path opacity="0.3" d="M12 10.6L14.8 7.8C15.2 7.4 15.8 7.4 16.2 7.8C16.6 8.2 16.6 8.80002 16.2 9.20002L13.4 12L12 10.6ZM10.6 12L7.8 14.8C7.4 15.2 7.4 15.8 7.8 16.2C8 16.4 8.3 16.5 8.5 16.5C8.7 16.5 8.99999 16.4 9.19999 16.2L12 13.4L10.6 12Z" fill="#035A4B"></path>
+                                <path d="M22 12C22 17.5 17.5 22 12 22C6.5 22 2 17.5 2 12C2 6.5 6.5 2 12 2C17.5 2 22 6.5 22 12ZM13.4 12L16.2 9.20001C16.6 8.80001 16.6 8.19999 16.2 7.79999C15.8 7.39999 15.2 7.39999 14.8 7.79999L12 10.6L9.2 7.79999C8.8 7.39999 8.2 7.39999 7.8 7.79999C7.4 8.19999 7.4 8.80001 7.8 9.20001L10.6 12L7.8 14.8C7.4 15.2 7.4 15.8 7.8 16.2C8 16.4 8.3 16.5 8.5 16.5C8.7 16.5 9 16.4 9.2 16.2L12 13.4L14.8 16.2C15 16.4 15.3 16.5 15.5 16.5C15.7 16.5 16 16.4 16.2 16.2C16.6 15.8 16.6 15.2 16.2 14.8L13.4 12Z" fill="#035A4B"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-danger" id="tw-blazor-reconnect-lost" data-tw-reconnect-message>Die Verbindung zur Anwendung ist unterbrochen. Bitte laden Sie die Seite neu.</h3>
+                        </div>
+                        <button type="button" class="btn-close btn-lg" aria-label="Schliessen" data-tw-reconnect-dismiss></button>
+                    </div>
+                    <div class="fs-5 mt-2" data-tw-reconnect-message>Tritt dies wiederholt auf, blockiert m&#xF6;glicherweise eine Netzwerk- oder Firewall-Einstellung in Ihrer Organisation bestimmte Dauerverbindungen (WebSocket). Ihre IT-Abteilung kann das pr&#xFC;fen. Wir arbeiten parallel an einer Anpassung, die ohne diese Verbindungsart auskommt.</div>
+                    <div class="mt-2 text-end">
+                        <button type="button" class="btn btn-outline-danger" data-tw-reconnect-dismiss><i class="bi-x-lg me-1"></i>Schliessen</button>
+                        <button type="button" class="btn btn-danger" aria-describedby="tw-blazor-reconnect-lost" data-tw-reconnect-reload><i class="bi bi-arrow-clockwise"></i>Seite neu laden</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="blazor-error-ui" class="d-none"></div>
+</div>
+<div class="visually-hidden" role="status" aria-live="polite" aria-atomic="true" data-tw-reconnect-announcer></div>
+<div class="visually-hidden" role="alert" data-tw-reconnect-alert></div>
+
+    
+
+
+
+
+
+
+
+
+<header id="header" class="navbar navbar-expand-lg navbar-end navbar-sticky-top navbar-light bg-white px-lg-5">
+        <div class="container-fluid navbar-topbar">
+            <nav class="js-mega-menu navbar-nav-wrap hs-menu-horizontal">
+                <!-- Toggler -->
+                <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#topbarNavDropdown" aria-controls="topbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="d-flex justify-content-between align-items-center small">
+                        <span class="navbar-toggler-text">Schnellzugriff</span>
+
+                        <span class="navbar-toggler-default">
+                            <i class="bi-chevron-down ms-2"></i>
+                        </span>
+                        <span class="navbar-toggler-toggled">
+                            <i class="bi-chevron-up ms-2"></i>
+                        </span>
+                    </span>
+                </button>
+                <!-- End Toggler -->
+
+                <div id="topbarNavDropdown" class="navbar-nav-wrap-collapse collapse navbar-collapse navbar-topbar-collapse">
+                    <div class="navbar-toggler-wrapper">
+                        <div class="navbar-topbar-toggler d-flex justify-content-between align-items-center">
+                            <span class="navbar-toggler-text small">Schnellzugriff</span>
+
+                            <!-- Toggler -->
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topbarNavDropdown" aria-controls="topbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                                <i class="bi-x"></i>
+                            </button>
+                            <!-- End Toggler -->
+                        </div>
+                    </div>
+                    <ul class="navbar-nav">
+                                        <li class="hs-has-sub-menu nav-item">
+                                            <a id="nav_1302" class="nav-link " href="/de/schnellzugriff/faq/">FAQ</a>
+                                        </li>
+                                        <li class="hs-has-sub-menu nav-item">
+                                            <a id="nav_1300" class="btn btn-primary" href="/de/schnellzugriff/login/">Login</a>
+                                        </li>
+            <li class="hs-has-sub-menu nav-item language-switcher">
+                <a id="nav_lang" class="hs-mega-menu-invoker nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    DE
+                </a>
+                <div class="hs-sub-menu dropdown-menu dropdown-menu-end hs-sub-menu-desktop-lg animated" aria-labelledby="nav_lang">
+                            <a class="dropdown-item text-capitalize active" href="/de/home/">Deutsch</a>
+                            <a class="dropdown-item text-capitalize " href="/en/home-en/">English</a>
+                </div>
+            </li>
+                                        <li class="hs-has-sub-menu nav-item">
+                                            <a id="nav_1958" class="nav-link " href="/de/schnellzugriff/registrieren/">Registrieren</a>
+                                        </li>
+                    </ul>
+
+                </div>
+            </nav>
+        </div>
+    <!-- End Topbar -->
+
+    <div class="container-fluid">
+        <nav class="js-mega-menu navbar-nav-wrap">
+            <!-- Default Logo -->
+            <a class="navbar-brand" href="/de/" aria-label="Front">
+                    <img class="navbar-brand-logo" src="/media/rpyjwcji/unibe-alumni_logo-gross_rgb.png" alt="Unibe Alumni Logo Gross Rgb">
+            </a>
+            <!-- End Default Logo -->
+            <!-- Toggler -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-default">
+                    <i class="bi-list"></i>
+                </span>
+                <span class="navbar-toggler-toggled">
+                    <i class="bi-x"></i>
+                </span>
+            </button>
+            <!-- End Toggler -->
+
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                                    <li class="hs-has-sub-menu nav-item">
+                                        <a id="nav_2537" class="nav-link " href="/de/netzwerk/">Netzwerk</a>
+                                    </li>
+                                    <li class="hs-has-sub-menu nav-item">
+                                        <a id="nav_1296" class="nav-link " href="/de/events/">Events</a>
+                                    </li>
+                                    <li class="hs-has-sub-menu nav-item">
+                                        <a id="nav_2071" class="nav-link " href="/de/news/">News</a>
+                                    </li>
+                                    <li class="hs-has-sub-menu nav-item">
+                                        <a id="nav_1358" class="nav-link " href="/de/angebote/">Angebote</a>
+                                    </li>
+                                    <li class="hs-has-sub-menu nav-item">
+                                        <a id="nav_1359" class="nav-link " href="/de/stories/">Stories</a>
+                                    </li>
+                                    <li class="hs-has-sub-menu nav-item">
+                                        <a id="nav_1303" class="nav-link " href="/de/ueber-uns/">&#xDC;ber uns</a>
+                                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        new HSHeader('#header').init();
+        new HSMegaMenu('.js-mega-menu', {
+            desktop: { position: 'left' },
+            eventType: 'click'
+        });
+
+        // Edge-aware dropdown alignment.
+        // The theme ships a smart-position feature, but it never runs here because the
+        // Bootstrap dropdown (data-bs-toggle) handles the invoker click first. So when a
+        // dropdown near the right edge would overflow the viewport, it gets clipped instead
+        // of flipping. We restore that behaviour by toggling the theme's own alignment
+        // classes (dropdown-menu-end for top-level, hs-reversed for nested flyouts) based on
+        // the measured overflow. No custom CSS/inline styles - only existing theme classes.
+        var LG_BREAKPOINT = 992;
+
+        function twSmartAlign(menu) {
+            // Skip hidden menus and the collapsed mobile navbar (dropdowns render statically there).
+            if (!menu || menu.offsetParent === null || window.innerWidth < LG_BREAKPOINT) {
+                return;
+            }
+
+            var viewportWidth = document.documentElement.clientWidth;
+            var isNested = !!(menu.parentElement && menu.parentElement.closest('.hs-sub-menu, .hs-mega-menu'));
+
+            if (isNested) {
+                // Flyouts open to the right (left: 100%). Flip to the left only when they overflow.
+                menu.classList.remove('hs-reversed');
+                if (menu.getBoundingClientRect().right > viewportWidth) {
+                    menu.classList.add('hs-reversed');
+                }
+                return;
+            }
+
+            // Top-level: remember the server-configured alignment, reset to it, then correct.
+            if (menu.dataset.twDefaultEnd === undefined) {
+                menu.dataset.twDefaultEnd = menu.classList.contains('dropdown-menu-end') ? '1' : '0';
+            }
+            menu.classList.toggle('dropdown-menu-end', menu.dataset.twDefaultEnd === '1');
+
+            var rect = menu.getBoundingClientRect();
+            if (rect.right > viewportWidth) {
+                menu.classList.add('dropdown-menu-end');      // runs off the right -> right-align
+            } else if (rect.left < 0) {
+                menu.classList.remove('dropdown-menu-end');    // runs off the left -> left-align
+            }
+        }
+
+        // Re-align when a dropdown opens (after the current click handlers have shown it).
+        document.querySelectorAll('.js-mega-menu .hs-mega-menu-invoker').forEach(function (invoker) {
+            invoker.addEventListener('click', function () {
+                requestAnimationFrame(function () {
+                    twSmartAlign(invoker.parentElement.querySelector(':scope > .hs-sub-menu, :scope > .hs-mega-menu'));
+                });
+            });
+        });
+
+        // Re-align any open dropdown when the viewport size changes.
+        window.addEventListener('resize', function () {
+            document.querySelectorAll('.js-mega-menu .hs-sub-menu, .js-mega-menu .hs-mega-menu').forEach(twSmartAlign);
+        });
+    });
+</script>
+
+
+    <main id="content" role="main" class="content-space-t-4">
+        
+
+<div class="umb-block-grid"
+     data-grid-columns="12;"
+     style="--umb-block-grid--grid-columns: 12;">
+    
+<div class="umb-block-grid__layout-container">
+        <div
+            class="umb-block-grid__layout-item"
+            data-content-element-type-alias="umbBlockLayout1Column12"
+            data-content-element-type-key="73718804-8df3-4579-af3b-fb8e0d86d978"
+            data-element-udi="umb://element/31b5f843625046e2b841fed1a5b1cfd4"
+            data-col-span="12"
+            data-row-span="1"
+            style=" --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1; ">
+
+
+
+<div class="edge-to-edge content-space-1 content-space-md-3 content-space-lg-4  bg-img-center " style="background-image:url(&#x27;/media/kvjnryyw/unibe_hg_fruehling.jpg?width=1920&amp;height=1080&amp;v=1dbd47ee05836ef&#x27;); ">
+    
+<div class="umb-block-grid__area-container"
+style="--umb-block-grid--area-grid-columns: 12;">
+
+<div class="umb-block-grid__area"
+     data-area-col-span="12"
+     data-area-row-span="1"
+     data-area-alias="Content"
+     style="--umb-block-grid--grid-columns: 12;--umb-block-grid--area-column-span: 12; --umb-block-grid--area-row-span: 1;">
+    
+<div class="umb-block-grid__layout-container">
+        <div
+            class="umb-block-grid__layout-item"
+            data-content-element-type-alias="umbBlockLayout1Column12"
+            data-content-element-type-key="73718804-8df3-4579-af3b-fb8e0d86d978"
+            data-element-udi="umb://element/ebd29530d45e4931876b09783c091d95"
+            data-col-span="12"
+            data-row-span="1"
+            style=" --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1; ">
+
+
+
+<div class="container content-space-1 " style="background-color:rgba(153, 153, 153, 0.183); ">
+    
+<div class="umb-block-grid__area-container"
+style="--umb-block-grid--area-grid-columns: 12;">
+
+<div class="umb-block-grid__area"
+     data-area-col-span="12"
+     data-area-row-span="1"
+     data-area-alias="Content"
+     style="--umb-block-grid--grid-columns: 12;--umb-block-grid--area-column-span: 12; --umb-block-grid--area-row-span: 1;">
+    
+<div class="umb-block-grid__layout-container">
+        <div
+            class="umb-block-grid__layout-item"
+            data-content-element-type-alias="richtext"
+            data-content-element-type-key="2fb07454-9a8b-4825-954f-38f39d100d14"
+            data-element-udi="umb://element/e0b7ba146c1c4e23a17d16fb8fefb1d6"
+            data-col-span="12"
+            data-row-span="1"
+            style=" --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1; ">
+
+<div>
+<h1 style="text-align: left;"><span class="display-1 text-white">Alumni UniBE</span></h1>
+<h2 style="text-align: left;"><span class="text-white">Lebendig und vernetzt - your community for a lifetime!</span></h2>
+<p style="text-align: left;"><a href="/de/schnellzugriff/registrieren/" title="Registrieren" class="btn btn-primary">Jetzt entdecken!</a></p>
+</div>
+        </div>
+</div>
+
+</div>
+</div>
+
+</div>
+        </div>
+</div>
+
+</div>
+</div>
+
+</div>
+        </div>
+        <div
+            class="umb-block-grid__layout-item"
+            data-content-element-type-alias="umbBlockLayout1Column12"
+            data-content-element-type-key="73718804-8df3-4579-af3b-fb8e0d86d978"
+            data-element-udi="umb://element/12003b0664d24ee79a05c2d7833e9d3b"
+            data-col-span="12"
+            data-row-span="1"
+            style=" --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1; ">
+
+
+
+<div class="container content-space-t-1 " style="">
+    
+<div class="umb-block-grid__area-container"
+style="--umb-block-grid--area-grid-columns: 12;">
+
+<div class="umb-block-grid__area"
+     data-area-col-span="12"
+     data-area-row-span="1"
+     data-area-alias="Content"
+     style="--umb-block-grid--grid-columns: 12;--umb-block-grid--area-column-span: 12; --umb-block-grid--area-row-span: 1;">
+    
+<div class="umb-block-grid__layout-container">
+        <div
+            class="umb-block-grid__layout-item"
+            data-content-element-type-alias="richtext"
+            data-content-element-type-key="2fb07454-9a8b-4825-954f-38f39d100d14"
+            data-element-udi="umb://element/8fa6e4375a3645f28c3bc8b8f849deb6"
+            data-col-span="10"
+            data-row-span="1"
+            style=" --umb-block-grid--item-column-span: 10; --umb-block-grid--item-row-span: 1; ">
+
+<div>
+<p style="text-align: left;" class="lead">Wir sind das Netzwerk aus aktuellen und ehemaligen Studierenden der Universität Bern. Durch geteilte Erfahrungen und Erinnerungen entsteht eine Community, die unsere Mitglieder über das Studium hinaus verbindet.</p>
+</div>
+        </div>
+</div>
+
+</div>
+</div>
+
+</div>
+        </div>
+        <div
+            class="umb-block-grid__layout-item"
+            data-content-element-type-alias="umbBlockLayout1Column12"
+            data-content-element-type-key="73718804-8df3-4579-af3b-fb8e0d86d978"
+            data-element-udi="umb://element/db0ec3756cf042aea83805281383982d"
+            data-col-span="12"
+            data-row-span="1"
+            style=" --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1; ">
+
+
+
+<div class="container content-space-1 " style="">
+    
+<div class="umb-block-grid__area-container"
+style="--umb-block-grid--area-grid-columns: 12;">
+
+<div class="umb-block-grid__area"
+     data-area-col-span="12"
+     data-area-row-span="1"
+     data-area-alias="Content"
+     style="--umb-block-grid--grid-columns: 12;--umb-block-grid--area-column-span: 12; --umb-block-grid--area-row-span: 1;">
+    
+<div class="umb-block-grid__layout-container">
+        <div
+            class="umb-block-grid__layout-item"
+            data-content-element-type-alias="richtext"
+            data-content-element-type-key="2fb07454-9a8b-4825-954f-38f39d100d14"
+            data-element-udi="umb://element/c170e1965e92412e84b1b34d4a71ac7c"
+            data-col-span="10"
+            data-row-span="1"
+            style=" --umb-block-grid--item-column-span: 10; --umb-block-grid--item-row-span: 1; ">
+
+<div>
+<h2 style="text-align: left;">Das Netzwerk erleben</h2>
+</div>
+        </div>
+</div>
+
+</div>
+</div>
+
+</div>
+        </div>
+        <div
+            class="umb-block-grid__layout-item"
+            data-content-element-type-alias="umbBlockLayout2Columns6_6"
+            data-content-element-type-key="db412a76-348c-4d3a-a0ef-67d0bd336724"
+            data-element-udi="umb://element/9170cdf92d4d4ac991bf93806d0b229b"
+            data-col-span="12"
+            data-row-span="1"
+            style=" --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1; ">
+
+
+
+<div class="edge-to-edge content-space-1 content-space-lg-2 " style="background-color:#36b5b6; ">
+    
+<div class="umb-block-grid__area-container"
+style="--umb-block-grid--area-grid-columns: 12;">
+
+<div class="umb-block-grid__area"
+     data-area-col-span="6"
+     data-area-row-span="1"
+     data-area-alias="left"
+     style="--umb-block-grid--grid-columns: 6;--umb-block-grid--area-column-span: 6; --umb-block-grid--area-row-span: 1;">
+    
+<div class="umb-block-grid__layout-container">
+        <div
+            class="umb-block-grid__layout-item"
+            data-content-element-type-alias="umbBlockLayout1Column12"
+            data-content-element-type-key="73718804-8df3-4579-af3b-fb8e0d86d978"
+            data-element-udi="umb://element/7600b37f2abd492b8b555736808938a8"
+            data-col-span="6"
+            data-row-span="1"
+            style=" --umb-block-grid--item-column-span: 6; --umb-block-grid--item-row-span: 1; ">
+
+
+
+<div class="container  " style="">
+    
+<div class="umb-block-grid__area-container"
+style="--umb-block-grid--area-grid-columns: 12;">
+
+<div class="umb-block-grid__area"
+     data-area-col-span="12"
+     data-area-row-span="1"
+     data-area-alias="Content"
+     style="--umb-block-grid--grid-columns: 12;--umb-block-grid--area-column-span: 12; --umb-block-grid--area-row-span: 1;">
+    
+</div>
+</div>
+
+</div>
+        </div>
+        <div
+            class="umb-block-grid__layout-item"
+            data-content-element-type-alias="umbBlockLayout1Column12"
+            data-content-element-type-key="73718804-8df3-4579-af3b-fb8e0d86d978"
+            data-element-udi="umb://element/f13d1a7aaf7f4b41bfaf146ff4e94757"
+            data-col-span="6"
+            data-row-span="1"
+            style=" --umb-block-grid--item-column-span: 6; --umb-block-grid--item-row-span: 1; ">
+
+
+
+<div class="container  " style="">
+    
+<div class="umb-block-grid__area-container"
+style="--umb-block-grid--area-grid-columns: 12;">
+
+<div class="umb-block-grid__area"
+     data-area-col-span="12"
+     data-area-row-span="1"
+     data-area-alias="Content"
+     style="--umb-block-grid--grid-columns: 12;--umb-block-grid--area-column-span: 12; --umb-block-grid--area-row-span: 1;">
+    
+<div class="umb-block-grid__layout-container">
+        <div
+            class="umb-block-grid__layout-item"
+            data-content-element-type-alias="card"
+            data-content-element-type-key="5f7a28f2-fca8-4308-b8a5-ac1fd20fce76"
+            data-element-udi="umb://element/baf986b0ad4d4df98b4886beff85c97c"
+            data-col-span="12"
+            data-row-span="1"
+            style=" --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1; ">
+
+
+
+
+
+
+
+
+
+<div id="card_5190355d-10c3-458a-9dcc-f71bf6fa727c" class="card mx-1 overflow-hidden h-100 border-1" style="background-color: rgba(54, 181, 182, 0.818); ">
+        <img class="card-img-top" src="/media/2wecev01/bowlumni24-dsc0770.jpg?cc=0.001964085297418599,0.07978709086993968,0.001964085297418599,0.07977730306945421&amp;width=1920&amp;height=1080&amp;v=1dc7fe5bf8c4ba2" alt="Bowlumni24 DSC0770">
+        <div class="card-body" style="">
+
+                <div class="card-text" style=""><p class="mb-0"><span class="text-light">Porträts und Geschichten&nbsp;</span></p>
+<h3 class="card-title"><span class="text-light">Stories</span></h3>
+<p><span class="text-light">Alumni im Porträt sind spannenden Geschichten und Lebenswege von Ehemaligen der Universität Bern. Sie erzählen welche Wege sie gegangens sind nach dem Studium, was sie heute machen und was ihnen aus dem Studium bleibt.&nbsp;</span></p>
+<p><a href="/de/stories/alumni-im-portraet/#Porträts" class="link link-primary" data-anchor="#Porträts">Zu den Geschichten/Porträts</a></p></div>
+
+        </div>
+
+</div>
+
+        </div>
+</div>
+
+</div>
+</div>
+
+</div>
+        </div>
+        <div
+            class="umb-block-grid__layout-item"
+            data-content-element-type-alias="umbBlockLayout1Column12"
+            data-content-element-type-key="73718804-8df3-4579-af3b-fb8e0d86d978"
+            data-element-udi="umb://element/17b57bd294f240ecaa361e5de9195617"
+            data-col-span="6"
+            data-row-span="1"
+            style=" --umb-block-grid--item-column-span: 6; --umb-block-grid--item-row-span: 1; ">
+
+
+
+<div class="container  " style="">
+    
+<div class="umb-block-grid__area-container"
+style="--umb-block-grid--area-grid-columns: 12;">
+
+<div class="umb-block-grid__area"
+     data-area-col-span="12"
+     data-area-row-span="1"
+     data-area-alias="Content"
+     style="--umb-block-grid--grid-columns: 12;--umb-block-grid--area-column-span: 12; --umb-block-grid--area-row-span: 1;">
+    
+</div>
+</div>
+
+</div>
+        </div>
+</div>
+
+</div>
+
+<div class="umb-block-grid__area"
+     data-area-col-span="6"
+     data-area-row-span="1"
+     data-area-alias="right"
+     style="--umb-block-grid--grid-columns: 6;--umb-block-grid--area-column-span: 6; --umb-block-grid--area-row-span: 1;">
+    
+<div class="umb-block-grid__layout-container">
+        <div
+            class="umb-block-grid__layout-item"
+            data-content-element-type-alias="umbBlockLayout1Column12"
+            data-content-element-type-key="73718804-8df3-4579-af3b-fb8e0d86d978"
+            data-element-udi="umb://element/b831f0574f274134b0b8622f7589c1d2"
+            data-col-span="6"
+            data-row-span="1"
+            style=" --umb-block-grid--item-column-span: 6; --umb-block-grid--item-row-span: 1; ">
+
+
+
+<div class="container  " style="">
+    
+<div class="umb-block-grid__area-container"
+style="--umb-block-grid--area-grid-columns: 12;">
+
+<div class="umb-block-grid__area"
+     data-area-col-span="12"
+     data-area-row-span="1"
+     data-area-alias="Content"
+     style="--umb-block-grid--grid-columns: 12;--umb-block-grid--area-column-span: 12; --umb-block-grid--area-row-span: 1;">
+    
+</div>
+</div>
+
+</div>
+        </div>
+        <div
+            class="umb-block-grid__layout-item"
+            data-content-element-type-alias="umbBlockLayout1Column12"
+            data-content-element-type-key="73718804-8df3-4579-af3b-fb8e0d86d978"
+            data-element-udi="umb://element/8e85a06beaec41e88b80fc2c23987c6f"
+            data-col-span="6"
+            data-row-span="1"
+            style=" --umb-block-grid--item-column-span: 6; --umb-block-grid--item-row-span: 1; ">
+
+
+
+<div class="container  " style="">
+    
+<div class="umb-block-grid__area-container"
+style="--umb-block-grid--area-grid-columns: 12;">
+
+<div class="umb-block-grid__area"
+     data-area-col-span="12"
+     data-area-row-span="1"
+     data-area-alias="Content"
+     style="--umb-block-grid--grid-columns: 12;--umb-block-grid--area-column-span: 12; --umb-block-grid--area-row-span: 1;">
+    
+<div class="umb-block-grid__layout-container">
+        <div
+            class="umb-block-grid__layout-item"
+            data-content-element-type-alias="cardGroup"
+            data-content-element-type-key="c29b37bf-2e00-4081-b53a-b8ef4c4c0fbe"
+            data-element-udi="umb://element/467352ecd34b41d2814046049cd7733b"
+            data-col-span="12"
+            data-row-span="1"
+            style=" --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1; ">
+
+
+<div class="card-group card-group-md-break">
+
+
+
+
+
+    <style>
+        #card_8c6c4dec-3084-40c8-80c5-a2e998554691,
+        #card_8c6c4dec-3084-40c8-80c5-a2e998554691 > .card-body,
+        #card_8c6c4dec-3084-40c8-80c5-a2e998554691 > .card-body > .card-title,
+        #card_8c6c4dec-3084-40c8-80c5-a2e998554691 > .card-body > .card-text,
+        #card_8c6c4dec-3084-40c8-80c5-a2e998554691 > .card-body > .card-text > *,
+        #card_8c6c4dec-3084-40c8-80c5-a2e998554691 > .card-body > .card-text > * > *,
+        #card_8c6c4dec-3084-40c8-80c5-a2e998554691 > .card-body > .card-text > * > * > *,
+        #card_8c6c4dec-3084-40c8-80c5-a2e998554691 > .card-body > .card-subtitle,
+        #card_8c6c4dec-3084-40c8-80c5-a2e998554691 > .card-body > .text-muted,
+        #card_8c6c4dec-3084-40c8-80c5-a2e998554691 > .card-footer > .card-text,
+        #card_8c6c4dec-3084-40c8-80c5-a2e998554691 > .card-footer > .card-text > *,
+        #card_8c6c4dec-3084-40c8-80c5-a2e998554691 > .card-footer > .card-text > * > *,
+        #card_8c6c4dec-3084-40c8-80c5-a2e998554691 > .card-footer > .card-text > * > * > *,
+        #card_8c6c4dec-3084-40c8-80c5-a2e998554691 > .card-footer > .text-muted,
+        #card_8c6c4dec-3084-40c8-80c5-a2e998554691 > .card-footer > .text-muted > * {
+        color: #ffffff !important; 
+        }
+    </style>
+
+<div id="card_8c6c4dec-3084-40c8-80c5-a2e998554691" class="card mx-1 overflow-hidden border-1" style="background-color: rgba(54, 181, 182, 0.818); color: color: #ffffff !important; ; ">
+    <div class="row h-100 no-gutters">
+        <div class="col-md-7">
+                <div class="card-body" style="color: color: #ffffff !important; ; ">
+                        <span class="card-subtitle" style="">Event</span>
+                        <h3 class="card-title" style="">Science Slam Bern 4.0 </h3>
+                        <div class="card-text" style="color: #ffffff !important; ; "><p><em>28.10.2026, 18.30 Uhr&nbsp;</em><br><span class="NormalTextRun SpellingErrorV2Themed SCXW134171878 BCX8">Wer wird Science Slam Champion? Motivierte Wissenschaftler:innen wagen sich auf die Bühne und begeistern das Publikum für ihr Forschungsthema.</span>&nbsp;<br><br><a href="/de/events/detail/?id=4fc328ad-8769-f111-9b5b-c1582e74b019&amp;slug=science-slam-bern-40" class="link link-primary" data-anchor="?id=4fc328ad-8769-f111-9b5b-c1582e74b019&amp;slug=science-slam-bern-40">Zum Event</a></p></div>
+                </div>
+        </div>
+        <div class="col-md-5">
+                    <img class="img-fluid" src="/media/qwyjdfcu/science-slam_2026_sei-dabei_2000x2000px_2-1.png?cc=0,0.05555555555555555,0,0.05555555555555555&amp;width=1200&amp;height=600&amp;v=1dd0fb2ef7a8ebb" alt="">
+        </div>
+    </div>
+</div></div>
+        </div>
+        <div
+            class="umb-block-grid__layout-item"
+            data-content-element-type-alias="cardGroup"
+            data-content-element-type-key="c29b37bf-2e00-4081-b53a-b8ef4c4c0fbe"
+            data-element-udi="umb://element/71c15fafb2414217aef4d604a0dd406c"
+            data-col-span="12"
+            data-row-span="1"
+            style=" --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1; ">
+
+
+<div class="card-group card-group-md-break">
+
+
+
+
+
+    <style>
+        #card_9a3e89c3-7c59-45be-9239-5bc08ab5cdde,
+        #card_9a3e89c3-7c59-45be-9239-5bc08ab5cdde > .card-body,
+        #card_9a3e89c3-7c59-45be-9239-5bc08ab5cdde > .card-body > .card-title,
+        #card_9a3e89c3-7c59-45be-9239-5bc08ab5cdde > .card-body > .card-text,
+        #card_9a3e89c3-7c59-45be-9239-5bc08ab5cdde > .card-body > .card-text > *,
+        #card_9a3e89c3-7c59-45be-9239-5bc08ab5cdde > .card-body > .card-text > * > *,
+        #card_9a3e89c3-7c59-45be-9239-5bc08ab5cdde > .card-body > .card-text > * > * > *,
+        #card_9a3e89c3-7c59-45be-9239-5bc08ab5cdde > .card-body > .card-subtitle,
+        #card_9a3e89c3-7c59-45be-9239-5bc08ab5cdde > .card-body > .text-muted,
+        #card_9a3e89c3-7c59-45be-9239-5bc08ab5cdde > .card-footer > .card-text,
+        #card_9a3e89c3-7c59-45be-9239-5bc08ab5cdde > .card-footer > .card-text > *,
+        #card_9a3e89c3-7c59-45be-9239-5bc08ab5cdde > .card-footer > .card-text > * > *,
+        #card_9a3e89c3-7c59-45be-9239-5bc08ab5cdde > .card-footer > .card-text > * > * > *,
+        #card_9a3e89c3-7c59-45be-9239-5bc08ab5cdde > .card-footer > .text-muted,
+        #card_9a3e89c3-7c59-45be-9239-5bc08ab5cdde > .card-footer > .text-muted > * {
+        color: #ffffff !important; 
+        }
+    </style>
+
+<div id="card_9a3e89c3-7c59-45be-9239-5bc08ab5cdde" class="card mx-1 overflow-hidden border-1" style="background-color: rgba(54, 181, 182, 0.818); color: color: #ffffff !important; ; ">
+    <div class="row h-100 no-gutters">
+        <div class="col-md-7">
+                <div class="card-body" style="color: color: #ffffff !important; ; ">
+                        <span class="card-subtitle" style="">Event</span>
+                        <h3 class="card-title" style="">Film Night &#xAB;Reproduktive Gerechtigkeit&#xBB;</h3>
+                        <div class="card-text" style="color: #ffffff !important; ; "><p><em>25.10.2026</em><br>Sei dabei, wenn im Kino Rex Bern der Film «Reproduktive Gerechtigkeit» gezeigt wird. Der Filmabend findet im Rahmen des Global Science Film Festivals statt und bildet zugleich den Abschluss der Ausstellung «Atlas der Reproduktion – Babys, Grenzen, Geopolitik».</p>
+<p><strong><a href="/de/events/detail/?id=68081eff-ce6f-f111-9b5c-c60ec8160352&amp;slug=film-night-reproduktive-gerechtigkeit&amp;page=2?id=68081eff-ce6f-f111-9b5c-c60ec8160352&amp;slug=film-night-reproduktive-gerechtigkeit&amp;page=2" data-anchor="?id=68081eff-ce6f-f111-9b5c-c60ec8160352&amp;slug=film-night-reproduktive-gerechtigkeit&amp;page=2">Zum Event</a></strong><a href="/de/formularseiten/science-slam-bern-bewerbung/?id=876e44a6-ed21-f111-9b59-8a298afaea65&amp;slug=review-partner-event-alumni-unibe-x-rochester-bern-energy-of-the-future-competitive-into-the-next-decade" title="Science Slam Bern Bewerbung" class="link link-primary" data-anchor="?id=876e44a6-ed21-f111-9b59-8a298afaea65&amp;slug=review-partner-event-alumni-unibe-x-rochester-bern-energy-of-the-future-competitive-into-the-next-decade"></a></p></div>
+                </div>
+        </div>
+        <div class="col-md-5">
+                    <img class="img-fluid" src="/media/0p1pnf4l/filmnight.png?width=1200&amp;height=600&amp;v=1dd240f0f7e8154" alt="">
+        </div>
+    </div>
+</div></div>
+        </div>
+        <div
+            class="umb-block-grid__layout-item"
+            data-content-element-type-alias="cardGroup"
+            data-content-element-type-key="c29b37bf-2e00-4081-b53a-b8ef4c4c0fbe"
+            data-element-udi="umb://element/f5248518198f47b4a5ec695f2e207407"
+            data-col-span="12"
+            data-row-span="1"
+            style=" --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1; ">
+
+
+<div class="card-group card-group-md-break">
+
+
+
+
+
+    <style>
+        #card_5230cfcb-2a2a-4956-a09c-1ee71b058326,
+        #card_5230cfcb-2a2a-4956-a09c-1ee71b058326 > .card-body,
+        #card_5230cfcb-2a2a-4956-a09c-1ee71b058326 > .card-body > .card-title,
+        #card_5230cfcb-2a2a-4956-a09c-1ee71b058326 > .card-body > .card-text,
+        #card_5230cfcb-2a2a-4956-a09c-1ee71b058326 > .card-body > .card-text > *,
+        #card_5230cfcb-2a2a-4956-a09c-1ee71b058326 > .card-body > .card-text > * > *,
+        #card_5230cfcb-2a2a-4956-a09c-1ee71b058326 > .card-body > .card-text > * > * > *,
+        #card_5230cfcb-2a2a-4956-a09c-1ee71b058326 > .card-body > .card-subtitle,
+        #card_5230cfcb-2a2a-4956-a09c-1ee71b058326 > .card-body > .text-muted,
+        #card_5230cfcb-2a2a-4956-a09c-1ee71b058326 > .card-footer > .card-text,
+        #card_5230cfcb-2a2a-4956-a09c-1ee71b058326 > .card-footer > .card-text > *,
+        #card_5230cfcb-2a2a-4956-a09c-1ee71b058326 > .card-footer > .card-text > * > *,
+        #card_5230cfcb-2a2a-4956-a09c-1ee71b058326 > .card-footer > .card-text > * > * > *,
+        #card_5230cfcb-2a2a-4956-a09c-1ee71b058326 > .card-footer > .text-muted,
+        #card_5230cfcb-2a2a-4956-a09c-1ee71b058326 > .card-footer > .text-muted > * {
+        color: #ffffff !important; 
+        }
+    </style>
+
+<div id="card_5230cfcb-2a2a-4956-a09c-1ee71b058326" class="card mx-1 overflow-hidden border-1" style="background-color: rgba(54, 181, 182, 0.818); color: color: #ffffff !important; ; ">
+    <div class="row h-100 no-gutters">
+        <div class="col-md-7">
+                <div class="card-body" style="color: color: #ffffff !important; ; ">
+                        <span class="card-subtitle" style="">F&#xFC;hrung </span>
+                        <h3 class="card-title" style="">Exklusive F&#xFC;hrung durch das Stadttheater Bern </h3>
+                        <div class="card-text" style="color: #ffffff !important; ; "><p><em>03. November 2026, 18.00 Uhr </em><br>Erlebe mit uns das Stadttheater aus einer neuen Perspektive. Es gibt Einblicke hinter die Kulissen und entdecken dem Publikum sonst verborgene Orte.<br><br><span class="text-primary"><a href="/de/events/detail/?id=7b715f5b-e7a5-f111-9b5e-d733d90f01ed&amp;slug=exklusive-fhrung-durch-das-stadttheater-bern&amp;page=3" class="link link-primary" data-anchor="?id=7b715f5b-e7a5-f111-9b5e-d733d90f01ed&amp;slug=exklusive-fhrung-durch-das-stadttheater-bern&amp;page=3"><strong>Mehr erfahren</strong></a><a href="/de/stories/alumni-im-portraet/#Hoersaal" title="Alumni im Porträt" class="link link-primary" data-anchor="#Hoersaal"></a></span></p></div>
+                </div>
+        </div>
+        <div class="col-md-5">
+                    <img class="img-fluid" src="/media/22rl2r52/event-fuehrung-bb.png?cc=0,0.1111111111111111,0,0&amp;width=1200&amp;height=600&amp;v=1dd52590e5e453c" alt="">
+        </div>
+    </div>
+</div></div>
+        </div>
+</div>
+
+</div>
+</div>
+
+</div>
+        </div>
+</div>
+
+</div>
+</div>
+
+</div>
+        </div>
+        <div
+            class="umb-block-grid__layout-item"
+            data-content-element-type-alias="umbBlockLayout1Column12"
+            data-content-element-type-key="73718804-8df3-4579-af3b-fb8e0d86d978"
+            data-element-udi="umb://element/4a67f99f2e6b4b768fd076db576c5063"
+            data-col-span="12"
+            data-row-span="1"
+            style=" --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1; ">
+
+
+
+<div class="container content-space-1 content-space-lg-2 " style="">
+    
+<div class="umb-block-grid__area-container"
+style="--umb-block-grid--area-grid-columns: 12;">
+
+<div class="umb-block-grid__area"
+     data-area-col-span="12"
+     data-area-row-span="1"
+     data-area-alias="Content"
+     style="--umb-block-grid--grid-columns: 12;--umb-block-grid--area-column-span: 12; --umb-block-grid--area-row-span: 1;">
+    
+<div class="umb-block-grid__layout-container">
+        <div
+            class="umb-block-grid__layout-item"
+            data-content-element-type-alias="cardGroup"
+            data-content-element-type-key="c29b37bf-2e00-4081-b53a-b8ef4c4c0fbe"
+            data-element-udi="umb://element/f00937f792ee457ab771ddd36611baf2"
+            data-col-span="12"
+            data-row-span="1"
+            style=" --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1; ">
+
+
+<div class="card-group card-group-md-break">
+
+
+
+
+
+
+<div id="card_874d02cb-864c-44bf-a071-1efe9991d456" class="card mx-1 overflow-hidden border-1" style="">
+        <img class="card-img-top" src="/media/y3cfajn5/unibe_hg_aula_tuer.jpg?width=1920&amp;height=1080&amp;v=1dbed0888961bff" alt="Unibe HG Aula Tuer">
+        <div class="card-body" style="">
+
+                <span class="card-subtitle" style="">Die Community vor Ort erleben</span>
+                <h3 class="card-title" style="">Events</h3>
+                <div class="card-text" style=""><p style="text-align: left;">Ob Stammtisch, Führung oder Workshop – unsere Events bieten Gelegenheiten zum persönlichen Austausch mit anderen Mitgliedern der Community.</p>
+<p style="text-align: left;"><a href="/de/events/uebersicht/" title="Übersicht" class="link link-primary">Events entdecken</a></p></div>
+
+        </div>
+
+</div>
+
+
+
+
+
+<div id="card_e4cfa782-e7ed-480f-bdc3-7fe1db14b3b5" class="card mx-1 overflow-hidden border-1" style="">
+        <img class="card-img-top" src="/media/wm1hyo4a/laptop-2838921_1280-1.jpg?width=1920&amp;height=1080&amp;v=1dbbf612a45188d" alt="Laptop Verg&#xFC;nstigung Neptun">
+        <div class="card-body" style="">
+
+                <span class="card-subtitle" style="">Profitiere von attraktiven Angeboten</span>
+                <h3 class="card-title" style="">Benefits</h3>
+                <div class="card-text" style=""><p style="text-align: left;">Eine Mitgliedschaft bei Alumni UniBE bietet dir eine Vielzahl von Vorteilen. Erlebe mit unseren Angeboten Kultur, bleibe in Bewegung oder probiere etwas Neues aus.&nbsp;</p>
+<p style="text-align: left;"><a href="/de/angebote/benefits/" title="Benefits" class="link link-primary">Benefits anschauen</a></p></div>
+
+        </div>
+
+</div></div>
+        </div>
+</div>
+
+</div>
+</div>
+
+</div>
+        </div>
+        <div
+            class="umb-block-grid__layout-item"
+            data-content-element-type-alias="umbBlockLayout1Column12"
+            data-content-element-type-key="73718804-8df3-4579-af3b-fb8e0d86d978"
+            data-element-udi="umb://element/2b982dac63d048c284dc1de5eebc9707"
+            data-col-span="12"
+            data-row-span="1"
+            style=" --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1; ">
+
+
+
+<div class="container content-space-b-1 content-space-b-lg-2 " style="">
+    
+<div class="umb-block-grid__area-container"
+style="--umb-block-grid--area-grid-columns: 12;">
+
+<div class="umb-block-grid__area"
+     data-area-col-span="12"
+     data-area-row-span="1"
+     data-area-alias="Content"
+     style="--umb-block-grid--grid-columns: 12;--umb-block-grid--area-column-span: 12; --umb-block-grid--area-row-span: 1;">
+    
+<div class="umb-block-grid__layout-container">
+        <div
+            class="umb-block-grid__layout-item"
+            data-content-element-type-alias="cardGroup"
+            data-content-element-type-key="c29b37bf-2e00-4081-b53a-b8ef4c4c0fbe"
+            data-element-udi="umb://element/5e07df72e06a48b89d5370ee7d2fe2e3"
+            data-col-span="12"
+            data-row-span="1"
+            style=" --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1; ">
+
+
+<div class="card-group card-group-md-break">
+
+
+
+
+
+
+<div id="card_13e99099-6298-4031-af0f-060305012061" class="card mx-1 overflow-hidden border-1" style="">
+        <img class="card-img-top" src="/media/gygf0ia2/header-netzwerz_uebersicht.jpg?width=1920&amp;height=1080&amp;v=1dbc9acc1d39fea" alt="Header Netzwerz Uebersicht">
+        <div class="card-body" style="">
+
+                <span class="card-subtitle" style="">Die Community entdecken</span>
+                <h3 class="card-title" style="">Fachvereine und Communities</h3>
+                <div class="card-text" style=""><p style="text-align: left;">Für das Netzwerken innerhalb deines Studiengangs gibt es unsere Partner*innenschaft mit verschiedenen fachspezifischen Alumni Organisationen.</p>
+<p style="text-align: left;"><a href="/de/start-netzwerk/uebersicht-netzwerk/" title="Übersicht" class="link link-primary">Jetzt entdecken</a></p></div>
+
+        </div>
+
+</div>
+
+
+
+
+
+<div id="card_a870e985-ac70-426f-b573-fad34745ac66" class="card mx-1 overflow-hidden border-1" style="">
+        <img class="card-img-top" src="/media/eyqp1gly/header-ueber-uns.png?cc=0,0,0,0&amp;width=1920&amp;height=1080&amp;v=1dbe5dc7b8c5ec9" alt="Header Ueber Uns">
+        <div class="card-body" style="">
+
+                <span class="card-subtitle" style="">Wer sind wir</span>
+                <h3 class="card-title" style="">&#xDC;ber uns</h3>
+                <div class="card-text" style=""><p style="text-align: left;">Ein engagiertes Team sorgt dafür, dass deine Verbindung zur Universität Bern auch nach dem Studium lebendig bleibt.</p>
+<p style="text-align: left;"><a href="/de/ueber-uns/die-alumni-unibe/" title="Die Alumni UniBE" class="link link-primary">Erfahre mehr</a></p></div>
+
+        </div>
+
+</div></div>
+        </div>
+</div>
+
+</div>
+</div>
+
+</div>
+        </div>
+        <div
+            class="umb-block-grid__layout-item"
+            data-content-element-type-alias="umbBlockLayout1Column12"
+            data-content-element-type-key="73718804-8df3-4579-af3b-fb8e0d86d978"
+            data-element-udi="umb://element/8e399fe324bd45f694697b98d0461f3d"
+            data-col-span="12"
+            data-row-span="1"
+            style=" --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1; ">
+
+
+
+<div class="container content-space-b-1 content-space-b-lg-2 " style="">
+    
+<div class="umb-block-grid__area-container"
+style="--umb-block-grid--area-grid-columns: 12;">
+
+<div class="umb-block-grid__area"
+     data-area-col-span="12"
+     data-area-row-span="1"
+     data-area-alias="Content"
+     style="--umb-block-grid--grid-columns: 12;--umb-block-grid--area-column-span: 12; --umb-block-grid--area-row-span: 1;">
+    
+<div class="umb-block-grid__layout-container">
+        <div
+            class="umb-block-grid__layout-item"
+            data-content-element-type-alias="card"
+            data-content-element-type-key="5f7a28f2-fca8-4308-b8a5-ac1fd20fce76"
+            data-element-udi="umb://element/0017e221821244e791039a59a2d71856"
+            data-col-span="12"
+            data-row-span="1"
+            style=" --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1; ">
+
+
+
+
+
+
+
+
+
+
+<div id="card_3336f3d3-312d-4dc6-a9d9-c1f666f96f5d" class="card mx-1 overflow-hidden border-1" style="">
+    <div class="row h-100 no-gutters">
+        <div class="col-md-6">
+                    <div class="card-body">
+                        <img class="img-fluid" src="/media/gtrmhz2o/kachel-weiss_kontakt.png?cc=0.06350615530303028,0.07304161405723905,0.09309895833333331,0.08356349957912451&amp;width=1920&amp;height=1080&amp;v=1dcf36a3623e56d" alt="">
+                    </div>
+        </div>
+        <div class="col-md-6">
+                <div class="card-body" style="">
+                        <span class="card-subtitle" style="">ALumni UniBE</span>
+                        <h3 class="card-title" style="">Kontakt </h3>
+                        <div class="card-text" style=""><p>Wir freuen uns auf eure Fragen und Rückmeldungen per E-Mail oder einfach über unser Kontaktformular. </p>
+<p><a href="mailto:info.alumni@unibe.ch" class="link link-primary">E-Mail </a><br><a href="/de/formularseiten/kontaktformular/" title="Kontaktformular" class="link link-primary">Formular</a></p>
+<p> </p></div>
+                </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+</div>
+
+</div>
+</div>
+
+</div>
+        </div>
+</div>
+
+</div>
+
+
+    </main>
+
+
+
+
+    <!-- ========== SECONDARY CONTENTS ========== -->
+    <!-- Go To -->
+    <a class="js-go-to go-to position-fixed" href="javascript:;" style="visibility: hidden;"
+       data-hs-go-to-options='{
+       "offsetTop": 500,
+       "position": {
+         "init": {
+           "right": "2rem"
+         },
+         "show": {
+           "bottom": "2rem"
+         },
+         "hide": {
+           "bottom": "-2rem"
+         }
+       }
+     }'>
+        <i class="bi-chevron-up"></i>
+    </a>
+    <!-- ========== END SECONDARY CONTENTS ========== -->
+    
+
+    <script autostart="false" data-cookieconsent="ignore" src="/_framework/blazor.server.js"></script>
+    <script onerror="window.Blazor && Blazor.start()" data-cookieconsent="ignore" src="/scripts/blazor-reconnect.js?v=5OPxl-cnRIlGTU9_hvYyaMreTLASmMbgL9Azh7LLD-Y"></script>
+    <script data-cookieconsent="ignore" src="/scripts/blazor-test.js"></script>
+
+
+    <!-- jQuery -->
+    <script data-cookieconsent="ignore" src="/assets/lib/jquery/jquery.min.js?v=eqaw4I9IoPldjffqieTL_h7z0ejA9zc_fyXt-05KMl4"></script>
+    <script data-cookieconsent="ignore" src="/assets/lib/jquery-validate/jquery.validate.min.js?v=4NCwFlQ_wYiXS_TiueaKHFZND6AibX0E5NEBx9i3ar0"></script>
+    <script data-cookieconsent="ignore" src="/assets/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js?v=RFWFWIIPsjB4DucR4jqwxTWw13ZmtI-s6tVR2LJmZXk"></script>
+
+    <!-- JS Global Compulsory -->
+    <script data-cookieconsent="ignore" src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JS Implementing Plugins -->
+    <script data-cookieconsent="ignore" src="/assets/vendor/hs-go-to/dist/hs-go-to.min.js"></script>
+    <script data-cookieconsent="ignore" src="/assets/vendor/prism/prism.js"></script>
+    <script data-cookieconsent="ignore" src="/assets/vendor/hs-show-animation/dist/hs-show-animation.min.js"></script>
+    <script data-cookieconsent="ignore" src="/assets/vendor/hs-header/dist/hs-header.min.js"></script>
+    <script data-cookieconsent="ignore" src="/assets/vendor/hs-mega-menu/dist/hs-mega-menu.min.js"></script>
+    <script data-cookieconsent="ignore" src="/assets/vendor/hs-sticky-block/dist/hs-sticky-block.min.js"></script>
+    <script data-cookieconsent="ignore" src="/assets/vendor/hs-toggle-password/dist/hs-toggle-password.js"></script>
+    <script data-cookieconsent="ignore" src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script data-cookieconsent="ignore" src="/assets/vendor/leaflet/dist/leaflet.js"></script>
+    <script data-cookieconsent="ignore" src="/assets/vendor/aos/dist/aos.js"></script>
+    <script data-cookieconsent="ignore" src="/assets/vendor/fslightbox/index.js"></script>
+
+    <script data-cookieconsent="ignore" src="/scripts/theme.min.js"></script>
+
+    <script data-cookieconsent="ignore" src="/scripts/theme-custom.js"></script>
+
+    <script data-cookieconsent="ignore" src="/scripts/theme-custom-init.js"></script>
+
+    <script data-cookieconsent="ignore" src="_content/Cropper.Blazor/cropper.min.js"></script>
+
+    <script data-cookieconsent="ignore" src="/scripts/banner.js"></script>
+
+    
+
+    
+
+    <script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
+    
+    
+
+
+    <footer class="bg-dark text-white">
+        
+<div class="umb-block-grid"
+     data-grid-columns="12;"
+     style="--umb-block-grid--grid-columns: 12;">
+    
+<div class="umb-block-grid__layout-container">
+        <div
+            class="umb-block-grid__layout-item"
+            data-content-element-type-alias="umbBlockLayout1Column12"
+            data-content-element-type-key="73718804-8df3-4579-af3b-fb8e0d86d978"
+            data-element-udi="umb://element/73e08184a33642b18147bf83951caa6f"
+            data-col-span="12"
+            data-row-span="1"
+            style=" --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1; ">
+
+
+
+<div class="edge-to-edge  " style="background-color:#262626; ">
+    
+<div class="umb-block-grid__area-container"
+style="--umb-block-grid--area-grid-columns: 12;">
+
+<div class="umb-block-grid__area"
+     data-area-col-span="12"
+     data-area-row-span="1"
+     data-area-alias="Content"
+     style="--umb-block-grid--grid-columns: 12;--umb-block-grid--area-column-span: 12; --umb-block-grid--area-row-span: 1;">
+    
+<div class="umb-block-grid__layout-container">
+        <div
+            class="umb-block-grid__layout-item"
+            data-content-element-type-alias="umbBlockLayout2Columns8_4"
+            data-content-element-type-key="a6f14584-b1cc-4105-938e-8f6d784fbcd5"
+            data-element-udi="umb://element/67e05ad236af47e18db4fed52e8c9d3a"
+            data-col-span="12"
+            data-row-span="1"
+            style=" --umb-block-grid--item-column-span: 12; --umb-block-grid--item-row-span: 1; ">
+
+
+
+<div class="container content-space-1 " style="">
+    
+<div class="umb-block-grid__area-container"
+style="--umb-block-grid--area-grid-columns: 12;">
+
+<div class="umb-block-grid__area"
+     data-area-col-span="8"
+     data-area-row-span="1"
+     data-area-alias="left"
+     style="--umb-block-grid--grid-columns: 8;--umb-block-grid--area-column-span: 8; --umb-block-grid--area-row-span: 1;">
+    
+<div class="umb-block-grid__layout-container">
+        <div
+            class="umb-block-grid__layout-item"
+            data-content-element-type-alias="richtext"
+            data-content-element-type-key="2fb07454-9a8b-4825-954f-38f39d100d14"
+            data-element-udi="umb://element/4222708e85e948e4953ec49e90ce952a"
+            data-col-span="8"
+            data-row-span="1"
+            style=" --umb-block-grid--item-column-span: 8; --umb-block-grid--item-row-span: 1; ">
+
+<div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p style="font-size: 1.5rem;" class="lead">WISSEN SCHAFFT WERT.</p>
+</div>
+        </div>
+        <div
+            class="umb-block-grid__layout-item"
+            data-content-element-type-alias="richtext"
+            data-content-element-type-key="2fb07454-9a8b-4825-954f-38f39d100d14"
+            data-element-udi="umb://element/28b8f2824815447b865e9cbf9dabc85b"
+            data-col-span="8"
+            data-row-span="1"
+            style=" --umb-block-grid--item-column-span: 8; --umb-block-grid--item-row-span: 1; ">
+
+<div>
+<p>&nbsp;</p>
+<p style="color: white; font-size: 15px;">© 2026 Universität Bern     <a style="color: #2d98e0;" href="/de/impressum/" title="Impressum" class="link-primary link">Impressum</a>     <a style="color: #2d98e0;" href="/de/nutzungsvereinbarung/" title="Nutzungsbedingungen" class="link link-primary">Nutzungsbedingungen</a>     <a href="/de/datenschutzerklaerung/" title="Datenschutzerklärung" class="link-primary">Datenschutzerklärung</a><a style="color: #2d98e0;" href="/de/datenschutzerklaerung/" title="Datenschutzerklärung" class="link-primary"></a></p>
+<p><a rel="noopener" href="https://www.linkedin.com/showcase/alumni-unibe/" target="_blank"><img style="width: 50px;" src="/media/f5dpuwnk/linkedin_icon_400_400.png" alt=""></a></p>
+<p> </p>
+</div>
+        </div>
+</div>
+
+</div>
+
+<div class="umb-block-grid__area"
+     data-area-col-span="4"
+     data-area-row-span="1"
+     data-area-alias="right"
+     style="--umb-block-grid--grid-columns: 4;--umb-block-grid--area-column-span: 4; --umb-block-grid--area-row-span: 1;">
+    
+<div class="umb-block-grid__layout-container">
+        <div
+            class="umb-block-grid__layout-item"
+            data-content-element-type-alias="umbBlockLayout2Columns6_6"
+            data-content-element-type-key="db412a76-348c-4d3a-a0ef-67d0bd336724"
+            data-element-udi="umb://element/a06662e6aa2845ed836d1781681f9506"
+            data-col-span="4"
+            data-row-span="1"
+            style=" --umb-block-grid--item-column-span: 4; --umb-block-grid--item-row-span: 1; ">
+
+
+
+<div class="container  " style="">
+    
+<div class="umb-block-grid__area-container"
+style="--umb-block-grid--area-grid-columns: 12;">
+
+<div class="umb-block-grid__area"
+     data-area-col-span="6"
+     data-area-row-span="1"
+     data-area-alias="left"
+     style="--umb-block-grid--grid-columns: 6;--umb-block-grid--area-column-span: 6; --umb-block-grid--area-row-span: 1;">
+    
+<div class="umb-block-grid__layout-container">
+        <div
+            class="umb-block-grid__layout-item"
+            data-content-element-type-alias="richtext"
+            data-content-element-type-key="2fb07454-9a8b-4825-954f-38f39d100d14"
+            data-element-udi="umb://element/6cef8f806f25463ab62c10b5a4c0718a"
+            data-col-span="6"
+            data-row-span="1"
+            style=" --umb-block-grid--item-column-span: 6; --umb-block-grid--item-row-span: 1; ">
+
+<div>
+<p> </p>
+<p> </p>
+<p> </p>
+<p style="font-size: 13px; line-height: 1.5; margin: 0;">Universität Bern</p>
+<p style="font-size: 13px; line-height: 1.5; margin: 0;">Hochschulstrasse 6</p>
+<p style="font-size: 13px; line-height: 1.5; margin: 0;">3012 Bern</p>
+</div>
+        </div>
+</div>
+
+</div>
+
+<div class="umb-block-grid__area"
+     data-area-col-span="6"
+     data-area-row-span="1"
+     data-area-alias="right"
+     style="--umb-block-grid--grid-columns: 6;--umb-block-grid--area-column-span: 6; --umb-block-grid--area-row-span: 1;">
+    
+<div class="umb-block-grid__layout-container">
+        <div
+            class="umb-block-grid__layout-item"
+            data-content-element-type-alias="richtext"
+            data-content-element-type-key="2fb07454-9a8b-4825-954f-38f39d100d14"
+            data-element-udi="umb://element/b9e833d2c3db443fbe180649befb46ff"
+            data-col-span="6"
+            data-row-span="1"
+            style=" --umb-block-grid--item-column-span: 6; --umb-block-grid--item-row-span: 1; ">
+
+<div>
+<p> </p>
+<p><img style="width: 180px;" src="/media/dswdbtdp/logo-unibern-footer.png" alt=""></p>
+</div>
+        </div>
+</div>
+
+</div>
+</div>
+
+</div>
+        </div>
+</div>
+
+</div>
+</div>
+
+</div>
+        </div>
+</div>
+
+</div>
+</div>
+
+</div>
+        </div>
+</div>
+
+</div>
+
+
+    </footer>
+
+
+
+    <script>
+        console.log("VERSION: 2026-10-07-15-00-main-921b399");
+
+    </script>
+
+    
+    </body>
+</html>
