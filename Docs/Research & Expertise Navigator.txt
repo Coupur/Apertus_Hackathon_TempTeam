@@ -1,0 +1,79 @@
+See the challenge in our Guide
+https://app.notion.com/p/hackapertus/Bern-Economic-Development-Agency-fe5b4fec112a833daf9401a4771a7c12?source=copy_link
+
+Context and Background
+Today, finding expertise often requires knowing where to search before knowing what to search for. Information may be located on a faculty website, an institute page, a research group profile, a centre's website, an individual researcher page or a project description. On top of that, the terminology used by the person searching may differ significantly from the terminology used on the source website. Someone looking for expertise in "glucose sensors", for example, may miss relevant information described as continuous glucose monitoring, biosensing, metabolic monitoring, wearable sensing or CGM. The challenge is therefore to transform this fragmented web landscape into a unified and semantically searchable knowledge resource.
+
+Problem Description
+Research institutions generate a considerable amount of valuable information about their people, expertise, research activities, technologies, infrastructures and services. However, this information is distributed across a large and heterogeneous landscape of institutional websites and platforms.
+
+Main Objective
+Create an AI-powered Research & Expertise Navigator that aggregates these distributed public sources and makes their content accessible through a single natural-language and keyword-based search interface.
+
+2. 2
+Datasets (type, format, access)
+For the prototype, the system would use three complementary sets of public data sources, treated as **one distributed information ecosystem** rather than separate databases:
+
+1. **University of Bern web ecosystem** — based on the provided inventory of public unibe.ch subdomains (faculties, institutes, departments, research centres, laboratories, services and platforms).
+2. **ARTORG Center for Biomedical Engineering Research** — website and its associated research, team and project pages.
+3. **Diabetes Center Berne** — website and its associated research, expertise, team, project and service pages.
+
+The architecture should also be designed so that additional institutional websites and data sources can be added easily later.
+
+Supporting Materials
+A supplied inventory of public University of Bern (unibe.ch) subdomains, serving as the initial discovery map for the UniBE ecosystem.
+
+3. 3
+Preferred Programming Languages / Frameworks
+Not specified — no restriction implied
+
+Recommended Platforms
+External environments only — development and deployment must happen entirely outside the Canton of Bern's ICT infrastructure. Use local setups (e.g. Docker) or independent / Swiss Cloud infrastructure. Solutions must be self-contained and run fully air-gapped or on independent cloud instances, with no connection to internal cantonal networks.
+
+Specific AI Models
+Apertus 8B or 70B (v1.5)
+
+Model Sources
+huggingface.co/swiss-ai/Apertus-v1.5-8B
+huggingface.co/swiss-ai/Apertus-v1.5-70B
+
+4. 4
+Expected Outputs
+An **end-to-end prototype**: public web sources → content extraction → semantic enrichment → structured knowledge → natural-language search → source-backed results.
+
+Rather than only a textual answer, each query should return **structured, traceable results**:
+
+- relevant people and contact persons;
+- their functions and affiliations;
+- departments / institutes / research groups;
+- fields of expertise;
+- related projects or activities;
+- relevant infrastructure or services;
+- a short explanation of why each result matches;
+- direct links to the original source pages.
+
+Every result stays connected to its source and can be verified.
+
+Success Criteria
+1. **Finds the right people:** at least 80% of expected experts/units appear in the top 10 results.
+2. **Handles different wording:** synonym and lay-term queries (e.g. "glucose sensors" vs. "CGM", "biosensing") find the same experts as the site's own terminology.
+3. **Every result is traceable:** 100% of results link to a public source page that supports the claim; no invented people, roles or projects.
+4. **Structured results:** each result fills the required fields (person, role/affiliation, unit, expertise, projects, infrastructure/services, reason for match, source link) where the source provides them.
+5. **Covers all three sources:** UniBE, ARTORG and Diabetes Center Berne.
+6. **Easy to extend:** a new institutional website can be added via configuration or a short documented step, without rewriting the pipeline.
+
+Evaluation Criteria
+- Purposeful use of AI
+- Technical rigour
+- Value, cost & scalability
+- Sovereign deployability
+- Implementation feasibility
+
+5. 5
+Ethical Guidelines
+- **Transparency & traceability:** AI outputs must avoid unverified or hallucinated information. Every result, summary and explanation must be fully traceable and back-linked to the verifiable public source URL (e.g. UniBE, ARTORG).
+- **Fair & unbiased representation:** the search must ensure fair, objective discoverability across all research groups, institutes and individual researchers, regardless of institutional size or prominence.
+- **Accuracy & reliability:** the system must clearly say when no reliable, verifiable or sufficient source information is available to answer a query.
+
+Legal & Compliance Requirements
+Comply with the Swiss Federal Act on Data Protection (nDSG) and GDPR where applicable. Only public web content is used; the copyright of source pages stays with the original institutions. Outputs are published as Open Commons (see Terms & Conditions, §6).

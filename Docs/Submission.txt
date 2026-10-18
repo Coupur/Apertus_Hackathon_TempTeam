@@ -1,0 +1,4 @@
+- Github repo (fork our repo template, set to public
+- Pitch deck (pdf, max. 10 slides)
+- Demo video (URL, max. 2 min)
+- Technical report (pdf, max. 6 pages)

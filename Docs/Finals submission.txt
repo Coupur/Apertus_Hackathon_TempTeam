@@ -1,0 +1,12 @@
+1 Purposetul use of Al: Is Al (Apertus) essential to the solution and used for the right
+job, not just bolted on?
+2 Technical rigour: Is the solution well built, tested and evaluated? Does the demo
+actually work?
+3 Value, cost & scalabilty: Does it create real value for the partner? Is it affordable to
+run, and can it scale?
+4 Sovereign deployability: Can it run air-gapped, on-premise or on Swiss cloud, with
+no dependency on foreign closed services?
+5 Implementation feasibiity: Could the partner realistically adopt and run it after the
+hackathon?
+6 Pitch & presentation: Is the problem and solution clearly explained, with a
+convincing demo, within time, and with strong answers in Q&A?
