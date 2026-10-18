@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Research &amp; Expertise Navigator</title>
+<style>
+  :root { --ink:#1d2433; --muted:#5d6678; --line:#e3e6ec; --accent:#c8102e; --bg:#f6f7f9; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; color:var(--ink); background:var(--bg); }
+  main { max-width: 860px; margin: 0 auto; padding: 32px 16px 64px; }
+  h1 { font-size: 24px; margin: 0 0 4px; }
+  .sub { color: var(--muted); margin: 0 0 20px; }
+  form { display:flex; gap:8px; flex-wrap:wrap; }
+  textarea { flex:1 1 420px; min-height:64px; padding:10px 12px; font:inherit; border:1px solid var(--line); border-radius:8px; resize:vertical; }
+  button { padding:0 22px; min-height:44px; font:inherit; font-weight:600; color:#fff; background:var(--accent); border:0; border-radius:8px; cursor:pointer; }
+  button:disabled { opacity:.6; cursor:wait; }
+  .examples { margin:10px 0 24px; font-size:13px; color:var(--muted); }
+  .examples a { color:inherit; margin-right:12px; cursor:pointer; text-decoration:underline dotted; }
+  .status { color:var(--muted); margin:12px 0; }
+  .card { background:#fff; border:1px solid var(--line); border-radius:10px; padding:16px 18px; margin:12px 0; }
+  .card h2 { font-size:17px; margin:0; }
+  .inst { color:var(--muted); font-size:13px; margin:2px 0 10px; }
+  .reason { margin:0 0 10px; }
+  .row { font-size:13px; margin:4px 0; }
+  .row b { display:inline-block; min-width:110px; color:var(--muted); font-weight:600; }
+  .tag { display:inline-block; background:var(--bg); border:1px solid var(--line); border-radius:12px; padding:0 8px; margin:2px 4px 2px 0; }
+  .people { margin:6px 0 0; padding-left:18px; font-size:13px; }
+  .sources a { word-break: break-all; color:#2457a6; }
+  .none { background:#fff7e6; border:1px solid #f0d9a8; border-radius:10px; padding:14px 18px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Research &amp; Expertise Navigator</h1>
+  <p class="sub">Describe what your company needs, in your own words and any language. Every result links to the public page it comes from.</p>
+  <form id="f">
+    <textarea id="need" placeholder="e.g. We build wearable glucose sensors and need a partner for clinical validation" required></textarea>
+    <button id="go">Search</button>
+  </form>
+  <div class="examples">Try:
+    <a>We build wearable glucose sensors and need a partner for clinical validation</a>
+    <a>Wir suchen Experten für Hörimplantate</a>
+    <a>partner for machine learning and computer vision</a>
+  </div>
+  <div id="status" class="status"></div>
+  <div id="results"></div>
+</main>
+<script>
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const tags = (xs) => xs.map((x) => `<span class="tag">${esc(x)}</span>`).join("");
+const row = (label, html) => html ? `<div class="row"><b>${label}</b>${html}</div>` : "";
+
+document.querySelectorAll(".examples a").forEach((a) => a.onclick = () => { $("need").value = a.textContent; $("f").requestSubmit(); });
+
+$("f").onsubmit = async (ev) => {
+  ev.preventDefault();
+  $("go").disabled = true; $("results").innerHTML = ""; $("status").textContent = "Searching… (Apertus reads the candidates, ~10 s)";
+  try {
+    const r = await fetch("/search", {method: "POST", headers: {"Content-Type": "application/json"},
+                                      body: JSON.stringify({need: $("need").value, max_results: 8})});
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const d = await r.json();
+    $("status").innerHTML = `Interpreted as: <i>${esc(d.interpreted_need)}</i>`;
+    if (d.no_reliable_match) {
+      $("results").innerHTML = `<div class="none">${esc(d.note || "No reliable, verifiable match found in the indexed sources.")}</div>`;
+      return;
+    }
+    $("results").innerHTML = d.results.map((m) => `
+      <div class="card">
+        <h2>${esc(m.unit)}</h2>
+        <div class="inst">${esc(m.institution)}</div>
+        <p class="reason">${esc(m.reason)}</p>
+        ${row("Expertise", tags(m.expertise.slice(0, 10)))}
+        ${row("Infrastructure", tags(m.infrastructure))}
+        ${row("Projects", tags(m.projects))}
+        ${m.people.length ? `<div class="row"><b>People</b></div><ul class="people">${m.people.map((p) =>
+            `<li>${esc(p.name)}${p.role ? ` — ${esc(p.role)}` : ""}${p.email ? ` · ${esc(p.email)}` : ""}
+             · <a href="${esc(p.source_url)}" target="_blank" rel="noopener">source</a></li>`).join("")}</ul>` : ""}
+        ${row("Sources", `<span class="sources">${m.sources.map((u) => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(u)}</a>`).join("<br>")}</span>`)}
+      </div>`).join("");
+  } catch (e) {
+    $("status").textContent = `Search failed: ${e.message}`;
+  } finally {
+    $("go").disabled = false;
+  }
+};
+</script>
+</body>
+</html>

@@ -1,59 +1,45 @@
-# Navigator backend
+# Research & Expertise Navigator — code
 
-```
-Company request ──► 1. understand (Apertus: need → terms + EN/DE synonyms)
-                    2. retrieve   (BM25 over crawled + enriched pages)
-                    3. judge      (Apertus: keep relevant units, write reason)
-                 ──► SearchResponse (units, people, expertise, infra, reason, source URLs)
+Four steps, one file each in [navigator/](navigator/):
 
-Offline pipeline:  sources (xlsx + sources.json) → crawl → enrich (Apertus) → data/*.jsonl
-```
+| Step | File | In → out |
+|---|---|---|
+| 1. crawl | `crawl.py` | websites from `sources.json` + the UniBE inventory → `data/pages.jsonl` (clean text per page) |
+| 2. enrich | `enrich.py` | Apertus reads each page → `data/entities.jsonl` (unit, people, roles, expertise, projects, infrastructure, EN/DE synonyms) |
+| 3. index | `index.py` | per-page records → one profile per person and per unit, embedded → `data/profiles.jsonl`, `data/vectors.npy` |
+| 4. search | `search.py` | Apertus rewrites the need → similarity search over profiles → Apertus keeps the units that fit and says why |
+
+`api.py` serves the web page (`static/index.html`) and `POST /search`. `llm.py` talks to any
+OpenAI-compatible Apertus endpoint; `models.py` is the request / response contract.
 
 ## Run
 
-```bash
-pip install -r src/requirements.txt
-export PYTHONPATH=src
-export LLM_NAME=swiss-ai/Apertus-v1.5-8B LLM_BASE_URL=http://<host>:8000/v1 LLM_API_KEY=...
+Python 3.12 (see `.python-version`).
 
-python -m navigator sources                          # list the 42+ configured sites
-python -m navigator crawl --only artorg dcberne inf  # or no --only for everything
-python -m navigator enrich                           # LLM structured extraction
+```bash
+uv venv && source .venv/bin/activate          # with conda: `conda deactivate` first
+uv pip install -r src/requirements.txt
+cp src/.env.example src/.env                  # fill in LLM_NAME, LLM_BASE_URL, LLM_API_KEY; loaded automatically
+cd src
+
+python -m navigator crawl                     # ~10 min for all sites; --only artorg dcberne for a subset
+python -m navigator enrich                    # ~35 min with 8 workers; resumable; --limit 20 for a test run
+python -m navigator index                     # ~1 min
 python -m navigator search "partner to validate a wearable glucose sensor"
 
-uvicorn navigator.api:app --app-dir src --port 8000  # POST /search, GET /health
+uvicorn navigator.api:app --port 8000         # web page on http://localhost:8000
 ```
 
-Without `LLM_BASE_URL` everything still runs as plain keyword search (no synonyms, no reasons).
-
-## Embeddings on a GPU
-
-`navigator embed` uses CUDA automatically when torch can see it (override with `EMBED_DEVICE=cpu|cuda`).
-The default pip torch is CPU-only. For an NVIDIA GPU install the CUDA build first:
-
-```bash
-pip install --force-reinstall --index-url https://download.pytorch.org/whl/cu128 torch
-python -c "import torch; print(torch.cuda.is_available())"   # must print True
-```
-
-The index is the same either way: vectors built on CPU and GPU can be mixed, and later runs only embed new chunks.
+If `data/pages.jsonl` and `data/entities.jsonl` are already there, only `index` and the server are needed.
 
 ## Add a new institution
 
-Append an entry to [sources.json](sources.json) (`id`, `name`, `url`, `institution`, optional `seed_paths`), then re-run `crawl` and `enrich`.
-
-## Input / output contract
-
-See [navigator/models.py](navigator/models.py). Only `need` is required:
-
-```json
-{"need": "We build wearable glucose sensors and need clinical validation",
- "company_name": "Acme", "sector": "MedTech", "keywords": ["CGM"],
- "looking_for": ["expert", "infrastructure"], "max_results": 10}
-```
+Append an entry to [sources.json](sources.json) (`id`, `name`, `url`, `institution`, optional `seed_paths`),
+then run `crawl`, `enrich` and `index` again. Each step only processes what is new.
 
 ## Traceability
 
-- People, projects and infrastructure that the LLM extracts are kept only if they appear verbatim in the page text.
-- The judge can only select candidate ids it was given; each result carries the source URLs it came from.
-- If nothing scores above the threshold, `no_reliable_match: true` is returned instead of a guess.
+- People, roles, emails, projects and infrastructure are kept only if they appear verbatim in the page text.
+- The judge can only pick candidates it was given; every result carries the source URLs it came from.
+- If no candidate fits, the response says `no_reliable_match: true` instead of guessing.
+- When a page exists in German and English, only the English version is indexed, so units are not listed twice.
