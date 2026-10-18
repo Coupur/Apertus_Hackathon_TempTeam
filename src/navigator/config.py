@@ -6,6 +6,7 @@ ROOT = Path(__file__).resolve().parents[2]
 DATA_DIR = Path(os.getenv("NAVIGATOR_DATA_DIR", ROOT / "data"))
 SOURCES_XLSX = ROOT / "Docs" / "unibe_sous_domaines_publics_etendus.xlsx"
 EXTRA_SOURCES = ROOT / "src" / "sources.json"
+DISCOVERED_SOURCES = ROOT / "src" / "sources_discovered.json"  # written by `navigator discover`
 
 RAW_DIR = DATA_DIR / "raw"                   # untouched downloads: raw/<source_id>/, raw/boris/, raw/dcberne_api/
 PAGES_FILE = DATA_DIR / "pages.jsonl"        # cleaned text extracted from raw HTML

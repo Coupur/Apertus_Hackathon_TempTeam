@@ -34,12 +34,20 @@ PRIORITY_WORDS = [
     "research", "forschung", "group", "gruppe", "project", "projekt", "expertise",
     "publication", "publikation", "service", "dienstleistung", "infrastructure", "infrastruktur",
     "facility", "facilities", "equipment", "platform", "lab", "labor", "news", "aktuell",
+    # what a company looks for: infrastructure, services, transfer, collaboration
+    "geraete", "ausstattung", "core", "technolog", "method", "methode", "angebot", "industry",
+    "industrie", "kooperation", "collaborat", "partner", "transfer", "innovation", "patent", "spin",
+    "startup", "consult", "analys", "messung", "testing", "clinical", "trial", "studie", "study",
 ]
 SKIP_WORDS = ["login", "logout", "/search", "/suche", "index_print", "_fra.html", "/fr/", "/it/", "/events/",
               "/agenda/", "/jobs", "/stellen", "career", "impressum", "datenschutz", "privacy",
               "data-protection", "mailto:", "javascript:", "tel:", "/feed", "?share=", "wp-login",
-              "replytocom", "/tag/", "/author/"]
+              "replytocom", "/tag/", "/author/",
+              # UniBE-wide portals linked from every page: staff intranet, LMS, library, jobs
+              "karriere.unibe", "intern.unibe", "ilias.unibe", "teachinghub.unibe", "ub.unibe",
+              "edit.cms.unibe", "beratungswegweiser.unibe"]
 MAX_BYTES = 5_000_000
+GER_PENALTY = 3  # UniBE pages exist as *_ger.html and *_eng.html; fetch English first
 
 
 def _now() -> str:
@@ -48,7 +56,11 @@ def _now() -> str:
 
 def _priority(url: str, depth: int) -> float:
     u = url.lower()
-    return depth - sum(0.6 for w in PRIORITY_WORDS if w in u)
+    return depth - sum(0.6 for w in PRIORITY_WORDS if w in u) + (GER_PENALTY if "_ger." in u else 0)
+
+
+def _eng_twin(url: str) -> str | None:
+    return url.replace("_ger.", "_eng.") if "_ger." in url else None
 
 
 def _links(html: str, base: str) -> list[str]:
@@ -75,6 +87,7 @@ class SourceCrawl:
         self.pdfs: set[str] = set()
         self.queue: list = []
         self.queued: set[str] = set()
+        self.saved_urls: set[str] = set()
 
     def _same_site(self, url: str) -> bool:
         host = urlsplit(url).netloc.lower().split(":")[0].removeprefix("www.")
@@ -106,9 +119,12 @@ class SourceCrawl:
         saved = []
         for line in open(manifest, encoding="utf-8"):
             m = json.loads(line)
+            if str(m.get("status")).startswith("error"):
+                continue  # network errors are retried on the next run
             self.done.update({m["url"], m.get("final_url") or m["url"]})
             if m.get("file"):
                 saved.append(m)
+                self.saved_urls.add(m["final_url"])
         self.stats["saved"] = len(saved)
         return saved
 
@@ -135,6 +151,10 @@ class SourceCrawl:
                 self.stats["frontier"] = len(self.queue)
                 if url in self.done:
                     continue
+                if _eng_twin(url) in self.saved_urls:
+                    self.stats["skipped_ger"] = self.stats.get("skipped_ger", 0) + 1
+                    self.done.add(url)  # English twin already saved; German copy adds little
+                    continue
                 if not robots.can_fetch(url):
                     self.stats["skipped_robots"] += 1
                     self.done.add(url)
@@ -155,6 +175,7 @@ class SourceCrawl:
                         rec["file"] = f"pages/{name}"
                         self.stats["saved"] += 1
                         self.stats["new"] += 1
+                        self.saved_urls.add(final)
                         for link in _links(r.text, final):
                             self._enqueue(link, depth + 1, final)
                     elif ctype == "application/pdf":

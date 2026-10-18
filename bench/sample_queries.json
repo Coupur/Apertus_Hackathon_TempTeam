@@ -1,0 +1,13 @@
+{
+  "company_id": "samples",
+  "queries": [
+    {"qid": "glucose", "text": "clinical validation of a wearable glucose sensor for diabetes patients", "from": "sample"},
+    {"qid": "gnss", "text": "satellite orbit determination and GNSS positioning services", "from": "sample"},
+    {"qid": "ml-vision", "text": "partner for machine learning and computer vision research", "from": "sample"},
+    {"qid": "materials-de", "text": "Labor für Materialprüfung und Oberflächenanalyse", "from": "sample"},
+    {"qid": "vet", "text": "veterinary diagnostics for livestock diseases", "from": "sample"},
+    {"qid": "climate", "text": "climate data and paleoclimate research for risk assessment", "from": "sample"},
+    {"qid": "medtech-reg", "text": "medical device startup needs help with regulatory approval and clinical trials", "from": "sample"},
+    {"qid": "chocolate", "text": "we make chocolate and want to reduce our food waste", "from": "sample"}
+  ]
+}

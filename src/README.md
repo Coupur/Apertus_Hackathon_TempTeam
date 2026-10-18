@@ -26,6 +26,18 @@ uvicorn navigator.api:app --app-dir src --port 8000  # POST /search, GET /health
 
 Without `LLM_BASE_URL` everything still runs as plain keyword search (no synonyms, no reasons).
 
+## Embeddings on a GPU
+
+`navigator embed` uses CUDA automatically when torch can see it (override with `EMBED_DEVICE=cpu|cuda`).
+The default pip torch is CPU-only. For an NVIDIA GPU install the CUDA build first:
+
+```bash
+pip install --force-reinstall --index-url https://download.pytorch.org/whl/cu128 torch
+python -c "import torch; print(torch.cuda.is_available())"   # must print True
+```
+
+The index is the same either way: vectors built on CPU and GPU can be mixed, and later runs only embed new chunks.
+
 ## Add a new institution
 
 Append an entry to [sources.json](sources.json) (`id`, `name`, `url`, `institution`, optional `seed_paths`), then re-run `crawl` and `enrich`.

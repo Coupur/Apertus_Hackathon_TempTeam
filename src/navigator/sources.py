@@ -40,8 +40,12 @@ def load_sources() -> list[Source]:
     by_host: dict[str, Source] = {}
     for s in _from_xlsx():
         by_host[s.host] = s
-    if config.EXTRA_SOURCES.exists():
-        for entry in json.loads(config.EXTRA_SOURCES.read_text(encoding="utf-8"))["sources"]:
-            s = Source(**entry)
-            by_host[s.host] = s  # sources.json overrides the xlsx entry for the same host
+    # later files override earlier ones for the same host: discovered < xlsx < sources.json
+    for path, override in ((config.DISCOVERED_SOURCES, False), (config.EXTRA_SOURCES, True)):
+        if path.exists():
+            for entry in json.loads(path.read_text(encoding="utf-8"))["sources"]:
+                entry.pop("linked_from_pages", None)
+                s = Source(**entry)
+                if override or s.host not in by_host:
+                    by_host[s.host] = s
     return list(by_host.values())
