@@ -3,6 +3,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        ORIGIN: ${ORIGIN:?Set ORIGIN to the public HTTPS origin}
     restart: unless-stopped
     environment:
       ORIGIN: ${ORIGIN:?Set ORIGIN to the public HTTPS origin}

@@ -39,9 +39,10 @@ artifacts.
 
 Deploy this repository with the Docker Compose builder using
 [docker-compose.yml](../docker-compose.yml). Route the `web` service to
-container port `3000`. Set `ORIGIN` to the public HTTPS origin and provide
-`RESEND_API_KEY` and `RESEND_FROM_EMAIL` as Dokploy runtime environment
-variables. Do not bake secrets into the image.
+container port `3000`. Set `ORIGIN` to the public HTTPS origin; Compose passes
+it at build time for SvelteKit's CSRF origin check and at runtime for magic-link
+URLs. Provide `RESEND_API_KEY` and `RESEND_FROM_EMAIL` as Dokploy runtime
+environment variables. Do not bake secrets into the image.
 
 The Node adapter is configured to use the proxy's `X-Forwarded-Host` and
 `X-Forwarded-Proto` headers when validating POST origins. Keep the app behind
