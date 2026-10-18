@@ -1,4 +1,4 @@
-import { APP_ORIGIN, RESEND_API_KEY, RESEND_FROM_EMAIL } from "$app/env/private";
+import { ORIGIN, RESEND_API_KEY, RESEND_FROM_EMAIL } from "$app/env/private";
 import { fail, type Actions } from "@sveltejs/kit";
 import { redirect } from "@sveltejs/kit";
 import { Resend } from "resend";
@@ -50,9 +50,9 @@ export const actions: Actions = {
       });
     }
 
-    const configuredOrigin = APP_ORIGIN;
+    const configuredOrigin = ORIGIN;
     if (!configuredOrigin && process.env.NODE_ENV === "production") {
-      console.error("Magic-link delivery is unavailable: APP_ORIGIN is not configured.");
+      console.error("Magic-link delivery is unavailable: ORIGIN is not configured.");
       return fail(503, {
         error: "Email sign-in is temporarily unavailable. Please try again later.",
         message: undefined
@@ -71,10 +71,10 @@ export const actions: Actions = {
         (appOrigin.protocol !== "https:" &&
           !(process.env.NODE_ENV !== "production" && appOrigin.hostname === "localhost"))
       ) {
-        throw new Error("APP_ORIGIN must be an HTTPS origin.");
+        throw new Error("ORIGIN must be an HTTPS origin.");
       }
     } catch {
-      console.error("Magic-link delivery is unavailable: APP_ORIGIN is invalid.");
+      console.error("Magic-link delivery is unavailable: ORIGIN is invalid.");
       return fail(503, {
         error: "Email sign-in is temporarily unavailable. Please try again later.",
         message: undefined

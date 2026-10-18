@@ -1,0 +1,14 @@
+.git
+.github
+.data
+.env
+.env.*
+node_modules
+.svelte-kit
+build
+dist
+data
+.venv
+venv
+__pycache__
+*.py[cod]

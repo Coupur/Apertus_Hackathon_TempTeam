@@ -7,7 +7,7 @@ export const variables = defineEnvVars({
   RESEND_FROM_EMAIL: {
     schema: (value) => value || "onboarding@resend.dev"
   },
-  APP_ORIGIN: {
+  ORIGIN: {
     schema: (value) => value || undefined
   }
 });

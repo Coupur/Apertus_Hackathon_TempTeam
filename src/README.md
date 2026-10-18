@@ -16,8 +16,8 @@ npm run dev
 ```
 
 Set `RESEND_API_KEY` in the ignored root `.env` file. Optionally set
-`RESEND_FROM_EMAIL` to a verified sender address and `APP_ORIGIN` to the
-public HTTPS origin used in sign-in links. The default sender
+`RESEND_FROM_EMAIL` to a verified sender address and `ORIGIN` to the public
+HTTPS origin used in sign-in links and by SvelteKit behind the reverse proxy. The default sender
 `onboarding@resend.dev` is suitable for Resend testing; sending to arbitrary
 recipients requires a verified sending domain.
 
@@ -34,6 +34,22 @@ The dashboard includes cards for crawled pages, indexed pages, discovered PDF
 links, and downloaded PDF files. These remain at zero until an analytics
 backend is connected; the frontend does not infer metrics from local crawl
 artifacts.
+
+## Deploy with Dokploy
+
+Deploy this repository with the Docker Compose builder using
+[docker-compose.yml](../docker-compose.yml). Route the `web` service to
+container port `3000`. Set `ORIGIN` to the public HTTPS origin and provide
+`RESEND_API_KEY` and `RESEND_FROM_EMAIL` as Dokploy runtime environment
+variables. Do not bake secrets into the image.
+
+The Compose file mounts the named `app-data` volume at `/app/.data`, so SQLite
+users, sessions, and source settings survive container replacement. If
+replacing it with a host bind mount, make sure the directory is writable by
+the container's `node` user (UID `1000`).
+
+The Docker image runs the SvelteKit interface only; the Python crawler and API
+are not started by this container.
 
 ## Navigator backend
 
