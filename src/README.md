@@ -2,7 +2,12 @@
 
 ## SvelteKit interface
 
-The starter interface lives in `src/routes` and uses SvelteKit with Bits UI.
+The SvelteKit and Bits UI interface lives in `src/routes`. Sign in by email to
+open the research dashboard; use **Admin** in the top navigation to add, edit,
+or remove website sources. The three starting sources are the University of
+Bern website, ARTORG, and Diabetes Center Berne. The supplied University of
+Bern subdomain inventory adds more sites to the same registry.
+
 Run it from the repository root:
 
 ```sh
@@ -18,9 +23,17 @@ recipients requires a verified sending domain.
 
 Run `npm run check` for Svelte and TypeScript diagnostics, or `npm run build`
 to create a production build. Magic links expire after 15 minutes and are
-single-use. Verified sign-ins use HTTP-only session cookies, and auth records
-are stored in the ignored `.data/auth.sqlite` SQLite database. Production
-deployments need persistent storage for this database.
+single-use. Verified sign-ins use HTTP-only session cookies. Auth and
+admin-managed website sources are stored in the ignored `.data/auth.sqlite`
+SQLite database. The Python source registry reads active website sources from
+the same database, so additions are available to `python -m navigator sources`
+and the crawler. Production deployments need persistent storage for this
+database.
+
+The dashboard includes cards for crawled pages, indexed pages, discovered PDF
+links, and downloaded PDF files. These remain at zero until an analytics
+backend is connected; the frontend does not infer metrics from local crawl
+artifacts.
 
 ## Navigator backend
 
@@ -62,9 +75,17 @@ python -c "import torch; print(torch.cuda.is_available())"   # must print True
 
 The index is the same either way: vectors built on CPU and GPU can be mixed, and later runs only embed new chunks.
 
-## Add a new institution
+## Manage website sources
 
-Append an entry to [sources.json](sources.json) (`id`, `name`, `url`, `institution`, optional `seed_paths`), then re-run `crawl` and `enrich`.
+Use the signed-in **Admin** page to add, edit, or remove a website source.
+Changes are stored in `.data/auth.sqlite` and picked up by
+`python -m navigator sources`; run the crawler to collect pages from changed
+sources. The supplied UniBE subdomain inventory remains a separate discovery
+map for the University of Bern ecosystem.
+
+For source configuration committed with the project, append an entry to
+[sources.json](sources.json) (`id`, `name`, `url`, `institution`, optional
+`seed_paths`).
 
 ## Input / output contract
 

@@ -1,20 +1,28 @@
 import { APP_ORIGIN, RESEND_API_KEY, RESEND_FROM_EMAIL } from "$app/env/private";
 import { fail, type Actions } from "@sveltejs/kit";
+import { redirect } from "@sveltejs/kit";
 import { Resend } from "resend";
 import type { PageServerLoad } from "./$types";
 import { createMagicLink, deleteSession, getSessionUser } from "../lib/server/auth";
+import { getDashboardMetrics } from "../lib/server/metrics";
+import { listWebsiteSources } from "../lib/server/sources";
 
 const sessionCookieName = "navigator_session";
 
-export const load: PageServerLoad = ({ cookies, url }) => ({
-  email: getSessionUser(cookies.get(sessionCookieName)),
-  notice:
-    url.searchParams.get("verified") === "1"
-      ? "Your email is verified. You are signed in."
-      : url.searchParams.get("error") === "link"
-        ? "That sign-in link is invalid or has expired. Request a new one."
-        : null
-});
+export const load: PageServerLoad = async ({ cookies, url }) => {
+  const email = getSessionUser(cookies.get(sessionCookieName));
+  return {
+    email,
+    metrics: email ? await getDashboardMetrics() : null,
+    sources: listWebsiteSources(),
+    notice:
+      url.searchParams.get("verified") === "1"
+        ? "Your email is verified. You are signed in."
+        : url.searchParams.get("error") === "link"
+          ? "That sign-in link is invalid or has expired. Request a new one."
+          : null
+  };
+};
 
 export const actions: Actions = {
   requestLink: async ({ request, url }) => {
@@ -112,7 +120,7 @@ export const actions: Actions = {
 
     return {
       error: undefined,
-      message: "If email delivery is configured, your sign-in link will arrive shortly."
+      message: "Your sign-in link is on its way. Check your inbox."
     };
   },
 
@@ -120,6 +128,6 @@ export const actions: Actions = {
     const sessionToken = cookies.get(sessionCookieName);
     deleteSession(sessionToken);
     cookies.delete(sessionCookieName, { path: "/" });
-    return { error: undefined, message: "You have been signed out." };
+    redirect(303, "/");
   }
 };

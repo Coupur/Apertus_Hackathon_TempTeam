@@ -4,6 +4,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 DATA_DIR = Path(os.getenv("NAVIGATOR_DATA_DIR", ROOT / "data"))
+APP_DB_FILE = ROOT / ".data" / "auth.sqlite"
 SOURCES_XLSX = ROOT / "Docs" / "unibe_sous_domaines_publics_etendus.xlsx"
 EXTRA_SOURCES = ROOT / "src" / "sources.json"
 DISCOVERED_SOURCES = ROOT / "src" / "sources_discovered.json"  # written by `navigator discover`

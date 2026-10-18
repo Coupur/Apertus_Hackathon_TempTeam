@@ -1,43 +1,5 @@
-import Database from "better-sqlite3";
 import { createHash, randomBytes } from "node:crypto";
-import { mkdirSync } from "node:fs";
-import { resolve } from "node:path";
-
-const databaseDirectory = resolve(process.cwd(), ".data");
-mkdirSync(databaseDirectory, { recursive: true });
-
-const database = new Database(resolve(databaseDirectory, "auth.sqlite"));
-database.pragma("journal_mode = WAL");
-database.pragma("foreign_keys = ON");
-database.exec(`
-  CREATE TABLE IF NOT EXISTS users (
-    email TEXT PRIMARY KEY,
-    created_at INTEGER NOT NULL
-  );
-
-  CREATE TABLE IF NOT EXISTS magic_links (
-    token_hash TEXT PRIMARY KEY,
-    email TEXT NOT NULL,
-    expires_at INTEGER NOT NULL,
-    created_at INTEGER NOT NULL
-  );
-
-  CREATE TABLE IF NOT EXISTS magic_link_requests (
-    id INTEGER PRIMARY KEY,
-    email TEXT NOT NULL,
-    created_at INTEGER NOT NULL
-  );
-
-  CREATE TABLE IF NOT EXISTS sessions (
-    token_hash TEXT PRIMARY KEY,
-    email TEXT NOT NULL,
-    expires_at INTEGER NOT NULL,
-    created_at INTEGER NOT NULL
-  );
-
-  CREATE INDEX IF NOT EXISTS magic_link_requests_email_created
-    ON magic_link_requests(email, created_at);
-`);
+import { database } from "./database";
 
 const magicLinkLifetime = 15 * 60 * 1000;
 const sessionLifetime = 30 * 24 * 60 * 60 * 1000;
