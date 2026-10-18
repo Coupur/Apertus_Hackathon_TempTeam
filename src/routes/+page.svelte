@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { enhance } from "$app/forms";
   import { Label } from "bits-ui";
   import AppHeader from "../lib/components/AppHeader.svelte";
   import DashboardMetrics from "../lib/components/DashboardMetrics.svelte";
@@ -132,7 +133,7 @@
         <h3 id="login-heading">Welcome to your workspace</h3>
         <p class="card-copy">Enter your email and we’ll send you a secure sign-in link.</p>
 
-        <form method="POST" action="?/requestLink">
+        <form method="POST" action="?/requestLink" use:enhance>
           <Label.Root class="field-label" for="email">Work or research email</Label.Root>
           <input
             id="email"

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { enhance } from "$app/forms";
   import { Label } from "bits-ui";
   import AppHeader from "../../lib/components/AppHeader.svelte";
   import EcosystemCards from "../../lib/components/EcosystemCards.svelte";
@@ -59,7 +60,7 @@
         </div>
       </div>
 
-      <form method="POST" action="?/addSource" class="source-form">
+      <form method="POST" action="?/addSource" class="source-form" use:enhance>
         <div class="field-pair">
           <div class="form-field">
             <Label.Root class="field-label" for="source-name">Source name</Label.Root>
@@ -142,7 +143,7 @@
             <div class="source-actions">
               <details class="edit-details">
                 <summary>Edit</summary>
-                <form method="POST" action="?/editSource" class="edit-form">
+                <form method="POST" action="?/editSource" class="edit-form" use:enhance>
                   <input type="hidden" name="id" value={source.id} />
                   <label>
                     Source name
@@ -163,7 +164,7 @@
                   <button class="save-edit" type="submit">Save changes</button>
                 </form>
               </details>
-              <form method="POST" action="?/removeSource">
+              <form method="POST" action="?/removeSource" use:enhance>
                 <input type="hidden" name="id" value={source.id} />
                 <button class="remove-source" type="submit">Remove</button>
               </form>

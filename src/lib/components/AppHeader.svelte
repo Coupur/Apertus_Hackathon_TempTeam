@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { enhance } from "$app/forms";
+
   let {
     email = null,
     active = "welcome"
@@ -30,7 +32,7 @@
     </nav>
     <div class="account-actions">
       <span class="account-email" title={email}>{email}</span>
-      <form method="POST" action="/?/logout">
+      <form method="POST" action="/?/logout" use:enhance>
         <button class="sign-out" type="submit">Sign out</button>
       </form>
     </div>
