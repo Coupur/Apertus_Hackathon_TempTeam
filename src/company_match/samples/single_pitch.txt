@@ -1,0 +1,7 @@
+Company Name: Bern Biosense Labs
+Headquarters: Burgdorf, Canton of Bern, Switzerland
+
+We are a small medtech company building implantable glucose sensors and
+wearable metabolic monitoring systems. Looking for talent, university
+collaboration with ARTORG-style biomedical engineering groups, and clinical
+trial sites for diabetes device validation.

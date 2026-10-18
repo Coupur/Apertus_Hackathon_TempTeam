@@ -1,0 +1,14 @@
+# Core matching + text ingest: stdlib only.
+# PDF ingest:
+pypdf>=4.0.0
+# HTTP API (used by React UI):
+fastapi>=0.110.0
+uvicorn[standard]>=0.27.0
+pydantic>=2.0.0
+python-multipart>=0.0.9
+# Optional: full machine translation when Apertus is not configured
+deep-translator>=1.11.4
+# Later-stage vector matching
+qdrant-client>=1.9.0
+# Optional better embeddings (falls back to hash embedder if missing)
+fastembed>=0.3.0

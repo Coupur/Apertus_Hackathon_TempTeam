@@ -1,0 +1,158 @@
+{
+  "region": "Canton of Bern",
+  "domain": "life_science",
+  "domain_label": "Life Science",
+  "sources": [
+    "University of Bern (unibe.ch)",
+    "ARTORG Center for Biomedical Engineering Research",
+    "Diabetes Center Berne"
+  ],
+  "capabilities": [
+    {
+      "id": "diabetes_cgm",
+      "name": "Diabetes & Continuous Glucose Monitoring",
+      "source": "Diabetes Center Berne",
+      "keywords": [
+        "diabetes", "cgm", "glucose", "glucose sensor", "biosensing",
+        "metabolic monitoring", "wearable sensing", "insulin", "closed loop",
+        "type 1", "type 2", "glycemia", "aid", "pump",
+        "hba1c", "blood glucose", "blood glucose monitoring", "bgm",
+        "urinalysis", "urine test", "diagnostic", "diagnostics", "ivd"
+      ],
+      "synonyms": [
+        "continuous glucose monitoring", "blood glucose", "freestyle",
+        "flash glucose", "artificial pancreas", "metabolic sensing",
+        "glycated hemoglobin", "clinical chemistry", "self-monitoring"
+      ],
+      "units": ["Diabetes Center Berne", "Department of Diabetes, Endocrinology, Nutritional Medicine & Metabolism"],
+      "weight": 1.15
+    },
+    {
+      "id": "biomed_eng",
+      "name": "Biomedical Engineering & Medical Devices",
+      "source": "ARTORG Center",
+      "keywords": [
+        "biomedical engineering", "medical device", "medtech", "implant",
+        "prosthetics", "sensor", "wearable", "device development", "mechatronics",
+        "clinical testing", "diagnostic device", "reagent", "in vitro"
+      ],
+      "synonyms": [
+        "biomed eng", "medical technology", "healthtech hardware", "device R&D",
+        "medical testing systems", "point of care"
+      ],
+      "units": ["ARTORG Center for Biomedical Engineering Research"],
+      "weight": 1.0
+    },
+    {
+      "id": "surgical_robotics",
+      "name": "Surgical Robotics & Computer-Assisted Intervention",
+      "source": "ARTORG Center",
+      "keywords": [
+        "surgical robotics", "robotic surgery", "navigation", "image-guided",
+        "computer-assisted surgery", "or technology", "microsurgery"
+      ],
+      "synonyms": [
+        "davinci", "surgical navigation", "intervention planning", "soft tissue modeling"
+      ],
+      "units": ["ARTORG Center", "Inselspital surgical research groups"],
+      "weight": 0.9
+    },
+    {
+      "id": "medical_imaging_ai",
+      "name": "Medical Imaging & Clinical AI",
+      "source": "University of Bern / ARTORG",
+      "keywords": [
+        "medical imaging", "radiology", "ai diagnostics", "deep learning",
+        "computer vision", "pathology", "ultrasound", "mri", "ct"
+      ],
+      "synonyms": [
+        "clinical ai", "radiomics", "digital pathology", "image analysis"
+      ],
+      "units": ["ARTORG", "Department of Diagnostic, Interventional and Pediatric Radiology"],
+      "weight": 0.9
+    },
+    {
+      "id": "translational_medicine",
+      "name": "Translational & Clinical Research",
+      "source": "University of Bern / Inselspital",
+      "keywords": [
+        "clinical trial", "translational", "hospital partnership", "kol",
+        "investigator", "phase", "inpatient", "outpatient", "study site"
+      ],
+      "synonyms": [
+        "bench to bedside", "clinical validation", "academic medical center"
+      ],
+      "units": ["Inselspital", "sitem-insel", "Faculty of Medicine UniBE"],
+      "weight": 0.85
+    },
+    {
+      "id": "biologics_immuno",
+      "name": "Biologics, Immunology & Biomanufacturing Talent",
+      "source": "University of Bern",
+      "keywords": [
+        "biologics", "immunology", "plasma", "antibody", "biomanufacturing",
+        "vaccine", "cell therapy", "protein", "biotech"
+      ],
+      "synonyms": [
+        "immunotherapy", "biopharma", "process development", "cdmo"
+      ],
+      "units": ["Faculty of Medicine", "Institute of Immunology"],
+      "weight": 0.8
+    },
+    {
+      "id": "digital_health",
+      "name": "Digital Health & Remote Monitoring",
+      "source": "ARTORG / Diabetes Center Berne",
+      "keywords": [
+        "digital health", "remote monitoring", "mhealth", "telemedicine",
+        "patient app", "connected care", "health data", "ehr"
+      ],
+      "synonyms": [
+        "ehealth", "connected device", "patient engagement", "rpm"
+      ],
+      "units": ["ARTORG", "Diabetes Center Berne"],
+      "weight": 0.85
+    },
+    {
+      "id": "metabolic_nutrition",
+      "name": "Metabolic Health & Nutrition Science",
+      "source": "University of Bern / Diabetes Center Berne",
+      "keywords": [
+        "metabolic", "obesity", "nutrition", "endocrinology", "metabolism",
+        "weight management", "incretin", "glp-1"
+      ],
+      "synonyms": [
+        "metabolic syndrome", "nutritional medicine", "energy metabolism"
+      ],
+      "units": ["Diabetes Center Berne", "Department of Diabetes, Endocrinology, Nutritional Medicine & Metabolism"],
+      "weight": 0.8
+    },
+    {
+      "id": "one_health_vet",
+      "name": "One Health & Veterinary Sciences",
+      "source": "University of Bern",
+      "keywords": [
+        "veterinary", "one health", "animal health", "zoonosis", "comparative medicine"
+      ],
+      "synonyms": [
+        "vet med", "animal model", "comparative biology"
+      ],
+      "units": ["Vetsuisse Faculty"],
+      "weight": 0.7
+    },
+    {
+      "id": "lab_automation",
+      "name": "Lab Automation & Core Facilities",
+      "source": "University of Bern",
+      "keywords": [
+        "lab automation", "assay", "screening", "core facility", "omics",
+        "sequencing", "proteomics", "high-throughput"
+      ],
+      "synonyms": [
+        "laboratory automation", "liquid handling", "sample prep"
+      ],
+      "units": ["UniBE core facilities", "research platforms"],
+      "weight": 0.65
+    }
+  ]
+}

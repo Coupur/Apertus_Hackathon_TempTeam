@@ -1,0 +1,21 @@
+Company Name: Helix Glucose AG
+Headquarters: Zurich, Switzerland
+Website: https://www.example-helix-glucose.ch
+Sector: medtech / diabetes devices
+
+Helix Glucose develops wearable continuous glucose monitoring (CGM) sensors
+and biosensing patches for people with type 1 and type 2 diabetes. We are
+looking for clinical validation partners, university collaboration, and EU
+market entry support. Our roadmap includes closed-loop algorithm research
+and metabolic monitoring studies with academic hospitals.
+
+---
+
+Company Name: Alpine Surgical Systems
+Based in: Munich, Germany
+Website: https://www.example-alpine-surgical.de
+
+Alpine Surgical Systems builds computer-assisted surgical navigation and
+robotic surgery tooling for soft-tissue procedures. We need hospital
+partnership for clinical trials, biomedical engineering co-development,
+and medical imaging / AI diagnostics collaborators for the operating room.

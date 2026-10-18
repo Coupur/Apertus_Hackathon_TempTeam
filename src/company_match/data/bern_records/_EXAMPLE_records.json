@@ -1,0 +1,37 @@
+{
+  "_note": "FORMAT EXAMPLE ONLY. Files starting with '_' are ignored by the loader. Replace with real extracted records (one file per source is fine, e.g. artorg.jsonl, dcb.json, unibe.jsonl). Every record must point to the public page that supports it.",
+  "records": [
+    {
+      "id": "example-dcb-unit",
+      "type": "unit",
+      "name": "Diabetes Center Berne",
+      "institution": "Diabetes Center Berne",
+      "expertise": ["diabetes technology", "continuous glucose monitoring", "closed loop", "insulin delivery"],
+      "projects": [],
+      "services": ["device testing", "clinical studies"],
+      "source_url": "https://www.diabetescenter-berne.ch/",
+      "example": true
+    },
+    {
+      "id": "example-artorg-unit",
+      "type": "unit",
+      "name": "ARTORG Center for Biomedical Engineering Research",
+      "institution": "University of Bern",
+      "expertise": ["biomedical engineering", "medical device", "surgical navigation", "medical imaging"],
+      "source_url": "https://www.artorg.unibe.ch/",
+      "example": true
+    },
+    {
+      "id": "example-person",
+      "type": "person",
+      "name": "EXAMPLE PERSON (replace)",
+      "role": "Group leader",
+      "unit": "EXAMPLE research group",
+      "institution": "University of Bern",
+      "expertise": ["biosensor", "wearable sensing"],
+      "contact": "public contact page URL or email as shown on the source page",
+      "source_url": "https://www.unibe.ch/",
+      "example": true
+    }
+  ]
+}
