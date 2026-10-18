@@ -1,0 +1,92 @@
+{
+  "test": "five medical pages; no link traversal; local keyword rules",
+  "pages_requested": 5,
+  "content_fetches": 5,
+  "robots_fetches": 3,
+  "count": 7,
+  "results": [
+    {
+      "id": "924c9d97f29b1ea9c8893d00",
+      "name": "Organs-on-Chip Facility",
+      "keywords": [
+        "organ-on-chip",
+        "microfluidics"
+      ],
+      "source_url": "https://www.artorg.unibe.ch/services/organs_on_chip_facility/index_eng.html",
+      "evidence": "The ARTORG Organs-on-Chip Facility (OOCF) provides researchers at the University of Bern, the Inselspital and beyond with the infrastructure to fabricate microfluidic devices and to culture and test organs-on-chip."
+    },
+    {
+      "id": "39665d20cac9dbccda18d7f0",
+      "name": "ARTORG Start-Up PeriVision Demonstrates Clinical-Grade Performance",
+      "keywords": [
+        "clinical validation",
+        "medical imaging",
+        "glaucoma",
+        "ophthalmology",
+        "artificial intelligence"
+      ],
+      "source_url": "https://www.artorg.unibe.ch/news_and_events/2026/perivision_demonstrates_clinical_grade_performance/index_eng.html",
+      "evidence": "The company shared on August 10, 2026, that a new prospective study at the Inselspital has confirmed that the VisionOne VR perimeter delivers clinical performance equivalent to the Octopus 900 – a stationary perimeter considered to be the gold standard. The study evaluated 73 patients (120 eyes) with mild, moderate and severe glaucoma, with each patient completing both examinations during the same visit."
+    },
+    {
+      "id": "5be635cbff794bae1cdb4f9a",
+      "name": "Organs-on-Chip Culture Laboratory",
+      "keywords": [
+        "organ-on-chip",
+        "3D bioprinting",
+        "laboratory services"
+      ],
+      "source_url": "https://www.artorg.unibe.ch/services/organs_on_chip_facility/index_eng.html",
+      "evidence": "The Organs-on-Chip Culture Laboratory is a BSL-2 laboratory equipped with state-of the art cell biology equipment and specific equipment for organs-on-chip (specific incubators, …) and a 3D bioprinter."
+    },
+    {
+      "id": "2ba700511132aedf77198514",
+      "name": "BioMEMS Laboratory",
+      "keywords": [
+        "biomedical engineering",
+        "microfluidics",
+        "computational modeling"
+      ],
+      "source_url": "https://www.artorg.unibe.ch/services/organs_on_chip_facility/index_eng.html",
+      "evidence": "BioMEMS Laboratory The BioMEMS (bio-micro-electromechanical systems) lab comprises three parts: the design of microfluidic devices by CAD and numerical simulation, the production of microfluidic devices and the testing of those devices. The lab is equipped with an infrastructure for PDMS soft lithography, spin coating, plasma O2, laminator, hot embossing and more."
+    },
+    {
+      "id": "c2bfe2ff2ab1838b51c7a3f3",
+      "name": "SpineBot: A Robot to Measure Spinal Mechanics During Surgery",
+      "keywords": [
+        "musculoskeletal health",
+        "surgical robotics",
+        "biomechanics",
+        "surgery",
+        "robotics",
+        "computational modeling",
+        "digital twins"
+      ],
+      "source_url": "https://www.artorg.unibe.ch/news_and_events/2026/spinebot_a_robot_to_measure_spinal_mechanics_during_surgery/index_eng.html",
+      "evidence": "Philippe Büchler , develops patient-specific computational models of the spine. These digital twins can simulate how an individual patient’s spine responds to mechanical loading."
+    },
+    {
+      "id": "83a4ffb3c565a45fe521f220",
+      "name": "Optimization of nanopore-based sequencing for bloodstream infection diagnostics",
+      "keywords": [
+        "infectious disease",
+        "diagnostics",
+        "sequencing",
+        "genetics",
+        "genomics"
+      ],
+      "source_url": "https://www.bcpm.unibe.ch/research/projects_2nd_round/alban_ramette",
+      "evidence": "Here we aim to use long-read sequencing technology to analyse the genomic DNA of pathogens directly from blood samples of septic patients."
+    },
+    {
+      "id": "5dddd21a886b4d9d2e6bb8c1",
+      "name": "The Moonwalk Project",
+      "keywords": [
+        "glucose",
+        "hypoglycemia"
+      ],
+      "source_url": "https://www.dcberne.com/en/project/the-moonwalk-project/",
+      "evidence": "After the end of the study, algorithms will be developed to build a warning system for nocturnal hypoglycaemia. Project team: Prof."
+    }
+  ]
+}

@@ -34,6 +34,8 @@ Check our resources & tools page for detailed information:
 
 ## The structure
 
+The implemented focused collector uses local rules to build a separate SQLite database of up to 500 research candidates from the supplied UniBE inventory, ARTORG, and Diabetes Center Berne. It requires no Apertus endpoint and marks candidates as unreviewed. Start with [the backend instructions](src/README.md) and [the focused workflow guide](Docs/Focused%20Crawler.md). Authored output is English; original names and evidence excerpts preserve source wording.
+
 Keep the files and directories as shown below — don't rename or move them.
 
 | Path | What it is |

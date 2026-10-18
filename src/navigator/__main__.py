@@ -21,6 +21,8 @@ def main():
     sys.stdout.reconfigure(encoding="utf-8")  # page text has umlauts, Greek letters, etc.
     ap = argparse.ArgumentParser(prog="navigator")
     sub = ap.add_subparsers(dest="cmd", required=True)
+    from .focused.cli import add_commands, dispatch
+    add_commands(sub)
     c = sub.add_parser("crawl", help="step 2a: crawl sources into data/pages.jsonl")
     c.add_argument("--only", nargs="*", help="source ids, e.g. artorg dcberne inf")
     c.add_argument("--max-pages", type=int, default=config.MAX_PAGES_PER_SOURCE)
@@ -53,6 +55,10 @@ def main():
     s.add_argument("--keywords", nargs="*", default=[])
     s.add_argument("--n", type=int, default=5)
     args = ap.parse_args()
+
+    if args.cmd in ("focused-crawl", "highlights", "refresh-keywords"):
+        dispatch(args, ap)
+        return
 
     if args.cmd == "sources":
         for s in load_sources():
