@@ -43,6 +43,10 @@ container port `3000`. Set `ORIGIN` to the public HTTPS origin and provide
 `RESEND_API_KEY` and `RESEND_FROM_EMAIL` as Dokploy runtime environment
 variables. Do not bake secrets into the image.
 
+The Node adapter is configured to use the proxy's `X-Forwarded-Host` and
+`X-Forwarded-Proto` headers when validating POST origins. Keep the app behind
+Dokploy's trusted proxy rather than exposing the container port directly.
+
 The Compose file mounts the named `app-data` volume at `/app/.data`, so SQLite
 users, sessions, and source settings survive container replacement. If
 replacing it with a host bind mount, make sure the directory is writable by
