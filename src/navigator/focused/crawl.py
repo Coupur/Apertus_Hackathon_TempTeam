@@ -17,10 +17,13 @@ from bs4 import BeautifulSoup
 
 from ..extract import chunk, extract
 from ..sources import Source, _from_xlsx
-from .keywords import keyword_priority, record_keywords
+from .keywords import KEYWORD_VOCABULARY_VERSION, keyword_priority, record_keywords
 from .models import Document, Settings
 from .selection import RULESET_VERSION, evaluate, validate_findings
-from .store import Store, identity_keys, refresh_keywords
+from .store import Store, identity_keys, refresh_keywords, refresh_evaluations
+from .ranking import score_record, rank, ranking_summary, SELECTION_VERSION
+from .entities import extract_entities, ENTITY_VERSION
+from .privacy import clean_text
 from .web import Boundary, BudgetExceeded, FetchError, Fetcher, host, normalize_url
 
 IMPORTANT = re.compile(r"research|forschung|project|projekt|flagship|breakthrough|innovation|achievement|award|grant|transfer|patent|spin.?off|infrastructure|facility|facilities|service|platform|news|aktuell|archive|archiv|publication|publikation|ergebnis|entdeckung", re.I)
@@ -120,7 +123,7 @@ def consolidate(records: list[dict]) -> list[dict]:
         groups.append((keys, candidates))
     output = []
     for _, candidates in groups:
-        best = max(candidates, key=lambda r: (max(r["scores"].values()), sum(r["scores"].values())))
+        best = max(candidates, key=rank)
         result = {**best}
         for field, bound in (("evidence", 20), ("identifiers", 10), ("organizations", 3), ("experts", 10)):
             unique = {}
@@ -129,6 +132,7 @@ def consolidate(records: list[dict]) -> list[dict]:
                     unique[json.dumps(value, sort_keys=True)] = value
             result[field] = list(unique.values())[:bound]
         result["keywords"] = record_keywords(result)
+        score_record(result)
         output.append(result)
     return output
 
@@ -139,7 +143,7 @@ class Crawler:
         self.store, self.settings, self.evaluator, self.progress = store, settings, evaluator, progress
         self.checkpoint = checkpoint
         self.last_checkpoint = 0.0
-        self.traversal_version = "complete-v1:" + RULESET_VERSION
+        self.traversal_version = "complete-v1:" + RULESET_VERSION + ":" + SELECTION_VERSION + ":" + ENTITY_VERSION
         self.boundary = Boundary([s.url for s in sources])
         self.queue = []
         self.queued: set[str] = set()
@@ -149,7 +153,7 @@ class Crawler:
         self.rejections = Counter()
         self.errors = Counter()
         self.selection_evaluations = 0
-        self.fingerprint = RULESET_VERSION
+        self.fingerprint = RULESET_VERSION + ":" + SELECTION_VERSION + ":" + ENTITY_VERSION
         self.report = {"started_at": now(), "mode": "source_check" if settings.source_check else "collection",
                        "selection_method": "rules", "ruleset_version": RULESET_VERSION,
                        "traversal_mode": "complete" if settings.complete else "focused_budget",
@@ -229,8 +233,8 @@ class Crawler:
                 self.report["outside_links_not_followed"] += 1
                 if IMPORTANT.search(anchor + " " + context) or "doi.org" in url:
                     references.append(url)
-        return Document(response.url, page["title"], page["text"], source.id, source.institution,
-                        now(), response.url, tuple(dict.fromkeys(references))[:20])
+        return Document(response.url, page["title"], clean_text(page["text"]), source.id, source.institution,
+                        now(), response.url, tuple(dict.fromkeys(references))[:20], tuple(page_links(response.text,response.url)))
 
     def api_documents(self, response, depth: int) -> list[Document]:
         data = json.loads(response.text)
@@ -323,7 +327,25 @@ class Crawler:
             except Exception as error:
                 self.errors[f"selection_{type(error).__name__}"] += 1
                 successful = False
-        accepted_ids = {self.store.upsert(record) for record in consolidate(drafts)}
+        works = consolidate(drafts)
+        accepted_ids = set()
+        for work in works:
+            work["id"] = self.store.upsert(work)
+            accepted_ids.add(work["id"])
+        entities = extract_entities(document, works)
+        for entity in entities:
+            entity["source_read_version"] = SELECTION_VERSION
+            entity["id"] = self.store.upsert(entity)
+            accepted_ids.add(entity["id"])
+        for work in works:
+            for entity in entities:
+                for link in entity["related_works"]:
+                    if link["work_id"] == work["id"]:
+                        field = "experts" if entity["type"] == "expert" else "teams"
+                        work.setdefault(field, []).append({"id":entity["id"],"name":entity["original_name"],
+                            "role":link["role"],"source_url":link["source_url"],"quote":link["quote"]})
+            if work.get("experts") or work.get("teams"):
+                self.store.upsert(work)
         if successful and len(document.text) <= 36000:
             self.store.reconcile_source(document.url, accepted_ids)
         self.store.save_state(document.url, {"hash": digest, "evaluated": self.fingerprint if successful else None,
@@ -432,8 +454,10 @@ class Crawler:
                                    "frontier": None if self.settings.complete else self.settings.max_frontier},
                            exhaustive=False)
         report["selection_threshold"] = 2
+        report["keyword_vocabulary_version"] = KEYWORD_VOCABULARY_VERSION
+        report["ranking"] = ranking_summary(self.store.findings())
         report["retained_by_priority"] = dict(Counter(
-            "high_priority" if max(record["scores"].values()) >= 3 else "substantive"
+            "entity" if record["type"] in ("expert", "team") else "high_priority" if max(record["scores"].values()) >= 3 else "substantive"
             for record in self.store.findings()))
         return report
 
@@ -447,8 +471,6 @@ async def run_crawl(path: Path, settings: Settings, only: list[str] | None = Non
         sources = [s for s in sources if s.id in only]
     store = Store(path, settings.max_findings)
     try:
-        if not settings.source_check:
-            refresh_keywords(path)
         async with httpx.AsyncClient(timeout=30, follow_redirects=False) as client:
             return await Crawler(sources, store, settings, progress=progress, checkpoint=checkpoint).run(client)
     finally:

@@ -34,7 +34,6 @@ class Identifier(StrictModel):
 class Expert(StrictModel):
     name: str = Field(min_length=3, max_length=150)
     role: str = Field(default="", max_length=200)
-    email: str = Field(default="", max_length=200)
 
 
 class Candidate(StrictModel):
@@ -69,12 +68,13 @@ class Document:
     fetched_at: str
     retrieval_url: str = ""
     references: tuple[str, ...] = ()
+    links: tuple = ()
 
 
 @dataclass
 class Settings:
     max_fetches: int = 2000
-    max_findings: int = 500
+    max_findings: int = 700
     concurrency: int = 4
     delay: float = 1.0
     max_depth: int = 8
@@ -90,7 +90,7 @@ class Settings:
         for key in ("max_fetches", "concurrency", "max_depth", "max_frontier", "max_bytes"):
             if getattr(self, key) < 1:
                 raise ValueError(f"{key} must be positive")
-        if not 1 <= self.max_findings <= 500:
-            raise ValueError("max_findings must be between 1 and 500")
+        if not 1 <= self.max_findings <= 700:
+            raise ValueError("max_findings must be between 1 and 700")
         if not isfinite(self.delay) or self.delay < 1.0:
             raise ValueError("delay must be finite and at least one second per domain")

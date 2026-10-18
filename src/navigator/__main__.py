@@ -7,6 +7,7 @@
   python -m navigator retrieve "clinical validation of glucose sensors"   (or a queries/company .json)
   python -m navigator enrich
   python -m navigator search "we need a partner to validate a glucose sensor"
+  python -m navigator company-report company.json --out data/company-report.json
 """
 import argparse
 import asyncio
@@ -23,7 +24,9 @@ def main():
     sub = ap.add_subparsers(dest="cmd", required=True)
     from .focused.cli import add_commands, dispatch
     add_commands(sub)
-    c = sub.add_parser("crawl", help="step 2a: crawl sources into data/pages.jsonl")
+    from .focused.company_report import add_command, dispatch as dispatch_report
+    add_command(sub)
+    c = sub.add_parser("crawl", help="crawl sources into data/raw/; run pages to produce pages.jsonl")
     c.add_argument("--only", nargs="*", help="source ids, e.g. artorg dcberne inf")
     c.add_argument("--max-pages", type=int, default=config.MAX_PAGES_PER_SOURCE)
     c.add_argument("--concurrency", type=int, default=config.CRAWL_CONCURRENCY)
@@ -56,7 +59,11 @@ def main():
     s.add_argument("--n", type=int, default=5)
     args = ap.parse_args()
 
-    if args.cmd in ("focused-crawl", "highlights", "refresh-keywords"):
+    if args.cmd == "company-report":
+        dispatch_report(args, ap)
+        return
+
+    if args.cmd in ("focused-crawl", "highlights", "refresh-keywords", "refresh-evaluations", "keywords"):
         dispatch(args, ap)
         return
 

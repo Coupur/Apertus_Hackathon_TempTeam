@@ -249,7 +249,7 @@ class StoreTests(unittest.TestCase):
     def test_chunk_consolidation_keeps_strongest_observation(self):
         results = consolidate([record(score=4), record(score=3)])
         self.assertEqual(len(results), 1)
-        self.assertEqual(max(results[0]["scores"].values()), 4)
+        self.assertEqual(results[0]["selection_score"], record()["selection_score"])
 
     def test_distinct_doi_punctuation_is_preserved(self):
         first, second = record(), record()
@@ -288,11 +288,11 @@ class StoreTests(unittest.TestCase):
             item.update(title=f"Distinctive Platform {index}", original_name=f"Distinctive Platform {index}")
             self.store.upsert(item)
         self.assertEqual(len(self.store.findings()), 2)
-        self.assertEqual(max(self.store.findings()[0]["scores"].values()), 4)
+        self.assertEqual(self.store.findings()[0]["selection_score"], record()["selection_score"])
 
     def test_hard_500_cap_and_repetition_does_not_add_value(self):
         with self.assertRaises(ValueError):
-            Settings(max_findings=501)
+            Settings(max_findings=701)
         for index in range(505):
             item = record()
             item.update(title=f"Independent Facility {index}", original_name=f"Independent Facility {index}")

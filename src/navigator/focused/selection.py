@@ -2,12 +2,16 @@
 import re
 import unicodedata
 from collections import Counter
+from urllib.parse import urlsplit
 
 from pydantic import ValidationError
 
 from .keywords import record_keywords
 from .models import Candidate, Document, GROUPS
+from .ranking import score_record, SELECTION_VERSION
+from .privacy import has_contact
 from .rules import RULESET_VERSION, evaluate
+from .web import normalize_url, host
 
 
 def whitespace(text: str) -> str:
@@ -53,15 +57,12 @@ def validate_findings(raw: dict, document: Document) -> tuple[list[dict], Counte
         record["identifiers"] = [i.model_dump() for i in candidate.identifiers
                                  if whitespace(i.value).casefold() in text.casefold()
                                  and (i.kind != "doi" or re.fullmatch(r"10\.\d{4,9}/\S+", i.value))]
+        # People are attached only by the explicit relationship extractor.
         record["experts"] = []
-        for expert in candidate.experts:
-            if whitespace(expert.name) not in text:
-                continue
-            person = expert.model_dump()
-            for field in ("role", "email"):
-                if person[field] and whitespace(person[field]) not in text:
-                    person[field] = ""
-            record["experts"].append(person)
+        record["teams"] = []
+        if any(has_contact(e.quote) for e in candidate.evidence):
+            rejected["contact_in_evidence"] += 1
+            continue
         if candidate.date and candidate.date not in text:
             record["date"] = None
         if candidate.status != "unknown" and (not candidate.status_quote or whitespace(candidate.status_quote) not in text):
@@ -78,7 +79,18 @@ def validate_findings(raw: dict, document: Document) -> tuple[list[dict], Counte
                                 "fetched_at": document.fetched_at} for e in candidate.evidence]
         record.update(source_urls=[document.url], external_references=list(document.references)[:20],
                       source_ids=[document.source_id], fetched_at=document.fetched_at)
+        # Explicit language switches identify translations of one detail page.
+        # A multi-finding catalogue must never be merged by its page URL.
+        if len(raw["findings"]) == 1 and whitespace(candidate.original_name) == whitespace(document.title):
+            alternatives = [normalize_url(u) for u,a,*_ in document.links
+                            if a.casefold() in ("english","german","deutsch","englisch","en","de")
+                            and host(u) == host(document.url)
+                            and len([p for p in urlsplit(u).path.split('/') if p]) >= 2]
+            if alternatives:
+                record["identity_urls"] = sorted(set([document.url,*alternatives]))
         # Ignore proposed tags and derive them only from validated source facts.
         record["keywords"] = record_keywords(record)
+        record["source_read_version"] = SELECTION_VERSION
+        score_record(record)
         accepted.append(record)
     return accepted, rejected

@@ -1,0 +1,110 @@
+{
+  "annotation_method": "Source-reviewed weaker-claim and stronger-claim pairs, fixed before the revised scope checks.",
+  "cases": [
+    {
+      "id": "C22",
+      "candidate_name": "Menstrual Cycle Study: Results published in Diabetes Care",
+      "candidate_type": "research_result",
+      "requirement": "",
+      "claim": {
+        "kind": "fit",
+        "text": "DCB conducted a clinical study using CGM data from 77 adults with type 1 diabetes.",
+        "name": "",
+        "role": "",
+        "citations": [
+          {
+            "source_id": "S1",
+            "quote": "The Menstrual Cycle Study was conducted in collaboration between Tidepool and the Diabetes Center Berne (DCB). The retrospective decentralized study analysed real-world data donated by 77 menstruating adults with type 1 diabetes using automated insulin delivery systems."
+          },
+          {
+            "source_id": "S1",
+            "quote": "In total, the dataset covered 380 menstrual cycles and 10,107 days of data from continuous glucose monitoring, insulin delivery, carbohydrate intake and menstrual cycle tracking."
+          }
+        ]
+      },
+      "source_url": "https://www.dcberne.com/en/project_category/commitment-clinical-studies/",
+      "expected": true,
+      "label_reason": "Joint work supports involvement but not sole authorship or leadership."
+    },
+    {
+      "id": "C23",
+      "candidate_name": "Menstrual Cycle Study: Results published in Diabetes Care",
+      "candidate_type": "research_result",
+      "requirement": "",
+      "claim": {
+        "kind": "fit",
+        "text": "DCB alone conducted the study without other collaborators.",
+        "name": "",
+        "role": "",
+        "citations": [
+          {
+            "source_id": "S1",
+            "quote": "The Menstrual Cycle Study was conducted in collaboration between Tidepool and the Diabetes Center Berne (DCB). The retrospective decentralized study analysed real-world data donated by 77 menstruating adults with type 1 diabetes using automated insulin delivery systems."
+          }
+        ]
+      },
+      "source_url": "https://www.dcberne.com/en/project_category/commitment-clinical-studies/",
+      "expected": false,
+      "label_reason": "Joint work supports involvement but not sole authorship or leadership."
+    },
+    {
+      "id": "C24",
+      "candidate_name": "Menstrual Cycle Study: Results published in Diabetes Care",
+      "candidate_type": "research_result",
+      "requirement": "",
+      "claim": {
+        "kind": "fit",
+        "text": "DCB led the study independently of Tidepool.",
+        "name": "",
+        "role": "",
+        "citations": [
+          {
+            "source_id": "S1",
+            "quote": "The Menstrual Cycle Study was conducted in collaboration between Tidepool and the Diabetes Center Berne (DCB). The retrospective decentralized study analysed real-world data donated by 77 menstruating adults with type 1 diabetes using automated insulin delivery systems."
+          }
+        ]
+      },
+      "source_url": "https://www.dcberne.com/en/project_category/commitment-clinical-studies/",
+      "expected": false,
+      "label_reason": "Joint work supports involvement but not sole authorship or leadership."
+    },
+    {
+      "id": "C25",
+      "candidate_name": "SNAQ bringt den ersten KI-Ernährungsberater für CGM-Nutzer mit Diabetes auf den Markt",
+      "candidate_type": "technology",
+      "requirement": "",
+      "claim": {
+        "kind": "competency",
+        "text": "The source reports randomized-controlled studies showing improved glycemic outcomes.",
+        "name": "",
+        "role": "",
+        "citations": [
+          {
+            "source_id": "S1",
+            "quote": "Built on SNAQ’s clinically validated meal recognition technology, already used by over 250,000 people, the platform is supported by randomized-controlled evidence showing improved glycemic outcomes. CEO Aurelian Briner highlighted its potential to expand access to afford"
+          }
+        ]
+      },
+      "expected": true
+    },
+    {
+      "id": "C26",
+      "candidate_name": "SNAQ bringt den ersten KI-Ernährungsberater für CGM-Nutzer mit Diabetes auf den Markt",
+      "candidate_type": "technology",
+      "requirement": "",
+      "claim": {
+        "kind": "competency",
+        "text": "The randomized trials independently established CGM sensor accuracy against laboratory reference measurements.",
+        "name": "",
+        "role": "",
+        "citations": [
+          {
+            "source_id": "S1",
+            "quote": "Built on SNAQ’s clinically validated meal recognition technology, already used by over 250,000 people, the platform is supported by randomized-controlled evidence showing improved glycemic outcomes. CEO Aurelian Briner highlighted its potential to expand access to afford"
+          }
+        ]
+      },
+      "expected": false
+    }
+  ]
+}

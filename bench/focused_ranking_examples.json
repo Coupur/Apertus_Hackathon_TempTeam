@@ -1,0 +1,269 @@
+{
+  "description": "24 authored synthetic development examples in six matched priority groups. Relevance 0 is rejected, 1-3 expresses increasing evidence strength within a group. These are fictional rubric cases, not institutional facts, an independent benchmark, or a held-out estimate of real-world quality.",
+  "examples": [
+    {
+      "id": "clinical-01",
+      "organization": "ARTORG",
+      "language": "en",
+      "title": "Vision screening project",
+      "text": "The research project investigates how retinal imaging can identify early changes in visual function across different patient groups using paired clinical examinations.",
+      "accept": true,
+      "relevance": 1,
+      "ranking_group": "clinical",
+      "label_reason": "A concrete research objective, with no reported validation or outcome."
+    },
+    {
+      "id": "clinical-02",
+      "organization": "ARTORG",
+      "language": "en",
+      "title": "Vision comparison study",
+      "text": "A controlled study of 40 participants demonstrated that the Vision platform reduced measurement error by 10 percent against the reference instrument.",
+      "accept": true,
+      "relevance": 2,
+      "ranking_group": "clinical",
+      "label_reason": "A completed controlled comparison with a numerical result and sample size."
+    },
+    {
+      "id": "clinical-03",
+      "organization": "ARTORG",
+      "language": "en",
+      "title": "Vision randomized study",
+      "text": "A randomized controlled study of 240 participants demonstrated that the Vision platform reduced measurement error by 18 percentage points (95% confidence interval: 12 to 24). Independent validation against the reference method confirmed the result.",
+      "accept": true,
+      "relevance": 3,
+      "ranking_group": "clinical",
+      "label_reason": "Stronger design, numerical uncertainty and independent validation should outrank a smaller simple comparison."
+    },
+    {
+      "id": "clinical-04",
+      "organization": "ARTORG",
+      "language": "en",
+      "title": "Vision meeting invitation",
+      "text": "The institute invites staff to an informal meeting about future research ideas. Attendees can exchange suggestions over lunch and register through the internal calendar. No study has been conducted and no results are available.",
+      "accept": false,
+      "relevance": 0,
+      "ranking_group": "clinical",
+      "label_reason": "An invitation with no actual research finding or substantive project."
+    },
+    {
+      "id": "technology-01",
+      "organization": "Diabetes Center Berne",
+      "language": "en",
+      "title": "Optical cartridge research",
+      "text": "The research team developed an optical cartridge that measures insulin concentration using spectroscopy and a microfluidic sensor with a defined laboratory workflow.",
+      "accept": true,
+      "relevance": 1,
+      "ranking_group": "technology",
+      "label_reason": "A developed method with a concrete function, without external use."
+    },
+    {
+      "id": "technology-02",
+      "organization": "Diabetes Center Berne",
+      "language": "en",
+      "title": "Optical cartridge transfer",
+      "text": "The optical cartridge technology measures insulin concentration using spectroscopy. The cartridge was licensed to a commercial manufacturer for production and distribution.",
+      "accept": true,
+      "relevance": 2,
+      "ranking_group": "technology",
+      "label_reason": "Reported external licensing is more mature than a laboratory design."
+    },
+    {
+      "id": "technology-03",
+      "organization": "Diabetes Center Berne",
+      "language": "en",
+      "title": "Optical cartridge deployment",
+      "text": "The optical cartridge technology was licensed to 12 manufacturers for commercial production. Independent testing in 600 samples showed 96 percent agreement with laboratory assays. The publicly available dataset and source code are released under version 2 in a downloadable repository.",
+      "accept": true,
+      "relevance": 3,
+      "ranking_group": "technology",
+      "label_reason": "Quantified external use, independent testing and reusable outputs provide more evidence than licensing alone."
+    },
+    {
+      "id": "technology-04",
+      "organization": "Diabetes Center Berne",
+      "language": "en",
+      "title": "Optical cartridge advertising",
+      "text": "Our partner calls its proposed cartridge an outstanding revolution. No technical details or evaluation data are available, and the technology has not been licensed. The company hopes to begin development after raising investment.",
+      "accept": false,
+      "relevance": 0,
+      "ranking_group": "technology",
+      "label_reason": "Advertising and negated licensing are not achieved adoption."
+    },
+    {
+      "id": "facility-01",
+      "organization": "University of Bern",
+      "language": "en",
+      "title": "Cell imaging service",
+      "text": "The laboratory provides microscopy and imaging services for research teams studying the structure of tissue samples, with support for experimental design and analysis.",
+      "accept": true,
+      "relevance": 1,
+      "ranking_group": "facility",
+      "label_reason": "An available concrete research service."
+    },
+    {
+      "id": "facility-02",
+      "organization": "University of Bern",
+      "language": "en",
+      "title": "Cell imaging reference service",
+      "text": "The Cell Imaging Facility provides validated measurement services for external research projects, including microscopy of tissue samples under standardized laboratory conditions.",
+      "accept": true,
+      "relevance": 2,
+      "ranking_group": "facility",
+      "label_reason": "Validated capability and explicit external access add evidence."
+    },
+    {
+      "id": "facility-03",
+      "organization": "University of Bern",
+      "language": "en",
+      "title": "Cell imaging validation service",
+      "text": "The Cell Imaging Facility provides validated measurement services for external research projects, with independent validation against reference measurements. Researchers can access the laboratory through a documented application process. The publicly available dataset and source code can be downloaded from a version 3 repository.",
+      "accept": true,
+      "relevance": 3,
+      "ranking_group": "facility",
+      "label_reason": "Independent validation, an access procedure and reusable outputs strengthen an otherwise comparable facility."
+    },
+    {
+      "id": "facility-04",
+      "organization": "University of Bern",
+      "language": "en",
+      "title": "Cell imaging opening hours",
+      "text": "The laboratory reception is open on weekdays. Visitors should sign in at the main entrance and use the designated waiting area. The notice concerns opening hours and contains no instrument descriptions or research services.",
+      "accept": false,
+      "relevance": 0,
+      "ranking_group": "facility",
+      "label_reason": "Administrative content should be rejected."
+    },
+    {
+      "id": "humanities-01",
+      "organization": "University of Bern",
+      "language": "en",
+      "title": "Historical correspondence project",
+      "text": "The research project investigates how correspondence networks shaped the transmission of astronomical knowledge through archival analysis of previously catalogued manuscripts.",
+      "accept": true,
+      "relevance": 1,
+      "ranking_group": "humanities",
+      "label_reason": "A concrete humanities research project without released outputs."
+    },
+    {
+      "id": "humanities-02",
+      "organization": "University of Bern",
+      "language": "en",
+      "title": "Historical correspondence findings",
+      "text": "The research team identified new correspondence networks through archival analysis of 120 documents, revealing how astronomical knowledge travelled between regional observatories. A publicly available critical edition contains the transcribed source material.",
+      "accept": true,
+      "relevance": 2,
+      "ranking_group": "humanities",
+      "label_reason": "A finding with a stated corpus and accessible scholarly output."
+    },
+    {
+      "id": "humanities-03",
+      "organization": "University of Bern",
+      "language": "en",
+      "title": "Historical correspondence corpus",
+      "text": "The research team identified new correspondence networks through archival analysis of 1200 documents, revealing how astronomical knowledge travelled between regional observatories. The publicly available dataset and source code with the transcription protocol can be downloaded under version 2 from a repository.",
+      "accept": true,
+      "relevance": 3,
+      "ranking_group": "humanities",
+      "label_reason": "Comparable research with reusable data, code and a documented version should outrank a less reproducible account."
+    },
+    {
+      "id": "humanities-04",
+      "organization": "University of Bern",
+      "language": "en",
+      "title": "Historical correspondence praise",
+      "text": "The director congratulates the authors on their prestigious publication and outstanding international reputation. The announcement contains no new results or evaluation data and provides only a publication list.",
+      "accept": false,
+      "relevance": 0,
+      "ranking_group": "humanities",
+      "label_reason": "Prestige and praise without findings should be rejected."
+    },
+    {
+      "id": "clinical-de-01",
+      "organization": "ARTORG",
+      "language": "de",
+      "title": "Retinale Bildgebung",
+      "text": "Das Forschungsprojekt untersucht die Veränderungen der Netzhaut durch bildgebende Verfahren und entwickelt eine Methode zur Analyse der Gewebeproben bei verschiedenen Patientengruppen.",
+      "accept": true,
+      "relevance": 1,
+      "ranking_group": "clinical-de",
+      "label_reason": "A substantive German-language research project."
+    },
+    {
+      "id": "clinical-de-02",
+      "organization": "ARTORG",
+      "language": "de",
+      "title": "Retinale Vergleichsstudie",
+      "text": "Eine kontrollierte Studie mit 40 Patienten zeigte, dass die Plattform den Messfehler um 10 Prozent reduziert. Die Messung wurde mit einem Referenzinstrument verglichen.",
+      "accept": true,
+      "relevance": 2,
+      "ranking_group": "clinical-de",
+      "label_reason": "A completed comparative study with a numeric result."
+    },
+    {
+      "id": "clinical-de-03",
+      "organization": "ARTORG",
+      "language": "de",
+      "title": "Retinale randomisierte Studie",
+      "text": "Eine randomisierte kontrollierte Studie mit 240 Patienten zeigte, dass die Plattform den Messfehler um 18 Prozent reduziert (95% Konfidenzintervall: 12 bis 24). Eine unabhängige Validierung gegen die Referenzmessung bestätigte das Ergebnis.",
+      "accept": true,
+      "relevance": 3,
+      "ranking_group": "clinical-de",
+      "label_reason": "Randomization, numeric uncertainty and independent validation strengthen the evidence."
+    },
+    {
+      "id": "clinical-de-04",
+      "organization": "ARTORG",
+      "language": "de",
+      "title": "Retinale Werbeanzeige",
+      "text": "Die geplante Plattform soll künftig die Versorgung verbessern. Es liegen keine neuen Ergebnisse vor; das Gerät wurde noch nicht validiert und nicht lizenziert. Die Anzeige beschreibt eine Vision für zukünftige Produkte.",
+      "accept": false,
+      "relevance": 0,
+      "ranking_group": "clinical-de",
+      "label_reason": "German future claims and negation must not establish a validated result."
+    },
+    {
+      "id": "facility-de-01",
+      "organization": "Diabetes Center Berne",
+      "language": "de",
+      "title": "Mikroskopie Dienstleistung",
+      "text": "Das Labor bietet Mikroskopie und Bildgebung für Forschungsprojekte zur Untersuchung menschlicher Gewebeproben sowie Unterstützung bei der Planung wissenschaftlicher Experimente.",
+      "accept": true,
+      "relevance": 1,
+      "ranking_group": "facility-de",
+      "label_reason": "A specific available scientific service."
+    },
+    {
+      "id": "facility-de-02",
+      "organization": "Diabetes Center Berne",
+      "language": "de",
+      "title": "Validierte Gewebeplattform",
+      "text": "Die Plattform bietet validierte Prüfung von Gewebeproben und Zugang für externe Forschungspartner mit standardisierten Messungen unter kontrollierten Laborbedingungen.",
+      "accept": true,
+      "relevance": 2,
+      "ranking_group": "facility-de",
+      "label_reason": "A validated capability with access for outside research partners."
+    },
+    {
+      "id": "facility-de-03",
+      "organization": "Diabetes Center Berne",
+      "language": "de",
+      "title": "Extern validierte Gewebeplattform",
+      "text": "Die Plattform bietet validierte Prüfung von Gewebeproben und Zugang für externe Forschungspartner mit unabhängiger Validierung gegen Referenzmessungen. Der Zugang erfolgt durch einen dokumentierten Antrag. Ein öffentlich verfügbarer Datensatz und Quellcode können unter Version 2 aus einem Repository heruntergeladen werden.",
+      "accept": true,
+      "relevance": 3,
+      "ranking_group": "facility-de",
+      "label_reason": "External validation, an access route and reusable outputs strengthen the same kind of facility."
+    },
+    {
+      "id": "facility-de-04",
+      "organization": "Diabetes Center Berne",
+      "language": "de",
+      "title": "Gewebeplattform Newsletter",
+      "text": "Abonnieren Sie unseren Newsletter, um Informationen über das Institut und kommende Veranstaltungen zu erhalten. Geben Sie Ihre E-Mail-Adresse ein und bestätigen Sie Ihre Anmeldung.",
+      "accept": false,
+      "relevance": 0,
+      "ranking_group": "facility-de",
+      "label_reason": "A subscription notice contains no scientific result or capability."
+    }
+  ]
+}

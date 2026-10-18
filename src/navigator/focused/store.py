@@ -6,11 +6,26 @@ from pathlib import Path
 
 from .keywords import record_keywords
 from .selection import identity_text
+from .ranking import assess_evidence, evaluation_for, score_record, rank
+from .privacy import public_record
+
+
+def finding_keywords(record: dict) -> list[str]:
+    evidence=record.get("evidence", [])
+    if record.get("type") in ("expert", "team"):
+        evidence=evidence+[e for link in record.get("related_works", []) for e in link.get("work_evidence", [])]
+    return record_keywords({**record,"evidence":evidence})
 
 
 def identity_keys(record: dict) -> set[str]:
+    if record.get("type") in ("expert", "team"):
+        from .entities import profile_identity
+        if record.get("identity_url") and record.get("identity_evidence"):
+            return {record["type"] + ":profile:" + profile_identity(record["identity_url"])}
+        return {record["identity_anchor"]}
     keys = {f"identifier:{i['kind']}:" + (i["value"].strip().casefold() if i["kind"] == "doi"
                                                else identity_text(i["value"])) for i in record["identifiers"]}
+    keys.update("work:detail_url:" + url for url in record.get("identity_urls", []))
     # Name-only matches require a matching unit and source, not just membership of
     # the same large university. Cross-source matches use explicit identifiers.
     # Rule-authored titles describe a signal and are intentionally generic.
@@ -22,18 +37,14 @@ def identity_keys(record: dict) -> set[str]:
     return keys
 
 
-def rank(record: dict) -> tuple:
-    values = list(record["scores"].values())
-    return max(values), sum(values), record["id"]
-
-
 class Store:
-    def __init__(self, path: Path, limit: int = 500):
-        if not 1 <= limit <= 500:
-            raise ValueError("The finding limit must be between 1 and 500")
+    def __init__(self, path: Path, limit: int = 700, *, defer_trim: bool = False):
+        if not 1 <= limit <= 700:
+            raise ValueError("The finding limit must be between 1 and 700")
         path.parent.mkdir(parents=True, exist_ok=True)
         self.db = sqlite3.connect(path)
         self.limit = limit
+        self.defer_trim = defer_trim
         self.db.execute("PRAGMA foreign_keys=ON")
         self.db.execute("PRAGMA secure_delete=ON")
         self.db.executescript("""
@@ -88,6 +99,11 @@ class Store:
 
     def upsert(self, incoming: dict) -> str:
         """Use maximum significance, never mention counts or recency, when merging."""
+        incoming = public_record(incoming)
+        if incoming.get("type") in ("expert", "team"):
+            from .entities import eligible_link
+            if not any(eligible_link(link) for link in incoming.get("related_works", [])):
+                raise ValueError("An entity requires an explicit role in an accepted work")
         keys = identity_keys(incoming)
         if not keys:
             keys = {f"{incoming['type']}:name:{identity_text(incoming['title'])}:{incoming['unit']}:{incoming['source_ids'][0]}"}
@@ -95,9 +111,11 @@ class Store:
         current_keys = set(keys)
         previous = [json.loads(row[0]) for fid in ids for row in self.db.execute(
             "SELECT record FROM observations WHERE finding_id=?", (fid,))]
-        fid = min(ids) if ids else hashlib.sha256(min(keys).encode()).hexdigest()[:24]
+        stable = sorted(k for k in keys if k.startswith(("work:detail_url:", "expert:profile:", "team:profile:")))
+        fid = min(ids) if ids else hashlib.sha256((stable[0] if stable else min(keys)).encode()).hexdigest()[:24]
         incoming = {**incoming, "id": fid}
-        incoming["keywords"] = record_keywords(incoming)
+        incoming["keywords"] = finding_keywords(incoming)
+        score_record(incoming)
         observations = {p["source_urls"][0]: {**p, "id": fid} for p in previous}
         observations[incoming["source_urls"][0]] = incoming
         # Bound retained observations independently of the number of repeated mentions.
@@ -107,7 +125,9 @@ class Store:
         best = max(selected, key=rank)
         result = {**best, "id": fid, "fetched_at": incoming["fetched_at"]}
         for field, bound in (("organizations", 3), ("source_ids", 50), ("source_urls", 20),
-                             ("external_references", 20), ("topics", 12), ("identifiers", 10), ("experts", 10)):
+                             ("external_references", 20), ("topics", 12), ("identifiers", 10), ("experts", 10),
+                             ("teams", 10), ("related_works", 20), ("roles", 20), ("attributed_evidence", 30),
+                             ("identity_evidence", 8), ("competencies", 24), ("identity_urls", 10)):
             unique = {}
             for rec in [best, incoming, *selected]:
                 for value in rec.get(field, []):
@@ -123,7 +143,8 @@ class Store:
                 evidence[(e["source_url"], e["quote"])] = e
         result["evidence"] = list(evidence.values())[:20]
         # Recompute from retained evidence so withdrawn observations lose tags.
-        result["keywords"] = record_keywords(result)
+        result["keywords"] = finding_keywords(result)
+        score_record(result)
         if incoming["status"] != "unknown":
             result.update(status=incoming["status"], status_quote=incoming["status_quote"],
                           status_source_url=incoming["source_urls"][0])
@@ -155,6 +176,8 @@ class Store:
                     self.db.execute("DELETE FROM findings WHERE id=?", (fid,))
 
     def _trim(self):
+        if self.defer_trim:
+            return
         for rec in self.findings()[self.limit:]:
             self.db.execute("DELETE FROM findings WHERE id=?", (rec["id"],))
 
@@ -178,9 +201,50 @@ def read_highlights(path: Path) -> tuple[list[dict], dict | None]:
         raise FileNotFoundError(f"No focused database found at {path}. Run focused-crawl first.")
     db = sqlite3.connect(path.resolve().as_uri() + "?mode=ro", uri=True)
     try:
-        records = [json.loads(r[0]) for r in db.execute("SELECT record FROM findings")]
+        records = [public_record(json.loads(r[0])) for r in db.execute("SELECT record FROM findings")]
         report = db.execute("SELECT report FROM runs ORDER BY id DESC LIMIT 1").fetchone()
         return sorted(records, key=rank, reverse=True), json.loads(report[0]) if report else None
+    finally:
+        db.close()
+
+
+def refresh_evaluations(path: Path, source_snapshot: Path | None = None) -> dict[str, int]:
+    """Transactional rescoring, optionally restoring entity assertions from dated sources."""
+    if not path.exists():
+        raise FileNotFoundError(f"No focused database found at {path}. Run focused-crawl first.")
+    from .entities import enrich_entity_evidence
+    from .models import Document
+    sources = {}
+    if source_snapshot is not None:
+        with source_snapshot.open(encoding='utf-8') as stream:
+            for line in stream:
+                document = Document(**json.loads(line))
+                sources[document.url] = document
+                if document.retrieval_url:
+                    sources[document.retrieval_url] = document
+    db = sqlite3.connect(path.resolve().as_uri() + "?mode=rw", uri=True, timeout=30)
+    counts = {}
+    try:
+        with db:
+            db.execute("BEGIN IMMEDIATE")
+            for table in ("findings", "observations"):
+                changed = 0
+                for rowid, payload in db.execute(f"SELECT rowid, record FROM {table}").fetchall():
+                    record = json.loads(payload)
+                    if record.get('type') in ('expert', 'team'):
+                        for url in sorted({link['source_url'] for link in record.get('related_works', [])}):
+                            if url in sources:
+                                enrich_entity_evidence(record, sources[url])
+                    evaluation = evaluation_for(record)
+                    record["evaluation"] = evaluation
+                    if "selection_score" in record:
+                        record["selection_score"] = evaluation["score"]
+                    if record != json.loads(payload):
+                        db.execute(f"UPDATE {table} SET record=? WHERE rowid=?",
+                                   (json.dumps(record, ensure_ascii=False), rowid))
+                        changed += 1
+                counts[table] = changed
+        return counts
     finally:
         db.close()
 
@@ -198,7 +262,7 @@ def refresh_keywords(path: Path) -> dict[str, int]:
                 changed = 0
                 for rowid, payload in db.execute(f"SELECT rowid, record FROM {table}").fetchall():
                     record = json.loads(payload)
-                    keywords = record_keywords(record)
+                    keywords = finding_keywords(record)
                     if record.get("keywords") != keywords:
                         record["keywords"] = keywords
                         db.execute(f"UPDATE {table} SET record=? WHERE rowid=?",

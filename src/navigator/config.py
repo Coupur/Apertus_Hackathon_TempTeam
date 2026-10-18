@@ -1,8 +1,11 @@
-"""Central configuration: paths, crawl limits and LLM endpoint (from env vars)."""
+"""Central configuration: environment variables override the local, ignored .env."""
 import os
 from pathlib import Path
 
+from dotenv import load_dotenv
+
 ROOT = Path(__file__).resolve().parents[2]
+load_dotenv(ROOT / ".env", override=False, interpolate=False, encoding="utf-8-sig")
 DATA_DIR = Path(os.getenv("NAVIGATOR_DATA_DIR", ROOT / "data"))
 SOURCES_XLSX = ROOT / "Docs" / "unibe_sous_domaines_publics_etendus.xlsx"
 EXTRA_SOURCES = ROOT / "src" / "sources.json"
@@ -20,6 +23,7 @@ USER_AGENT = "HackApertus-ResearchNavigator/0.1 (+https://hackapertus.ch)"
 
 # LLM (Apertus v1.5 via any OpenAI-compatible endpoint: vLLM, SGLang, Ollama, ...)
 LLM_NAME = os.getenv("LLM_NAME", "swiss-ai/Apertus-v1.5-8B")
+REPORT_LLM_NAME = os.getenv("REPORT_LLM_NAME", LLM_NAME)
 LLM_BASE_URL = os.getenv("LLM_BASE_URL", "")
 LLM_API_KEY = os.getenv("LLM_API_KEY", "")
 LLM_ENABLED = bool(LLM_BASE_URL)

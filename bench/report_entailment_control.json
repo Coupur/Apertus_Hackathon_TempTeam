@@ -1,0 +1,343 @@
+{
+  "version": "report-entailment-control-v1",
+  "labelled_at": "2026-10-18T23:11:36+00:00",
+  "annotation_method": "Agent source review; fixed before testing the revised verifier on the 13 additional controls. C1-C3 are known development regressions.",
+  "cases": [
+    {
+      "id": "C1",
+      "candidate_name": "Research - Diabetes Center Berne",
+      "candidate_type": "research_result",
+      "requirement": "Experience evaluating glucose sensor accuracy against reference measurements",
+      "claim": {
+        "kind": "supported_requirement",
+        "text": "The source demonstrates completed clinical validation of CGM sensor accuracy against reference measurements.",
+        "name": "",
+        "role": "",
+        "citations": [
+          {
+            "source_id": "S1",
+            "quote": "These physiological signals change during nocturnal hypoglycemia, positioning radar as a promising indirect detection tool — particularly where wearables are impractical. Clinical validation pairing radar with glucose measurement is now needed."
+          }
+        ]
+      },
+      "source_url": "https://www.dcberne.com/en/projects/",
+      "expected": false,
+      "label_reason": "Frozen regression from the previous live failure."
+    },
+    {
+      "id": "C2",
+      "candidate_name": "Adaptive Diabetes Management",
+      "candidate_type": "project",
+      "requirement": "",
+      "claim": {
+        "kind": "fit",
+        "text": "ABBA supports continuous glucose monitoring and insulin pens and pumps, but its multicentre clinical study is still ongoing.",
+        "name": "",
+        "role": "",
+        "citations": [
+          {
+            "source_id": "S1",
+            "quote": "A key innovation is the Adaptive Basal-Bolus Advisor (ABBA), a self-learning system that adapts insulin recommendations multiple times per day. It is designed to operate across real-world settings, supporting continuous glucose monitoring, self-monitoring of blood glucose, flash glucose monitoring, as well as both insulin pens and pumps. The approach has been extensively validated in silico, with feasibility demonstrated for insulin-pen users, and is currently being evaluated in a multicentre clinical study."
+          }
+        ]
+      },
+      "source_url": "https://www.artorg.unibe.ch/research/aihn/research_activities/adaptive_diabetes_management/index_eng.html",
+      "expected": true,
+      "label_reason": "Frozen regression from the previous live failure."
+    },
+    {
+      "id": "C3",
+      "candidate_name": "Adaptive Diabetes Management",
+      "candidate_type": "project",
+      "requirement": "",
+      "claim": {
+        "kind": "service",
+        "text": "ABBA offers external companies an accredited CGM sensor calibration service.",
+        "name": "",
+        "role": "",
+        "citations": [
+          {
+            "source_id": "S1",
+            "quote": "A key innovation is the Adaptive Basal-Bolus Advisor (ABBA), a self-learning system that adapts insulin recommendations multiple times per day. It is designed to operate across real-world settings, supporting continuous glucose monitoring, self-monitoring of blood glucose, flash glucose monitoring, as well as both insulin pens and pumps. The approach has been extensively validated in silico, with feasibility demonstrated for insulin-pen users, and is currently being evaluated in a multicentre clinical study."
+          }
+        ]
+      },
+      "source_url": "https://www.artorg.unibe.ch/research/aihn/research_activities/adaptive_diabetes_management/index_eng.html",
+      "expected": false,
+      "label_reason": "Frozen regression from the previous live failure."
+    },
+    {
+      "id": "C4",
+      "candidate_name": "Adaptive Diabetes Management",
+      "candidate_type": "project",
+      "requirement": "",
+      "claim": {
+        "kind": "fit",
+        "text": "ABBA has completed its multicentre clinical study.",
+        "name": "",
+        "role": "",
+        "citations": [
+          {
+            "source_id": "S1",
+            "quote": "A key innovation is the Adaptive Basal-Bolus Advisor (ABBA), a self-learning system that adapts insulin recommendations multiple times per day. It is designed to operate across real-world settings, supporting continuous glucose monitoring, self-monitoring of blood glucose, flash glucose monitoring, as well as both insulin pens and pumps. The approach has been extensively validated in silico, with feasibility demonstrated for insulin-pen users, and is currently being evaluated in a multicentre clinical study."
+          }
+        ]
+      },
+      "source_url": "https://www.artorg.unibe.ch/research/aihn/research_activities/adaptive_diabetes_management/index_eng.html",
+      "expected": false,
+      "label_reason": "Ongoing evaluation is not a completed trial."
+    },
+    {
+      "id": "C5",
+      "candidate_name": "Menstrual Cycle Study: Results published in Diabetes Care",
+      "candidate_type": "research_result",
+      "requirement": "",
+      "claim": {
+        "kind": "fit",
+        "text": "The Menstrual Cycle Study analysed real-world data from 77 adults with type 1 diabetes in a DCB and Tidepool collaboration.",
+        "name": "",
+        "role": "",
+        "citations": [
+          {
+            "source_id": "S1",
+            "quote": "The Menstrual Cycle Study was conducted in collaboration between Tidepool and the Diabetes Center Berne (DCB). The retrospective decentralized study analysed real-world data donated by 77 menstruating adults with type 1 diabetes using automated insulin delivery systems."
+          }
+        ]
+      },
+      "source_url": "https://www.dcberne.com/en/project_category/commitment-clinical-studies/",
+      "expected": true,
+      "label_reason": "A study is an admissible finding and the named collaboration, count and population are explicit."
+    },
+    {
+      "id": "C6",
+      "candidate_name": "Menstrual Cycle Study: Results published in Diabetes Care",
+      "candidate_type": "project",
+      "requirement": "Experience evaluating glucose sensor accuracy against reference measurements",
+      "claim": {
+        "kind": "supported_requirement",
+        "text": "Experience evaluating glucose sensor accuracy against reference measurements",
+        "name": "",
+        "role": "",
+        "citations": [
+          {
+            "source_id": "S1",
+            "quote": "The Menstrual Cycle Study was conducted in collaboration between Tidepool and the Diabetes Center Berne (DCB). The retrospective decentralized study analysed real-world data donated by 77 menstruating adults with type 1 diabetes using automated insulin delivery systems."
+          }
+        ]
+      },
+      "source_url": "https://www.dcberne.com/en/project_category/commitment-clinical-studies/",
+      "expected": false,
+      "label_reason": "Analysing diabetic participant data does not demonstrate sensor-accuracy comparison."
+    },
+    {
+      "id": "C7",
+      "candidate_name": "Menstrual Cycle Study: Results published in Diabetes Care",
+      "candidate_type": "project",
+      "requirement": "Evidence of clinical research involving people with diabetes",
+      "claim": {
+        "kind": "supported_requirement",
+        "text": "Evidence of clinical research involving people with diabetes",
+        "name": "",
+        "role": "",
+        "citations": [
+          {
+            "source_id": "S1",
+            "quote": "The Menstrual Cycle Study was conducted in collaboration between Tidepool and the Diabetes Center Berne (DCB). The retrospective decentralized study analysed real-world data donated by 77 menstruating adults with type 1 diabetes using automated insulin delivery systems."
+          }
+        ]
+      },
+      "source_url": "https://www.dcberne.com/en/project_category/commitment-clinical-studies/",
+      "expected": true,
+      "label_reason": "The described retrospective study includes adults with type 1 diabetes."
+    },
+    {
+      "id": "C8",
+      "candidate_name": "Menstrual Cycle Study: Results published in Diabetes Care",
+      "candidate_type": "project",
+      "requirement": "",
+      "claim": {
+        "kind": "project",
+        "text": "The study analysed data from 777 participants.",
+        "name": "",
+        "role": "",
+        "citations": [
+          {
+            "source_id": "S1",
+            "quote": "The Menstrual Cycle Study was conducted in collaboration between Tidepool and the Diabetes Center Berne (DCB). The retrospective decentralized study analysed real-world data donated by 77 menstruating adults with type 1 diabetes using automated insulin delivery systems."
+          }
+        ]
+      },
+      "source_url": "https://www.dcberne.com/en/project_category/commitment-clinical-studies/",
+      "expected": false,
+      "label_reason": "Changed quantity."
+    },
+    {
+      "id": "C9",
+      "candidate_name": "DCB Innovation Challenge 2023: Meet This Year’s Mentors!",
+      "candidate_type": "project",
+      "requirement": "",
+      "claim": {
+        "kind": "expert",
+        "text": "Michael Schoemaker is a medical devices industry expert with experience in CGM device development and clinical studies.",
+        "name": "Michael Schoemaker",
+        "role": "Medical Devices Industry Expert",
+        "citations": [
+          {
+            "source_id": "S1",
+            "quote": "Michael Schoemaker\nMedical Devices Industry Expert\n20+ years experience in MD industry on development of CGM devices, covering all aspects from early research to manufacturing, clinical studies and launch activities."
+          }
+        ]
+      },
+      "source_url": "https://www.dcberne.com/en/2023/06/",
+      "expected": true,
+      "label_reason": "Name, role and experience occur together."
+    },
+    {
+      "id": "C10",
+      "candidate_name": "DCB Innovation Challenge 2023: Meet This Year’s Mentors!",
+      "candidate_type": "project",
+      "requirement": "",
+      "claim": {
+        "kind": "expert",
+        "text": "Stefanie Hofer has more than 20 years of experience developing CGM devices.",
+        "name": "Stefanie Hofer",
+        "role": "CGM developer",
+        "citations": [
+          {
+            "source_id": "S1",
+            "quote": "Michael Schoemaker\nMedical Devices Industry Expert\n20+ years experience in MD industry on development of CGM devices, covering all aspects from early research to manufacturing, clinical studies and launch activities."
+          }
+        ]
+      },
+      "source_url": "https://www.dcberne.com/en/2023/06/",
+      "expected": false,
+      "label_reason": "The quoted achievement belongs to Michael, not Stefanie."
+    },
+    {
+      "id": "C11",
+      "candidate_name": "SNAQ bringt den ersten KI-Ernährungsberater für CGM-Nutzer mit Diabetes auf den Markt",
+      "candidate_type": "technology",
+      "requirement": "",
+      "claim": {
+        "kind": "competency",
+        "text": "SNAQ combines meal analysis, glucose data, insulin and activity tracking for personalised nutrition guidance for people with diabetes.",
+        "name": "",
+        "role": "",
+        "citations": [
+          {
+            "source_id": "S1",
+            "quote": "SNAQ hat seinen AI Nutritionist auf den Markt gebracht, einen digitalen Begleiter, der Menschen mit Diabetes durch personalisierte Ernährungsberatung in Echtzeit unterstützt. Durch die Integration von Mahlzeitenanalyse, Glukosedaten, Insulin und Aktivitätsverfolgung liefert das Tool maßgeschneiderte Empfehlungen und ein ständiges Coaching, um den Nutzern zu helfen, den Blutzucker besser zu kontrollieren und nachhaltige Gewohnheiten aufzubauen."
+          }
+        ]
+      },
+      "source_url": "https://www.dcberne.com/de/category/innovation-de/",
+      "expected": true,
+      "label_reason": "Faithful translation of the German source."
+    },
+    {
+      "id": "C12",
+      "candidate_name": "New endowed lectureship investigates the role of the gut microbiome in obesity and diabetes",
+      "candidate_type": "project",
+      "requirement": "",
+      "claim": {
+        "kind": "competency",
+        "text": "This microbiome lectureship developed the SNAQ AI Nutritionist.",
+        "name": "",
+        "role": "",
+        "citations": [
+          {
+            "source_id": "S1",
+            "quote": "SNAQ hat seinen AI Nutritionist auf den Markt gebracht, einen digitalen Begleiter, der Menschen mit Diabetes durch personalisierte Ernährungsberatung in Echtzeit unterstützt. Durch die Integration von Mahlzeitenanalyse, Glukosedaten, Insulin und Aktivitätsverfolgung liefert das Tool maßgeschneiderte Empfehlungen und ein ständiges Coaching, um den Nutzern zu helfen, den Blutzucker besser zu kontrollieren und nachhaltige Gewohnheiten aufzubauen."
+          }
+        ]
+      },
+      "source_url": "https://www.dcberne.com/de/category/innovation-de/",
+      "expected": false,
+      "label_reason": "Wrong candidate attribution despite shared catalogue source."
+    },
+    {
+      "id": "C13",
+      "candidate_name": "University Institute of Diagnostic, Interventional and Pediatric Radiology",
+      "candidate_type": "infrastructure",
+      "requirement": "",
+      "claim": {
+        "kind": "infrastructure",
+        "text": "The radiology institute is performing 19 self-initiated studies and supports approximately 207 ongoing clinical studies.",
+        "name": "",
+        "role": "",
+        "citations": [
+          {
+            "source_id": "S1",
+            "quote": "Currently performing 19 self-initiated studies and supporting approx. 207 ongoing clinical studies"
+          }
+        ]
+      },
+      "source_url": "https://www.medizin.unibe.ch/profiles/university_clinics_inselspital/university_institute_of_diagnostic_interventional_and_pediatric_radiology/index_eng.html",
+      "expected": true,
+      "label_reason": "Exact counts and ongoing status; no CGM-specific assertion."
+    },
+    {
+      "id": "C14",
+      "candidate_name": "University Institute of Diagnostic, Interventional and Pediatric Radiology",
+      "candidate_type": "infrastructure",
+      "requirement": "",
+      "claim": {
+        "kind": "service",
+        "text": "The institute offers companies an accredited CGM sensor calibration service.",
+        "name": "",
+        "role": "",
+        "citations": [
+          {
+            "source_id": "S1",
+            "quote": "Currently performing 19 self-initiated studies and supporting approx. 207 ongoing clinical studies"
+          }
+        ]
+      },
+      "source_url": "https://www.medizin.unibe.ch/profiles/university_clinics_inselspital/university_institute_of_diagnostic_interventional_and_pediatric_radiology/index_eng.html",
+      "expected": false,
+      "label_reason": "General study activity is not an offered specific service."
+    },
+    {
+      "id": "C15",
+      "candidate_name": "TIMES study",
+      "candidate_type": "project",
+      "requirement": "",
+      "claim": {
+        "kind": "project",
+        "text": "TIMES plans to use ovulation testing to define cycle phases more precisely.",
+        "name": "",
+        "role": "",
+        "citations": [
+          {
+            "source_id": "S1",
+            "quote": "TIMES will help define cycle phases more precisely through ovulation testing and collect additional contextual information that may influence insulin sensitivity, supporting a more detailed understanding of individual variability."
+          }
+        ]
+      },
+      "source_url": "https://www.dcberne.com/en/project_category/commitment-clinical-studies/",
+      "expected": true,
+      "label_reason": "Future intent is faithfully retained."
+    },
+    {
+      "id": "C16",
+      "candidate_name": "TIMES study",
+      "candidate_type": "project",
+      "requirement": "",
+      "claim": {
+        "kind": "project",
+        "text": "TIMES has completed ovulation testing and established precise cycle phases.",
+        "name": "",
+        "role": "",
+        "citations": [
+          {
+            "source_id": "S1",
+            "quote": "TIMES will help define cycle phases more precisely through ovulation testing and collect additional contextual information that may influence insulin sensitivity, supporting a more detailed understanding of individual variability."
+          }
+        ]
+      },
+      "source_url": "https://www.dcberne.com/en/project_category/commitment-clinical-studies/",
+      "expected": false,
+      "label_reason": "Plans are not completed achievements."
+    }
+  ]
+}

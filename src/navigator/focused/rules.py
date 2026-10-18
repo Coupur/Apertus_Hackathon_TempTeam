@@ -3,8 +3,9 @@ import re
 from urllib.parse import urlsplit
 
 from .models import Document, GROUPS
+from .ranking import assess_evidence
 
-RULESET_VERSION = "focused-rules-v8"
+RULESET_VERSION = "focused-rules-v10"
 
 
 def has(pattern: str, text: str) -> bool:
@@ -194,7 +195,7 @@ def evaluate(document: Document) -> dict:
             broad_only = all(key in BROAD_RULES for key in matched)
             source_name = page_name if has(GENERIC_HEADING, label) or (broad_only and not collection) else label
             name = project_name(quote) or source_name
-            if len(name) < 4 or has(r"^(?:research|projects?|(?:our )?services?|(?:recent )?news(?: archive)?|home|navigation|overview|foundation(?: landingpage.*)?|forschung|projekte|startseite)$", name):
+            if len(name) < 4 or has(COLLECTION_TITLE, name) or has(r"^(?:research|projects?|(?:our )?services?|(?:recent )?news(?: archive)?|home|navigation|overview|foundation(?: landingpage.*)?|forschung|projekte|startseite)$", name):
                 continue
             entry = groups.setdefault(name, {"rules": set(), "quotes": [], "section": section})
             entry["rules"].update(matched)
@@ -206,8 +207,10 @@ def evaluate(document: Document) -> dict:
         keys = [key for key in RULES if key in entry["rules"]][:5]
         # One excerpt per rule before spare context, so every score has evidence.
         evidence = []
+        quality = {q["quote"]: assess_evidence([q])["score"] for q in entry["quotes"]}
         for key in keys:
-            excerpt = min((q for q in entry["quotes"] if key in signals(q["quote"])), key=lambda q: len(q["quote"]))
+            excerpt = max((q for q in entry["quotes"] if key in signals(q["quote"])),
+                          key=lambda q: (quality[q["quote"]], -len(q["quote"])))
             if excerpt not in evidence:
                 evidence.append(excerpt)
         primary = keys[0]

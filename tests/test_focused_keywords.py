@@ -9,7 +9,9 @@ from pathlib import Path
 
 from navigator.focused.cli import add_commands, dispatch
 from navigator.focused.crawl import consolidate, priority
-from navigator.focused.keywords import MAX_KEYWORDS, PATTERNS, extract_keywords, matches_keyword, record_keywords
+from navigator.focused.keywords import (MAX_KEYWORDS, PATTERNS, MEDICAL, GENERAL,
+                                       KEYWORD_VOCABULARY_VERSION, keyword_vocabulary,
+                                       extract_keywords, matches_keyword, record_keywords)
 from navigator.focused.models import Document
 from navigator.focused.selection import evaluate, validate_findings
 from navigator.focused.store import Store, refresh_keywords
@@ -27,6 +29,27 @@ ONCOLOGY = "The research project investigates how genomic sequencing can identif
 
 
 class KeywordTests(unittest.TestCase):
+    def test_runtime_cannot_expand_the_static_vocabulary(self):
+        before = keyword_vocabulary()
+        for mapping in (MEDICAL, GENERAL, PATTERNS):
+            with self.assertRaises(TypeError):
+                mapping["invented keyword"] = "invented"
+        copy = keyword_vocabulary()
+        copy["groups"]["medical"].append("invented keyword")
+        extract_keywords("A new inventedkeyword phenomenon was discovered.")
+        self.assertEqual(keyword_vocabulary(), before)
+
+    def test_catalog_cli_requires_no_database_and_matches_tagger_labels(self):
+        parser = ArgumentParser()
+        add_commands(parser.add_subparsers(dest="cmd"))
+        args = parser.parse_args(["keywords", "--json"])
+        with redirect_stdout(io.StringIO()) as output:
+            dispatch(args, parser)
+        catalog = json.loads(output.getvalue())
+        self.assertEqual(catalog["version"], KEYWORD_VOCABULARY_VERSION)
+        self.assertEqual(set(sum(catalog["groups"].values(), [])), set(PATTERNS))
+        self.assertEqual(catalog["count"], len(PATTERNS))
+
     def test_detailed_medical_concepts_in_both_languages(self):
         examples = [
             (DIABETES, {"type 1 diabetes", "diabetes", "continuous glucose monitoring", "insulin delivery"}),
