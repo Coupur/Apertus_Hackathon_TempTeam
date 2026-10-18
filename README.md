@@ -9,14 +9,18 @@ There are 3 challenges to pick from:
 2. OpenParlData: Topic classification for Swiss parliaments with Apertus
 3. University of Bern: Deciphering Archives with Apertus
 
-`One paragraph describing the challenge.`
+Research institutions generate a considerable amount of valuable information about their people, expertise, research activities, technologies, infrastructures and services. However, this information is distributed across a large and heterogeneous landscape of institutional websites and platforms.
 
 Submissions must use the v1.5 Apertus model family.
 The submission must comply with the [HackApertus T&C](https://hackapertus.ch/terms-and-conditions).
 
-## 🎯 The Challenge
+## The Challenge
 
-`Fill in the title of the challenge you picked and link the Notion challenge page (URL)`
+### Bern Economic Development Agency
+
+### Research & Expertise Navigator
+
+https://hackapertus.notion.site/liebefeld-challenges?p=fe5b4fec112a833daf9401a4771a7c12&pm=c
 
 ## 🔧 Resources & Tools
 
