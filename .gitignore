@@ -10,21 +10,38 @@
 *.ckpt
 *.pt
 
-# Crawled data (regenerate with `python -m navigator crawl`)
-
 # Python
 __pycache__/
 *.py[cod]
 .venv/
 venv/
+.venv/**
+
+# Local SQLite DB (re-seeded from JSON)
+src/company_match/data/*.db
+src/company_match/data/*.db-*
+
+# Generated sample PDF (recreate via samples/make_sample_pdf.py)
+src/company_match/samples/sample_pitch.pdf
+
+# Timestamped handoff copies (keep latest.json / latest.md for teammate)
+src/company_match/outbox/handoff_*.json
+src/company_match/outbox/handoff_*.md
+
+# Local Qdrant storage
+src/company_match/data/qdrant_local/
 
 # Node
 node_modules/
 dist/
 build/
+src/company_match/web/node_modules/
+src/company_match/web/dist/
 
 # OS and editor
 .DS_Store
 .idea/
 .vscode/
-/data
+
+# LLM profile cache
+src/company_match/data/llm_cache/

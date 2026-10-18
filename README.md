@@ -94,6 +94,23 @@ Each dimension is scored from 0 to 5.
 
 1. Click **Use this template** to create your own repository.
 
+## TempTeam — company match layer (this repo)
+
+Life-science company ingest → web enrich → **local Ollama LLM** (default
+`qwen2.5:3b`; Apertus when `LLM_*` is set) → **collaboration potential %**
+and P1–P4 priority for Bern outreach.
+
+| | |
+| --- | --- |
+| Docs | [`src/company_match/README.md`](src/company_match/README.md) |
+| UI | `http://127.0.0.1:5173` (Vite) |
+| API | `http://127.0.0.1:8088` (`uvicorn company_match.api:app --app-dir src --port 8088`) |
+| Env | copy [`.env.example`](.env.example) → `.env` |
+
+Quick demo: start Ollama + API + UI, paste a company name or website, click
+**Extract & prioritize**. Layer view shows the active model (e.g.
+`ollama:qwen2.5:3b`), not Kimi.
+
 ## License
 
 All Hack Apertus projects are open-sourced. Please check our Terms & Conditions for specific licensing details (6. What you build is open source): https://hackapertus.ch/terms-and-conditions
