@@ -1,5 +1,29 @@
 # Navigator backend
 
+## SvelteKit interface
+
+The starter interface lives in `src/routes` and uses SvelteKit with Bits UI.
+Run it from the repository root:
+
+```sh
+npm install
+npm run dev
+```
+
+Set `RESEND_API_KEY` in the ignored root `.env` file. Optionally set
+`RESEND_FROM_EMAIL` to a verified sender address and `APP_ORIGIN` to the
+public HTTPS origin used in sign-in links. The default sender
+`onboarding@resend.dev` is suitable for Resend testing; sending to arbitrary
+recipients requires a verified sending domain.
+
+Run `npm run check` for Svelte and TypeScript diagnostics, or `npm run build`
+to create a production build. Magic links expire after 15 minutes and are
+single-use. Verified sign-ins use HTTP-only session cookies, and auth records
+are stored in the ignored `.data/auth.sqlite` SQLite database. Production
+deployments need persistent storage for this database.
+
+## Navigator backend
+
 ```
 Company request ──► 1. understand (Apertus: need → terms + EN/DE synonyms)
                     2. retrieve   (BM25 over crawled + enriched pages)
