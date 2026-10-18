@@ -1,4 +1,4 @@
-# Hack Apertus Liebefeld — `challenge name`, `team name`
+# Hack Apertus Liebefeld — Research & Expertise Navigator, TempTeam
 
 Template repository for [Hack Apertus](https://hackapertus.ch/) submissions.
 Every project keeps the same layout, so organizers and judges find the same
