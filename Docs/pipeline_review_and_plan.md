@@ -185,9 +185,7 @@ Pass condition: no lower than this review on Hit@3 and Recall@10; all 3 bench ne
 2. **Report rendering (GAP).** From `answers.json`: one page per company. Start with existing ties, then each question with its
    verdict, the people and units with role, unit, reason and source link, and "not in our data, ask: …" where it applies.
    The same view serves the agency, the demo and the technical report's screenshots. HTML first; PDF from it if needed.
-3. **UI (GAP).** Pick one of the three: Jordan's SvelteKit dashboard (auth, sources admin, Dokploy deploy, no search page yet),
-   Niclas's static page on `feature/backend_optimisations` (old pipeline), or Trista's React app in `src/company_match/web`
-   on origin/main. Wire it to `/answer` and `/companies/{slug}`. A free-text search box plus the company report page is enough for a 2-minute demo.
+3. **UI (decision updated Oct 19).** Keep the React app in `src/company_match/web` as the single browser UI. Its navigation now switches between company matching and Apertus research themes; Vite proxies the company and Navigator APIs on distinct ports. The SvelteKit dashboard and the legacy standalone Python HTML page were removed. The initial review's `/answer` and `/companies/{slug}` integration remains a separate future gap.
 
 ### Step 3: gaps no workstream covers
 

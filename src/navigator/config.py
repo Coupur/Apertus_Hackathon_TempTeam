@@ -8,7 +8,6 @@ from dotenv import load_dotenv
 ROOT = Path(__file__).resolve().parents[2]
 load_dotenv(ROOT / ".env", override=False, interpolate=False, encoding="utf-8-sig")
 load_dotenv(ROOT / "src" / ".env", override=False, interpolate=False, encoding="utf-8-sig")
-APP_DB_FILE = ROOT / ".data" / "auth.sqlite"
 DATA_DIR = Path(os.getenv("NAVIGATOR_DATA_DIR", ROOT / "data"))
 RAW_DIR = DATA_DIR / "raw"
 SOURCES_XLSX = ROOT / "Docs" / "unibe_sous_domaines_publics_etendus.xlsx"

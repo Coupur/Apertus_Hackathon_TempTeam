@@ -1,60 +1,34 @@
 # Research & Expertise Navigator — code
 
-## SvelteKit interface
+## Unified React interface
 
-The SvelteKit and Bits UI interface lives in `src/routes`. Sign in by email to
-open the research dashboard; use **Admin** in the top navigation to add, edit,
-or remove website sources. The three starting sources are the University of
-Bern website, ARTORG, and Diabetes Center Berne. The supplied University of
-Bern subdomain inventory adds more sites to the same registry.
+The React UI in `src/company_match/web` is the project's single browser
+interface. Its navigation switches between the company-matching workflow and
+Apertus-generated research themes.
 
-Run it from the repository root:
+From the repository root:
 
 ```sh
 npm install
 npm run dev
 ```
 
-Set `RESEND_API_KEY` in the ignored root `.env` file. Optionally set
-`RESEND_FROM_EMAIL` to a verified sender address and `ORIGIN` to the public
-HTTPS origin used in sign-in links and by SvelteKit behind the reverse proxy. The default sender
-`onboarding@resend.dev` is suitable for Resend testing; sending to arbitrary
-recipients requires a verified sending domain.
+Open `http://localhost:5173`. The Vite server proxies company requests at
+`/api` to port `8088` and research-theme requests at `/navigator-api` to port
+`8000`. Run both Python APIs in separate terminals:
 
-Run `npm run check` for Svelte and TypeScript diagnostics, or `npm run build`
-to create a production build. Magic links expire after 15 minutes and are
-single-use. Verified sign-ins use HTTP-only session cookies. Auth and
-admin-managed website sources are stored in the ignored `.data/auth.sqlite`
-SQLite database. The Python source registry reads active website sources from
-the same database, so additions are available to `python -m navigator sources`
-and the crawler. Production deployments need persistent storage for this
-database.
+```sh
+PYTHONPATH=src uvicorn company_match.api:app --app-dir src --reload --port 8088
+PYTHONPATH=src uvicorn navigator.api:app --reload --port 8000
+```
 
-The dashboard includes cards for crawled pages, indexed pages, discovered PDF
-links, and downloaded PDF files. These remain at zero until an analytics
-backend is connected; the frontend does not infer metrics from local crawl
-artifacts.
+The focused crawler reads the supplied UniBE inventory and configured source
+groups; edit the source JSON files to change additional sources. The previous
+email sign-in, source-admin screens and standalone API page have been removed.
 
-## Deploy with Dokploy
-
-Deploy this repository with the Docker Compose builder using
-[docker-compose.yml](../docker-compose.yml). Route the `web` service to
-container port `3000`. Set `ORIGIN` to the public HTTPS origin; Compose passes
-it at build time for SvelteKit's CSRF origin check and at runtime for magic-link
-URLs. Provide `RESEND_API_KEY` and `RESEND_FROM_EMAIL` as Dokploy runtime
-environment variables. Do not bake secrets into the image.
-
-The Node adapter is configured to use the proxy's `X-Forwarded-Host` and
-`X-Forwarded-Proto` headers when validating POST origins. Keep the app behind
-Dokploy's trusted proxy rather than exposing the container port directly.
-
-The Compose file mounts the named `app-data` volume at `/app/.data`, so SQLite
-users, sessions, and source settings survive container replacement. If
-replacing it with a host bind mount, make sure the directory is writable by
-the container's `node` user (UID `1000`).
-
-The Docker image runs the SvelteKit interface only; the Python crawler and API
-are not started by this container.
+For production, deploy the React build and configure the reverse proxy to send
+`/api` to the company API and `/navigator-api` to the Navigator API. The Python
+services are separate from the static UI build.
 
 ## Navigator backend
 
@@ -65,6 +39,7 @@ The commands below are separate workflows. Having search code in the repository 
 | Entry point | Reads | Selection and output | Apertus |
 | --- | --- | --- | --- |
 | `focused-crawl`, then `highlights` | Source websites, then `data/focused.sqlite` | Local rules collect research candidates; `highlights --keyword` filters their subject tags and exports `findings` JSON. Ranking reflects evidence criteria, not relevance to a company. | Not used |
+| `cluster`, HTTP `POST /clusters/run`, or the React UI's **Research themes** section | Findings in `data/focused.sqlite` | Proposes themes in bounded batches, merges themes across batches and assigns every finding once. Results are saved in SQLite; rerun after findings change. | Required; uses `LLM_NAME`, `LLM_BASE_URL` and `LLM_API_KEY` |
 | `company-report company.json` | Company JSON and `data/focused.sqlite`, then selected source URLs | Keyword overlap selects findings; source HTML becomes clean text; a report evaluates the company's requirements against the selected evidence. Saves JSON and optionally Markdown. | Generates the report, except with `--prepare-only` |
 | `search`, or HTTP `POST /search` | `data/profiles.jsonl` and `data/vectors.npy`, built from pages and enriched records | Vector similarity retrieves person and unit profiles; results use the `SearchResponse` contract. | When configured, rewrites the query and judges matching units; otherwise similarity ranking is returned. |
 | `search-legacy`, or HTTP `POST /search/legacy` | `data/pages.jsonl`, plus optional `data/entities.jsonl` | BM25 retrieves pages from the company need and keywords; pages are grouped into units. | When configured, expands the query and filters candidates; without it, keyword matches are returned. |
@@ -76,7 +51,7 @@ For behavior, see the [CLI dispatch](navigator/__main__.py), [focused commands](
 
 ## Focused research highlights
 
-The focused workflow uses one working SQLite database, `data/focused.sqlite`, with **at most 700 findings**, including experts and teams, from the supplied University of Bern inventory, ARTORG, and Diabetes Center Berne. Collection, highlights and company reports all use this same database by default. Local rules select concrete significance signals and retain English explanations, short source excerpts and URLs. No model server, API key or GPU is required. Candidates are marked `selection_method: rules` and `review_status: unreviewed`.
+The focused workflow uses one working SQLite database, `data/focused.sqlite`, with **at most 700 findings**, including experts and teams, from the supplied University of Bern inventory, ARTORG, and Diabetes Center Berne. Collection, highlights, Apertus clustering and company reports use this same database by default. Local rules select concrete significance signals and retain English explanations, short source excerpts and URLs. Collection itself requires no model server, API key or GPU. Candidates are marked `selection_method: rules` and `review_status: unreviewed`; Apertus themes are a separate generated interpretation and do not change selection labels or scores.
 
 The portal list is [Docs/unibe_sous_domaines_publics_etendus.xlsx](../Docs/unibe_sous_domaines_publics_etendus.xlsx), stored in `Docs/`. Both crawlers automatically load all 42 sites from this workbook, including ARTORG and Diabetes Center Berne. Run without `--only` to include the entire inventory; `--only` restricts the run to the named source IDs. The bulk crawler also includes configured extra and discovered sources.
 
@@ -106,11 +81,23 @@ python -m navigator refresh-keywords
 python -m navigator refresh-evaluations
 python -m navigator highlights --keyword "CGM" --json
 python -m navigator highlights --keyword "oncology" --keyword "genomics" --json
+
+# Generate Apertus research themes after setting LLM_* in the root .env.
+python -m navigator cluster
 ```
 
 On POSIX shells, use `export PYTHONPATH=src`. Python's standard-library SQLite implementation is used; no database server is required.
 
 HTML is converted to plain text temporarily. Only selected structured facts, excerpts and compact crawl state persist in `data/focused.sqlite`; `highlights --out` exports JSON. Rules prioritize material for review and do not independently verify scientific importance or translate source text. `LLM_*` environment variables have no effect on focused collection.
+
+To browse themes, run the Navigator API and unified React UI from the repository root:
+
+```sh
+PYTHONPATH=src uvicorn navigator.api:app --reload --port 8000
+npm run dev
+```
+
+Select **Research themes** in the top navigation. The UI reads the most recently saved result and can start a new run. The API defaults to `http://127.0.0.1:8000`; set `NAVIGATOR_API_URL` when starting Vite if it is hosted elsewhere. Apertus calls are bounded to batches of at most 80 findings, with a maximum of 20 batch requests plus one consolidation request; the UI defaults to 50. A completed run is retained in the focused database, and the UI flags results stale when source findings change. A failed run leaves the last successful result intact.
 
 The fixed project vocabulary is [keyword_vocabulary.json](navigator/focused/keyword_vocabulary.json), version `keywords-v1`: 136 canonical terms with English/German aliases. It changes only through explicit repository edits and version increments; crawling and refresh do not add terms. `navigator keywords --json` exposes the catalog for UI filters. Per-finding tags can still change when their evidence changes.
 
@@ -192,8 +179,9 @@ Four steps, one file each in [navigator/](navigator/):
 | 3. index | `index.py` | per-page records → one profile per person and per unit, embedded → `data/profiles.jsonl`, `data/vectors.npy` |
 | 4. search | `search.py` | Apertus rewrites the need → similarity search over profiles → Apertus keeps the units that fit and says why |
 
-`api.py` serves the web page (`static/index.html`) and `POST /search`. `llm.py` talks to any
-OpenAI-compatible Apertus endpoint; `models.py` is the request / response contract.
+`api.py` exposes `/search`, `/search/legacy`, and cluster endpoints. `llm.py`
+talks to any OpenAI-compatible Apertus endpoint; `models.py` is the request /
+response contract.
 
 ### Four-step profile pipeline
 
@@ -210,7 +198,7 @@ python -m navigator enrich                    # ~35 min with 8 workers; resumabl
 python -m navigator index                     # ~1 min
 python -m navigator search "partner to validate a wearable glucose sensor"
 
-uvicorn navigator.api:app --port 8000         # web page on http://localhost:8000
+uvicorn navigator.api:app --port 8000         # Navigator API for the unified UI
 ```
 
 Build the profile index with `python -m navigator index` after collecting and enriching pages. Without `LLM_BASE_URL`, `search` returns similarity-ranked profiles without query rewriting or LLM reasons. The prior BM25 workflow remains available as `search-legacy` and `POST /search/legacy`.
@@ -274,15 +262,11 @@ Later embedding runs reuse unchanged chunk vectors and remove chunks absent from
 
 ## Manage website sources
 
-Use the signed-in **Admin** page to add, edit, or remove a website source.
-Changes are stored in `.data/auth.sqlite` and picked up by
-`python -m navigator sources`; run the crawler to collect pages from changed
-sources. The supplied UniBE subdomain inventory remains a separate discovery
-map for the University of Bern ecosystem.
-
-For source configuration committed with the project, append an entry to
-[sources.json](sources.json) (`id`, `name`, `url`, `institution`, optional
-`seed_paths`).
+There is no source-admin screen in the unified UI. For bulk workflows, add or
+edit entries in [sources.json](sources.json) (`id`, `name`, `url`,
+`institution`, optional `seed_paths`). The focused crawler uses the supplied
+UniBE inventory and its configured source groups; the bulk crawler also reads
+`sources.json` and `sources_discovered.json`.
 
 For bulk collection, append an entry to [sources.json](sources.json) (`id`, `name`, `url`, `institution`, optional `seed_paths`), then run `crawl`, `pages`, and optionally `enrich` or `embed` for the intended search workflow. This configuration does not expand the focused collector's source inventory.
 

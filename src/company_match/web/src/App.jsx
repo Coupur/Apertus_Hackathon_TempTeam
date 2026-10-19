@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import ResearchThemes from "./ResearchThemes.jsx";
 
 const API = import.meta.env.VITE_API_BASE || "/api";
 
@@ -401,6 +402,7 @@ function CompanyCard({ card }) {
 }
 
 export default function App() {
+  const [view, setView] = useState("company");
   const [text, setText] = useState("");
   const [url, setUrl] = useState("");
   const [deepLlm, setDeepLlm] = useState(false);
@@ -547,21 +549,50 @@ export default function App() {
 
   return (
     <div className="app">
-      <header className="hero">
-        <p className="badge-row">
-          <span className="badge">Canton of Bern</span>
-          <span className="badge">Life science only</span>
-          <span className="badge">Company layer</span>
-        </p>
-        <h1 className="brand">Company intelligence layer</h1>
-        <p className="lede">
-          Drop a company PDF, paste text, or add a website. See what keywords and
-          main fields are extracted, how they are prioritized, and what your
-          navigator teammate should run first.
-        </p>
+      <header className="app-navigation">
+        <a className="suite-name" href="/" onClick={(event) => {
+          event.preventDefault();
+          setView("company");
+        }}>
+          TempTeam <span>Bern research navigator</span>
+        </a>
+        <nav aria-label="Application sections">
+          <button
+            type="button"
+            className={view === "company" ? "selected" : ""}
+            aria-current={view === "company" ? "page" : undefined}
+            onClick={() => setView("company")}
+          >
+            Company matching
+          </button>
+          <button
+            type="button"
+            className={view === "themes" ? "selected" : ""}
+            aria-current={view === "themes" ? "page" : undefined}
+            onClick={() => setView("themes")}
+          >
+            Research themes
+          </button>
+        </nav>
       </header>
 
-      <div className="layout">
+      {view === "themes" ? <ResearchThemes /> : (
+        <>
+          <header className="hero">
+            <p className="badge-row">
+              <span className="badge">Canton of Bern</span>
+              <span className="badge">Life science only</span>
+              <span className="badge">Company layer</span>
+            </p>
+            <h1 className="brand">Company intelligence layer</h1>
+            <p className="lede">
+              Drop a company PDF, paste text, or add a website. See what keywords and
+              main fields are extracted, how they are prioritized, and what your
+              navigator teammate should run first.
+            </p>
+          </header>
+
+          <div className="layout">
         <section className="panel">
           <h2>Input</h2>
           <form onSubmit={analyze}>
@@ -773,7 +804,9 @@ export default function App() {
             </>
           )}
         </section>
-      </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }

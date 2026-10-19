@@ -41,8 +41,6 @@ build/
 # Company-matching web app
 src/company_match/web/node_modules/
 src/company_match/web/dist/
-# SvelteKit
-.svelte-kit/
 .data/
 
 # OS and editor

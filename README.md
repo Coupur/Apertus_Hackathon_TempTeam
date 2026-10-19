@@ -99,6 +99,14 @@ Each dimension is scored from 0 to 5.
 
 1. Click **Use this template** to create your own repository.
 
+## Research themes — focused crawler
+
+Collect findings with `python -m navigator focused-crawl`, then generate
+Apertus-based research themes with `python -m navigator cluster`. Research
+themes and company matching now share the React UI at `http://localhost:5173`;
+start the Navigator API on port `8000` to use themes. See the
+[Navigator setup and workflow guide](src/README.md).
+
 ## TempTeam — company match layer (this repo)
 
 Life-science company ingest → web enrich → **local Ollama LLM** (default
@@ -108,8 +116,9 @@ and P1–P4 priority for Bern outreach.
 | | |
 | --- | --- |
 | Docs | [`src/company_match/README.md`](src/company_match/README.md) |
-| UI | `http://127.0.0.1:5173` (Vite) |
+| UI | `http://127.0.0.1:5173` (React; company match + research themes) |
 | API | `http://127.0.0.1:8088` (`uvicorn company_match.api:app --app-dir src --port 8088`) |
+| Navigator API | `http://127.0.0.1:8000` (required for research themes) |
 | Env | copy [`.env.example`](.env.example) → `.env` |
 
 Quick demo: start Ollama + API + UI, paste a company name or website, click

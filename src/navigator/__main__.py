@@ -15,6 +15,7 @@
   python -m navigator index                         person + unit profiles -> data/profiles.jsonl, vectors.npy
   python -m navigator search "we need a partner to validate a glucose sensor"
   python -m navigator search-legacy "clinical validation of glucose sensors"
+  python -m navigator cluster                 focused finding themes via Apertus
   python -m navigator net run               targeted crawl with live console (net status in a 2nd terminal)
   python -m navigator company "Ypsomed" https://www.lindt-spruengli.com "startup that ..."   -> queries.json
   python -m navigator company-report company.json --out data/company-report.json
@@ -23,6 +24,7 @@ import argparse
 import asyncio
 import json
 import sys
+from pathlib import Path
 
 from . import config
 from .sources import load_sources
@@ -86,6 +88,10 @@ def main():
         prs.add_argument("--lead-boost", type=float, default=None)
         prs.add_argument("--floor", type=float, default=None)
     sub.add_parser("index", help="profiles + embeddings -> data/profiles.jsonl, data/vectors.npy")
+    cluster = sub.add_parser("cluster", help="group focused research findings into Apertus-generated themes")
+    cluster.add_argument("--db", type=Path, default=config.DATA_DIR / "focused.sqlite")
+    cluster.add_argument("--batch-size", type=int, default=50, help="findings per Apertus request (1-80)")
+    cluster.add_argument("--json", action="store_true", help="print the full cluster result as JSON")
     s = sub.add_parser("search", help="run a company request")
     s.add_argument("need")
     s.add_argument("--keywords", nargs="*", default=[])
@@ -119,6 +125,26 @@ def main():
 
     if args.cmd == "company-report":
         dispatch_report(args, ap)
+        return
+
+    if args.cmd == "cluster":
+        import httpx
+        import sqlite3
+        from .clusters import cluster_findings
+        from .llm import LLMUnavailable
+
+        try:
+            result = cluster_findings(args.db, args.batch_size)
+        except (ValueError, OSError, sqlite3.Error, LLMUnavailable, httpx.HTTPError) as error:
+            ap.error(str(error))
+        if args.json:
+            print(json.dumps(result, indent=2, ensure_ascii=False))
+        else:
+            print(f"Clustered {result['finding_count']} findings into {result['theme_count']} themes")
+            print(f"Model: {result['model']}  Generated: {result['generated_at']}")
+            for theme in result["clusters"]:
+                print(f"\n{theme['name']} ({theme['finding_count']})")
+                print(f"  {theme['description']}")
         return
 
     if args.cmd in ("focused-crawl", "highlights", "refresh-keywords", "refresh-evaluations", "keywords"):
@@ -225,7 +251,6 @@ def main():
                 print_answer(res)
         else:
             from datetime import datetime
-            from pathlib import Path
             from .bench import GOLD_FILE, print_summary, run_bench
             label = args.label or datetime.now().strftime("run-%m%d-%H%M")
             print_summary(run_bench(label, cfg, Path(args.gold) if args.gold else GOLD_FILE))
