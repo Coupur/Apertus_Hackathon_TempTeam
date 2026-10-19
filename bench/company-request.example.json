@@ -1,0 +1,12 @@
+{
+  "company_name": "Example MedTech company",
+  "need": "Find research partners in the canton of Bern to assess a wearable continuous glucose monitoring device.",
+  "keywords": ["CGM", "wearable devices", "clinical validation"],
+  "requirements": [
+    "Experience evaluating glucose sensor accuracy against reference measurements",
+    "Evidence of clinical research involving people with diabetes",
+    "A route for an external company to discuss collaboration"
+  ],
+  "goals": ["Identify suitable partners and questions to clarify before contacting them"],
+  "report_language": "English"
+}

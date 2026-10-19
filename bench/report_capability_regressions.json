@@ -1,0 +1,26 @@
+{
+  "annotation_method": "Source-reviewed development regressions labelled by the implementing agent before this expanded checker run; not independent human validation.",
+  "cases": [
+    {
+      "id": "C27",
+      "candidate_name": "SNAQ bringt den ersten KI-Ernährungsberater für CGM-Nutzer mit Diabetes auf den Markt",
+      "candidate_type": "research_result",
+      "requirement": "",
+      "claim": {
+        "kind": "fit",
+        "text": "This press release documents SNAQ's development of a clinically validated digital companion that integrates CGM data to support diabetes management, demonstrating relevant clinical research experience and technology integration capability for evaluating wearable glucose monitoring devices.",
+        "name": "",
+        "role": "",
+        "citations": [
+          {
+            "source_id": "S1",
+            "quote": "SNAQ Launches the First AI Nutritionist for CGM Users Managing Diabetes\n19 · Mar · 2026 | Innovation , Press Release , Research\nSNAQ has announced the release of its AI Nutritionist, a first-of-its-kind digital companion designed to help people with diabetes.\nSNAQ has launched its AI Nutritionist, a digital companion designed to support people with diabetes through personalized, real-time nutrition guidance. By integrating meal analysis, glucose data, insulin, and activity tracking, the tool delivers tailored recommendations and always-on coaching to help users improve blood sugar control and build sustainable habits.\nBuilt on SNAQ’s clinically validated meal recognition technology, already used by over 250,000 people, the platform is supported by randomized-controlled evidence showing improved glycemic outcomes."
+          }
+        ]
+      },
+      "source_url": "https://www.dcberne.com/en/snaq-launches-the-first-ai-nutritionist-for-cgm-users-managing-diabetes/",
+      "expected": false,
+      "label_reason": "Using CGM data and reporting improved glycemic outcomes do not establish the asserted capability for evaluating wearable glucose monitoring devices."
+    }
+  ]
+}

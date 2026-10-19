@@ -1,0 +1,71 @@
+{
+  "labelled_at": "2026-10-18T23:17:58+00:00",
+  "annotation_method": "New regression cases from the first repaired live CGM run, labelled before rerun.",
+  "cases": [
+    {
+      "id": "C17",
+      "candidate_name": "DCB Innovation Challenge 2023: Meet This Year’s Mentors!",
+      "candidate_type": "project",
+      "requirement": "",
+      "claim": {
+        "kind": "fit",
+        "text": "The candidate is a project linked to DCB Innovation Challenge 2023, hosted by Diabetes Center Berne. Mentors include Michael Schoemaker, a Medical Devices Industry Expert with 20+ years experience in CGM device development covering clinical studies and launch activities, and Stefanie Hofer, a Clinical Research Physician with expertise in clinical validation of machine-learning algorithms. The project provides a route for external companies to discuss collaboration with DCB, a centre for diabetes technology in Bern.",
+        "name": "",
+        "role": "",
+        "citations": [
+          {
+            "source_id": "S1",
+            "quote": "ore than 20 years of experience in the HealthTech market, at the intersection between science, technology and customer/patient.\nMyriam Tinner\nDCB, Product Manager\nBackground in Marketing, several years of experience in medical device product development, requirements definition, validation and global roll-outs and launches.\nEma Grabenweger\nDCB, Innovation Manager\nM.A. in Business Consultancy Int., 10+ years in MedTech industry corporates & start-ups, go-to-market strategies, regulatory affairs, product launch ex-cellence, global marketing.\nMichael Schoemaker\nMedical Devices Industry Expert\n20+ years experience in MD industry on development of CGM devices, covering all aspects from early research to manufacturing, clinical studies and launch activities.\nValentin Splett\nLife Sciences Innovation Consultant\n13+ years experience in consulting in life sciences innovation."
+          },
+          {
+            "source_id": "S1",
+            "quote": "DCB Annual Report 2022/23\nDownload PDF\nMore recent news\nBegin Mailchimp Signup Form CSS JS End mc_embed_signup\nDCB Research AG\nFreiburgstrasse 3\n3010 Bern\nSchweiz"
+          },
+          {
+            "source_id": "S1",
+            "quote": "in digital communication, branding and marketing.\nSimon Schwaighofer\nDCB, Business Development\nMedical device launches in start-ups/scale-ups – from late prototype stage to launch plan; business development and B2C/B2B sales.\nStefanie Hossmann\nDCB, Clinical Research Scientist\nBackground in neurobiology, strong experience in clinical evaluation planning and conduct, regulatory affairs and quality managment.\nMartina Rothenbühler\nDCB, Project Leader Data Sciences\nStrong experience in clinical development, trial design, clinical evaluation for health authorities (MDR, FDA) and clinical validation of machine-learning algorithms.\nStefanie Hofer\nDCB, Clinical Research Physician\nMedical Doctor, Diabetes Specialist and T1D. Stefanie’s mentoring focus lies in Clinical Research, Clinical Trial Strategy and reaching target patients & HCPs.\nCordelia Trümpy\nDCB, Innovation & Communication"
+          }
+        ]
+      },
+      "expected": false
+    },
+    {
+      "id": "C18",
+      "candidate_name": "DCB Innovation Challenge 2023: Meet This Year’s Mentors!",
+      "candidate_type": "project",
+      "requirement": "",
+      "claim": {
+        "kind": "expert",
+        "text": "Stefanie Hofer has expertise in clinical validation of machine-learning algorithms.",
+        "name": "Stefanie Hofer",
+        "role": "Clinical Research Physician",
+        "citations": [
+          {
+            "source_id": "S1",
+            "quote": "in digital communication, branding and marketing.\nSimon Schwaighofer\nDCB, Business Development\nMedical device launches in start-ups/scale-ups – from late prototype stage to launch plan; business development and B2C/B2B sales.\nStefanie Hossmann\nDCB, Clinical Research Scientist\nBackground in neurobiology, strong experience in clinical evaluation planning and conduct, regulatory affairs and quality managment.\nMartina Rothenbühler\nDCB, Project Leader Data Sciences\nStrong experience in clinical development, trial design, clinical evaluation for health authorities (MDR, FDA) and clinical validation of machine-learning algorithms.\nStefanie Hofer\nDCB, Clinical Research Physician\nMedical Doctor, Diabetes Specialist and T1D. Stefanie’s mentoring focus lies in Clinical Research, Clinical Trial Strategy and reaching target patients & HCPs.\nCordelia Trümpy\nDCB, Innovation & Communication"
+          }
+        ]
+      },
+      "expected": false
+    },
+    {
+      "id": "C19",
+      "candidate_name": "DCB Innovation Challenge 2023: Meet This Year’s Mentors!",
+      "candidate_type": "project",
+      "requirement": "",
+      "claim": {
+        "kind": "expert",
+        "text": "Martina Rothenbühler has expertise in clinical validation of machine-learning algorithms.",
+        "name": "Martina Rothenbühler",
+        "role": "Project Leader Data Sciences",
+        "citations": [
+          {
+            "source_id": "S1",
+            "quote": "in digital communication, branding and marketing.\nSimon Schwaighofer\nDCB, Business Development\nMedical device launches in start-ups/scale-ups – from late prototype stage to launch plan; business development and B2C/B2B sales.\nStefanie Hossmann\nDCB, Clinical Research Scientist\nBackground in neurobiology, strong experience in clinical evaluation planning and conduct, regulatory affairs and quality managment.\nMartina Rothenbühler\nDCB, Project Leader Data Sciences\nStrong experience in clinical development, trial design, clinical evaluation for health authorities (MDR, FDA) and clinical validation of machine-learning algorithms.\nStefanie Hofer\nDCB, Clinical Research Physician\nMedical Doctor, Diabetes Specialist and T1D. Stefanie’s mentoring focus lies in Clinical Research, Clinical Trial Strategy and reaching target patients & HCPs.\nCordelia Trümpy\nDCB, Innovation & Communication"
+          }
+        ]
+      },
+      "expected": true
+    }
+  ]
+}

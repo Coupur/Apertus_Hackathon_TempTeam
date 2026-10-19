@@ -27,7 +27,10 @@ def _from_xlsx() -> list[Source]:
     import openpyxl
 
     wb = openpyxl.load_workbook(config.SOURCES_XLSX, read_only=True)
-    rows = list(wb.worksheets[0].iter_rows(values_only=True))[1:]
+    try:
+        rows = list(wb.worksheets[0].iter_rows(values_only=True))[1:]
+    finally:
+        wb.close()
     out = []
     for subdomain, description, url in rows:
         if not url:

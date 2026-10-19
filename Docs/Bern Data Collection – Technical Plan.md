@@ -1,5 +1,7 @@
 # Bern Data Collection – Technical Plan
 
+> Historical design for bulk collection. The current focused implementation is documented in [Focused Crawler](Focused%20Crawler.md). It uses local rules without Apertus, retains at most 500 unreviewed research candidates, and does not execute the full-harvest or in-depth-researcher workflow described below.
+
 Oct 18, 2026 · @Sam
 
 ## At a glance

@@ -34,6 +34,10 @@ Check our resources & tools page for detailed information:
 
 ## The structure
 
+The implemented focused collector uses local rules to maintain one working SQLite database, `data/focused.sqlite`, of up to 700 findings (research, technologies, infrastructure, experts and teams) from the supplied UniBE inventory, ARTORG, and Diabetes Center Berne. Collection, highlights and company reports use this same database. It requires no Apertus endpoint and marks candidates as unreviewed. Start with [the backend instructions](src/README.md) and [the focused workflow guide](Docs/Focused%20Crawler.md). Authored output is English; original names and evidence excerpts preserve source wording.
+
+`company-report` accepts company JSON, selects focused findings by keyword overlap, reads their source pages as clean text, and asks Apertus to produce a report with citations. `--prepare-only` prepares the material without a model. The repository also contains separate legacy BM25/Apertus company search and embedding retrieval commands over a bulk page corpus. See the [implemented workflow comparison](src/README.md#implemented-workflows) for each command's inputs, matching method and output.
+
 Keep the files and directories as shown below — don't rename or move them.
 
 | Path | What it is |
@@ -42,6 +46,7 @@ Keep the files and directories as shown below — don't rename or move them.
 | `technical_report.md` | The deeper write-up: architecture, evaluation, limitations |
 | `LICENSE` | Apache-2.0 |
 | `src/` | Your code |
+| `Docs/unibe_sous_domaines_publics_etendus.xlsx` | The 42-site portal inventory, loaded automatically by both crawlers |
 
 ## Environment
 

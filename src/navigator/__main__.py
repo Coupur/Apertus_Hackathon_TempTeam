@@ -12,6 +12,7 @@
   python -m navigator search "we need a partner to validate a glucose sensor"
   python -m navigator net run               targeted crawl with live console (net status in a 2nd terminal)
   python -m navigator company "Ypsomed" https://www.lindt-spruengli.com "startup that ..."   -> queries.json
+  python -m navigator company-report company.json --out data/company-report.json
 """
 import argparse
 import asyncio
@@ -26,7 +27,11 @@ def main():
     sys.stdout.reconfigure(encoding="utf-8")  # page text has umlauts, Greek letters, etc.
     ap = argparse.ArgumentParser(prog="navigator")
     sub = ap.add_subparsers(dest="cmd", required=True)
-    c = sub.add_parser("crawl", help="step 2a: crawl sources into data/pages.jsonl")
+    from .focused.cli import add_commands, dispatch
+    add_commands(sub)
+    from .focused.company_report import add_command, dispatch as dispatch_report
+    add_command(sub)
+    c = sub.add_parser("crawl", help="crawl sources into data/raw/; run pages to produce pages.jsonl")
     c.add_argument("--only", nargs="*", help="source ids, e.g. artorg dcberne inf")
     c.add_argument("--max-pages", type=int, default=config.MAX_PAGES_PER_SOURCE)
     c.add_argument("--concurrency", type=int, default=config.CRAWL_CONCURRENCY)
@@ -94,6 +99,14 @@ def main():
     co.add_argument("--retrieve", action="store_true", help="also run the queries on the index: best chunks per "
                                                              "question, saved as matches.json")
     args = ap.parse_args()
+
+    if args.cmd == "company-report":
+        dispatch_report(args, ap)
+        return
+
+    if args.cmd in ("focused-crawl", "highlights", "refresh-keywords", "refresh-evaluations", "keywords"):
+        dispatch(args, ap)
+        return
 
     if args.cmd == "company":
         from .company import run, summary, write

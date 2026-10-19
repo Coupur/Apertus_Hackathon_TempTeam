@@ -1,0 +1,51 @@
+{
+  "annotation_method": "Source-reviewed composite false acceptances from live testing, frozen before the two-check verifier evaluation.",
+  "cases": [
+    {
+      "id": "C20",
+      "candidate_name": "SNAQ bringt den ersten KI-Ernährungsberater für CGM-Nutzer mit Diabetes auf den Markt",
+      "candidate_type": "research_result",
+      "requirement": "",
+      "claim": {
+        "kind": "fit",
+        "text": "The AI Nutritionist, a clinically validated digital companion for CGM users with diabetes, is supported by randomized-controlled evidence showing improved glycemic outcomes and is already used by over 250,000 people, establishing a proven route for external collaboration.",
+        "name": "",
+        "role": "",
+        "citations": [
+          {
+            "source_id": "S1",
+            "quote": "SNAQ bringt den ersten KI-Ernährungsberater für CGM-Nutzer mit Diabetes auf den Markt\nSNAQ hat die Veröffentlichung seines KI-Ernährungsberaters bekannt gegeben, eines einzigartigen digitalen Begleiters, der Menschen mit Diabetes helfen soll.\nSNAQ hat seinen AI Nutritionist auf den Markt gebracht, einen digitalen Begleiter, der Menschen mit Diabetes durch personalisierte Ernährungsberatung in Echtzeit unterstützt. Durch die Integration von Mahlzeitenanalyse, Glukosedaten, Insulin und Aktivitätsverfolgung liefert das Tool maßgeschneiderte Empfehlungen und ein ständiges Coaching, um den Nutzern zu helfen, den Blutzucker besser zu kontrollieren und nachhaltige Gewohnheiten aufzubauen.\nDie Plattform basiert auf der klinisch validierten Technologie von SNAQ zur Erkennung von Mahlzeiten, die bereits von mehr al"
+          },
+          {
+            "source_id": "S1",
+            "quote": "s 250.000 Menschen genutzt wird, und stützt sich auf randomisiert-kontrollierte Studien, die eine Verbesserung der Blutzuckerwerte belegen. CEO Aurelian Briner hob das Potenzial hervor, den Zugang zu erschwinglicher, qualitativ hochwertiger Ernährungsberatung weltweit zu erweitern. Der AI Nutritionist ist jetzt in den USA erhältlich, die internationale Einführung ist für 2026 geplant.\nWeitere Einzelheiten finden Sie in der vollständige Pressemitteilung oder erkunden Sie die Website von SNAQ , um mehr über ihre KI-gesteuerten Lösungen für die Diabetesversorgung zu erfahren.\nNeuigkeiten\nBegin Mailchimp Signup Form CSS JS End mc_embed_signup\nDCB Research AG\nFreiburgstrasse 3\n3010 Bern\nSchweiz"
+          }
+        ]
+      },
+      "expected": false
+    },
+    {
+      "id": "C21",
+      "candidate_name": "DCB Innovation Challenge 2023: Meet This Year’s Mentors!",
+      "candidate_type": "project",
+      "requirement": "",
+      "claim": {
+        "kind": "fit",
+        "text": "The Diabetes Center Berne (DCB) hosts an Innovation Challenge with mentors including a Medical Devices Industry Expert (Michael Schoemaker) with 20+ years experience in CGM device development, and a Clinical Research Physician (Stefanie Hofer) with expertise in clinical validation of machine-learning algorithms.",
+        "name": "",
+        "role": "",
+        "citations": [
+          {
+            "source_id": "S1",
+            "quote": "the user perspective/patient community and strong experience in digital communication, branding and marketing.\nSimon Schwaighofer\nDCB, Business Development\nMedical device launches in start-ups/scale-ups – from late prototype stage to launch plan; business development and B2C/B2B sales.\nStefanie Hossmann\nDCB, Clinical Research Scientist\nBackground in neurobiology, strong experience in clinical evaluation planning and conduct, regulatory affairs and quality managment.\nMartina Rothenbühler\nDCB, Project Leader Data Sciences\nStrong experience in clinical development, trial design, clinical evaluation for health authorities (MDR, FDA) and clinical validation of machine-learning algorithms.\nStefanie Hofer\nDCB, Clinical Research Physician\nMedical Doctor, Diabetes Specialist and T1D."
+          },
+          {
+            "source_id": "S1",
+            "quote": "ore than 20 years of experience in the HealthTech market, at the intersection between science, technology and customer/patient.\nMyriam Tinner\nDCB, Product Manager\nBackground in Marketing, several years of experience in medical device product development, requirements definition, validation and global roll-outs and launches.\nEma Grabenweger\nDCB, Innovation Manager\nM.A. in Business Consultancy Int., 10+ years in MedTech industry corporates & start-ups, go-to-market strategies, regulatory affairs, product launch ex-cellence, global marketing.\nMichael Schoemaker\nMedical Devices Industry Expert\n20+ years experience in MD industry on development of CGM devices, covering all aspects from early research to manufacturing, clinical studies and launch activities.\nValentin Splett\nLife Sciences Innovation Consultant\n13+ years experience in consulting in life sciences innovation."
+          }
+        ]
+      },
+      "expected": false
+    }
+  ]
+}
