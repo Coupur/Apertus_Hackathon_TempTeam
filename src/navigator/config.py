@@ -19,6 +19,7 @@ def _load_dotenv(path: Path) -> None:
 _load_dotenv(ROOT / ".env")
 
 DATA_DIR = Path(os.getenv("NAVIGATOR_DATA_DIR", ROOT / "data"))
+APP_DB_FILE = ROOT / ".data" / "auth.sqlite"
 SOURCES_XLSX = ROOT / "Docs" / "unibe_sous_domaines_publics_etendus.xlsx"
 EXTRA_SOURCES = ROOT / "src" / "sources.json"
 DISCOVERED_SOURCES = ROOT / "src" / "sources_discovered.json"  # written by `navigator discover`

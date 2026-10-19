@@ -35,8 +35,12 @@ src/company_match/data/qdrant_local/
 node_modules/
 dist/
 build/
+# Company-matching web app
 src/company_match/web/node_modules/
 src/company_match/web/dist/
+# SvelteKit
+.svelte-kit/
+.data/
 
 # OS and editor
 .DS_Store

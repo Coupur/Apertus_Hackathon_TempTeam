@@ -2,6 +2,13 @@
   "_comment": "Extra sources on top of Docs/unibe_sous_domaines_publics_etendus.xlsx. Add a new institution by appending an entry here; no code change needed.",
   "sources": [
     {
+      "id": "unibe",
+      "name": "University of Bern",
+      "url": "https://www.unibe.ch/",
+      "institution": "University of Bern",
+      "seed_paths": []
+    },
+    {
       "id": "artorg",
       "name": "ARTORG Center for Biomedical Engineering Research",
       "url": "https://www.artorg.unibe.ch/",
