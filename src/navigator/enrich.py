@@ -1,71 +1,114 @@
-"""Step 2b — semantic enrichment: Apertus turns each crawled page into a structured record.
+"""Step 2 — Apertus turns each crawled page into a structured record: unit, people, expertise,
+projects, infrastructure, plus EN/DE synonyms for lay-term search.
 
-Anti-hallucination guard: every person / project / infrastructure item the model returns
-must appear verbatim (case-insensitive) in the page text, otherwise it is dropped.
-Without an LLM, a heuristic record (title + emails) is produced so the pipeline still runs.
+Anti-hallucination: people, their roles and emails, projects and infrastructure must appear verbatim
+in the page text, otherwise they are dropped (validate() runs again when the index is built).
+Resumable: pages that already have an Apertus record are skipped; new records are appended.
 """
 import json
 from concurrent.futures import ThreadPoolExecutor
 
 from . import config, llm
+from .crawl import keep
 
 SYSTEM = """You extract structured facts from a university / research-centre web page.
 Only use information explicitly written in the page. Never guess or invent names, roles or projects.
 Return JSON with exactly these keys:
 {
   "page_type": one of "person", "team_list", "research_group", "project", "infrastructure_service", "institute_overview", "other",
-  "unit": name of the institute / department / group the page belongs to, or "",
+  "unit": the most specific research group, lab, division or service the page belongs to
+          (e.g. "Artificial Intelligence in Medical Imaging"), or "" if the page is about the whole institute,
+  "institute": the institute, centre, department or clinic that unit belongs to (e.g. "ARTORG Center for Biomedical Engineering Research"),
   "summary": 1-2 sentence English summary of what this page offers (expertise, services),
   "expertise": list of research topics / methods / technologies (English, short terms),
   "keywords_de_en": list of synonyms and related terms in English and German that a non-expert might search for,
-  "people": list of {"name": str, "role": str, "email": str, "expertise": [str]},
+  "people": list of {"name": str, "role": str exactly as written on the page, "email": str, "expertise": [str]},
   "projects": list of project names,
   "infrastructure": list of instruments, facilities, platforms or services offered
 }"""
 
 
-def _in_text(item: str, text_low: str) -> bool:
-    return bool(item) and item.lower().strip() in text_low
+def _on_page(item, text_low: str) -> bool:
+    return isinstance(item, str) and bool(item.strip()) and item.lower().strip() in text_low
 
 
-def _validate(rec: dict, page: dict) -> dict:
+def validate(rec: dict, page: dict) -> dict:
+    """Keep only what the page itself says about people, projects and infrastructure."""
     text_low = (page["title"] + "\n" + page["text"]).lower()
-    rec["people"] = [p for p in rec.get("people", []) if isinstance(p, dict) and _in_text(p.get("name", ""), text_low)]
-    for p in rec["people"]:
-        if p.get("email") and p["email"] not in page["emails"] and p["email"].lower() not in text_low:
-            p["email"] = ""
-    rec["projects"] = [x for x in rec.get("projects", []) if isinstance(x, str) and _in_text(x, text_low)]
-    rec["infrastructure"] = [x for x in rec.get("infrastructure", []) if isinstance(x, str) and _in_text(x, text_low)]
+    people = []
+    for p in rec.get("people", []):
+        if isinstance(p, dict) and _on_page(p.get("name"), text_low):
+            people.append({"name": p["name"].strip(),
+                           "role": p["role"].strip() if _on_page(p.get("role"), text_low) else "",
+                           "email": p["email"] if _on_page(p.get("email"), text_low) else "",
+                           "expertise": [x for x in p.get("expertise", []) if isinstance(x, str)][:10]})
+    rec["people"] = people
+    for k in ("projects", "infrastructure"):
+        rec[k] = [x for x in rec.get(k, []) if _on_page(x, text_low)]
     for k in ("expertise", "keywords_de_en"):
         rec[k] = [x for x in rec.get(k, []) if isinstance(x, str)][:30]
     return rec
 
 
 def _heuristic(page: dict) -> dict:
-    return {"page_type": "other", "unit": page["source_name"], "summary": page["text"][:300],
-            "expertise": [], "keywords_de_en": [], "people": [], "projects": [], "infrastructure": [],
-            "enriched_by": "heuristic"}
+    return {
+        "page_type": "other",
+        "unit": page.get("source_name") or page.get("institution", ""),
+        "summary": page.get("text", "")[:300],
+        "expertise": [],
+        "keywords_de_en": [],
+        "people": [],
+        "projects": [],
+        "infrastructure": [],
+        "enriched_by": "heuristic",
+    }
 
 
 def enrich_page(page: dict) -> dict:
-    rec = _heuristic(page)
-    if config.LLM_ENABLED:
-        try:
-            out = llm.chat_json(SYSTEM, f"URL: {page['url']}\nTITLE: {page['title']}\n\n{page['text'][:6000]}")
-            rec = _validate({**rec, **out}, page)
-            rec["enriched_by"] = config.LLM_NAME
-        except Exception as e:  # keep going; the heuristic record is still useful for search
-            print(f"  ! enrich {page['url']}: {e}")
-    return {"page_id": page["page_id"], "url": page["url"], "title": page["title"],
-            "source_id": page["source_id"], "institution": page["institution"],
-            "emails": page["emails"], **rec}
+    rec = {
+        "page_id": page["page_id"],
+        "url": page["url"],
+        "title": page.get("title", ""),
+        "source_id": page.get("source_id", ""),
+        "institution": page.get("institution", ""),
+        "emails": page.get("emails", []),
+        **_heuristic(page),
+    }
+    if not config.LLM_ENABLED:
+        return rec
+
+    try:
+        # team lists produce long JSON; a short limit cuts it off mid-object
+        out = llm.chat_json(SYSTEM, f"URL: {page['url']}\nTITLE: {page['title']}\n\n{page['text'][:6000]}",
+                            max_tokens=4000)
+        rec.update(validate(out, page), enriched_by=config.LLM_NAME)
+    except Exception as e:
+        print(f"  ! enrich {page['url']}: {str(e)[:120]}; keeping heuristic record")
+    return rec
 
 
-def enrich_all(workers: int = 4) -> int:
-    pages = [json.loads(l) for l in open(config.PAGES_FILE, encoding="utf-8")]
-    with ThreadPoolExecutor(workers) as ex, open(config.ENTITIES_FILE, "w", encoding="utf-8") as f:
-        for i, rec in enumerate(ex.map(enrich_page, pages), 1):
+def load(include_heuristic: bool = False) -> dict[str, dict]:
+    """Return the latest usable record for each page."""
+    records = {}
+    for record in config.read_jsonl(config.ENTITIES_FILE):
+        status = record.get("enriched_by")
+        if status == "failed" or (status == "heuristic" and not include_heuristic):
+            continue
+        records[record["page_id"]] = record
+    return records
+
+
+def enrich_all(workers: int = 8, limit: int | None = None, only: list[str] | None = None) -> int:
+    done = load()
+    pages = config.read_jsonl(config.PAGES_FILE)
+    urls = {p["url"] for p in pages}
+    todo = [p for p in pages if p["page_id"] not in done and keep(p, urls) and (not only or p["source_id"] in only)]
+    todo = todo[:limit] if limit else todo
+    print(f"{len(done)} pages already enriched, {len(todo)} to go")
+    with ThreadPoolExecutor(workers) as ex, open(config.ENTITIES_FILE, "a", encoding="utf-8") as f:
+        for i, rec in enumerate(ex.map(enrich_page, todo), 1):
             f.write(json.dumps(rec, ensure_ascii=False) + "\n")
-            if i % 25 == 0:
-                print(f"  enriched {i}/{len(pages)}")
-    return len(pages)
+            f.flush()
+            if i % 50 == 0:
+                print(f"  {i}/{len(todo)}", flush=True)
+    return len(todo)

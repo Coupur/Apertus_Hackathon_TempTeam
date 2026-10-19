@@ -1,7 +1,8 @@
-"""CLI.  From the repo root:
+"""CLI, run from src/ (or with PYTHONPATH=src):
 
   python -m navigator --help            (with PYTHONPATH=src)
-  python -m navigator crawl [--only artorg dcberne] [--max-pages 40]
+  python -m navigator crawl [--only artorg dcberne] [--max-pages 40]  clean pages
+  python -m navigator crawl-raw [--only artorg dcberne]               archive raw HTML
   python -m navigator pages                 raw HTML -> data/pages.jsonl
   python -m navigator cards                 net records + pages -> data/index/to_embed.jsonl
   python -m navigator embed                 to_embed.jsonl -> data/index/ (only new lines)
@@ -9,7 +10,11 @@
   python -m navigator bench --label NAME    score retrieval against bench/gold.jsonl -> bench/report.html
   python -m navigator retrieve "clinical validation of glucose sensors"   (or a queries/company .json)
   python -m navigator enrich
+  python -m navigator sources                       list the configured websites
+  python -m navigator enrich [--limit 20]           Apertus extraction -> data/entities.jsonl
+  python -m navigator index                         person + unit profiles -> data/profiles.jsonl, vectors.npy
   python -m navigator search "we need a partner to validate a glucose sensor"
+  python -m navigator search-legacy "clinical validation of glucose sensors"
   python -m navigator net run               targeted crawl with live console (net status in a 2nd terminal)
   python -m navigator company "Ypsomed" https://www.lindt-spruengli.com "startup that ..."   -> queries.json
   python -m navigator company-report company.json --out data/company-report.json
@@ -31,11 +36,16 @@ def main():
     add_commands(sub)
     from .focused.company_report import add_command, dispatch as dispatch_report
     add_command(sub)
-    c = sub.add_parser("crawl", help="crawl sources into data/raw/; run pages to produce pages.jsonl")
+    c = sub.add_parser("crawl", help="crawl websites directly into data/pages.jsonl")
     c.add_argument("--only", nargs="*", help="source ids, e.g. artorg dcberne inf")
     c.add_argument("--max-pages", type=int, default=config.MAX_PAGES_PER_SOURCE)
     c.add_argument("--concurrency", type=int, default=config.CRAWL_CONCURRENCY)
     c.add_argument("--delay", type=float, default=config.CRAWL_DELAY_S)
+    raw = sub.add_parser("crawl-raw", help="archive raw HTML under data/raw/ for offline page extraction")
+    raw.add_argument("--only", nargs="*", help="source ids, e.g. artorg dcberne inf")
+    raw.add_argument("--max-pages", type=int, default=config.MAX_PAGES_PER_SOURCE)
+    raw.add_argument("--concurrency", type=int, default=config.CRAWL_CONCURRENCY)
+    raw.add_argument("--delay", type=float, default=config.CRAWL_DELAY_S)
     sub.add_parser("sources", help="list configured sources")
     d = sub.add_parser("discover", help="add *.unibe.ch subdomains linked from crawled pages as sources")
     d.add_argument("--min-links", type=int, default=5)
@@ -48,8 +58,10 @@ def main():
     b.add_argument("--max-requests", type=int, default=None)
     b.add_argument("--from-date", help="only records changed since YYYY-MM-DD")
     sub.add_parser("dcberne-api", help="dump the Diabetes Center Berne WordPress API into data/raw/dcberne_api/")
-    e = sub.add_parser("enrich", help="step 2b: Apertus extracts structured records")
-    e.add_argument("--workers", type=int, default=4)
+    e = sub.add_parser("enrich", help="Apertus extraction -> data/entities.jsonl (resumable)")
+    e.add_argument("--workers", type=int, default=8)
+    e.add_argument("--limit", type=int, default=None, help="at most this many pages (for a test run)")
+    e.add_argument("--only", nargs="*", help="source ids")
     sub.add_parser("pages", help="raw HTML -> data/pages.jsonl (incremental)")
     em = sub.add_parser("embed", help="pages.jsonl -> data/index/ chunk vectors (only new chunks)")
     em.add_argument("--batch-size", type=int, default=64)
@@ -73,10 +85,15 @@ def main():
         prs.add_argument("--no-head-credit", action="store_true", help="don't pass team scores up to the named head")
         prs.add_argument("--lead-boost", type=float, default=None)
         prs.add_argument("--floor", type=float, default=None)
-    s = sub.add_parser("search", help="steps 1+3: run a company request")
+    sub.add_parser("index", help="profiles + embeddings -> data/profiles.jsonl, data/vectors.npy")
+    s = sub.add_parser("search", help="run a company request")
     s.add_argument("need")
     s.add_argument("--keywords", nargs="*", default=[])
     s.add_argument("--n", type=int, default=5)
+    legacy_search = sub.add_parser("search-legacy", help="BM25 search over the legacy page corpus")
+    legacy_search.add_argument("need")
+    legacy_search.add_argument("--keywords", nargs="*", default=[])
+    legacy_search.add_argument("--n", type=int, default=5)
     n = sub.add_parser("net", help="targeted crawl of UniBE, ARTORG and DCB: seed | run | status | export")
     nsub = n.add_subparsers(dest="net_cmd", required=True)
     ns = nsub.add_parser("seed", help="import the old crawl and fill the queue (run does this automatically)")
@@ -142,34 +159,23 @@ def main():
         for s in load_sources():
             print(f"{s.id:20} {s.url:45} {s.name}")
     elif args.cmd == "crawl":
-        sources = load_sources()
-        if args.only:
-            sources = [s for s in sources if s.id in args.only]
         from .crawl import crawl_all
-        print(f"Crawling {len(sources)} sources, max {args.max_pages} pages each, "
-              f"{args.concurrency} sites in parallel, {args.delay}s between requests per site")
-        snap = asyncio.run(crawl_all(sources, args.max_pages, args.concurrency, args.delay))
-        print(f"Saved {snap['pages_saved']} raw pages under {config.RAW_DIR}")
-    elif args.cmd == "discover":
-        from .discover import discover
-        found = discover(args.min_links)
-        print(f"{len(found)} new sources -> {config.DISCOVERED_SOURCES}")
-    elif args.cmd == "pdfs":
-        from .pdfs import download_all
-        st = asyncio.run(download_all(args.only, args.max_per_site, args.concurrency, args.delay))
-        print(f"Saved {st['saved']} PDFs ({st['mb']:.0f} MB) from {st['sites']} sites, {st['errors']} errors")
-    elif args.cmd == "boris":
-        from .boris import harvest
-        st = harvest(args.max_requests, args.from_date)
-        print(f"BORIS: {st['records']}/{st['total']} records in {config.RAW_DIR / 'boris'}")
-    elif args.cmd == "dcberne-api":
-        from .dcb_api import dump
-        print(json.dumps(dump(), indent=1))
+        sources = [s for s in load_sources() if not args.only or s.id in args.only]
+        pages = crawl_all(sources, args.max_pages, args.delay, workers=args.concurrency)
+        print(f"Saved {pages} pages -> {config.PAGES_FILE}")
+    elif args.cmd == "crawl-raw":
+        from .crawl_raw import crawl_all
+        sources = [s for s in load_sources() if not args.only or s.id in args.only]
+        snapshot = asyncio.run(crawl_all(sources, args.max_pages, args.concurrency, args.delay))
+        print(f"Saved {snapshot['pages_saved']} raw pages under {config.RAW_DIR}")
     elif args.cmd == "enrich":
-        from .enrich import enrich_all
         if not config.LLM_ENABLED:
             print("LLM_BASE_URL not set: writing heuristic records only")
-        print(f"Wrote {enrich_all(args.workers)} records to {config.ENTITIES_FILE}")
+        from .enrich import enrich_all
+        print(f"Enriched {enrich_all(args.workers, args.limit, args.only)} pages -> {config.ENTITIES_FILE}")
+    elif args.cmd == "index":
+        from .index import build
+        print(json.dumps(build(), indent=2))
     elif args.cmd == "pages":
         from .pages import build_pages
         added, total = build_pages()
@@ -230,6 +236,11 @@ def main():
     elif args.cmd == "search":
         from .models import CompanyRequest
         from .search import search
+        res = search(CompanyRequest(need=args.need, keywords=args.keywords, max_results=args.n))
+        print(json.dumps(res.model_dump(), indent=2, ensure_ascii=False))
+    elif args.cmd == "search-legacy":
+        from .models import CompanyRequest
+        from .legacy_search import search
         res = search(CompanyRequest(need=args.need, keywords=args.keywords, max_results=args.n))
         print(json.dumps(res.model_dump(), indent=2, ensure_ascii=False))
 

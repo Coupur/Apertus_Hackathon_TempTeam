@@ -1,4 +1,4 @@
-# Navigator backend
+# Research & Expertise Navigator — code
 
 ## SvelteKit interface
 
@@ -58,7 +58,7 @@ are not started by this container.
 
 ## Navigator backend
 
-## Implemented workflows
+### Implemented workflows
 
 The commands below are separate workflows. Having search code in the repository does not mean its input data or model endpoint has been prepared.
 
@@ -66,12 +66,13 @@ The commands below are separate workflows. Having search code in the repository 
 | --- | --- | --- | --- |
 | `focused-crawl`, then `highlights` | Source websites, then `data/focused.sqlite` | Local rules collect research candidates; `highlights --keyword` filters their subject tags and exports `findings` JSON. Ranking reflects evidence criteria, not relevance to a company. | Not used |
 | `company-report company.json` | Company JSON and `data/focused.sqlite`, then selected source URLs | Keyword overlap selects findings; source HTML becomes clean text; a report evaluates the company's requirements against the selected evidence. Saves JSON and optionally Markdown. | Generates the report, except with `--prepare-only` |
-| `search`, or HTTP `POST /search` | `data/pages.jsonl`, plus optional `data/entities.jsonl` | BM25 retrieves pages from the company need and keywords; pages are grouped into units and returned as `SearchResponse` JSON. | When configured, expands the query and filters candidates with explanations. Final order still uses the grouped BM25 score. |
+| `search`, or HTTP `POST /search` | `data/profiles.jsonl` and `data/vectors.npy`, built from pages and enriched records | Vector similarity retrieves person and unit profiles; results use the `SearchResponse` contract. | When configured, rewrites the query and judges matching units; otherwise similarity ranking is returned. |
+| `search-legacy`, or HTTP `POST /search/legacy` | `data/pages.jsonl`, plus optional `data/entities.jsonl` | BM25 retrieves pages from the company need and keywords; pages are grouped into units. | When configured, expands the query and filters candidates; without it, keyword matches are returned. |
 | `embed`, then `retrieve` | `data/pages.jsonl`, then `data/index/` | A separate embedding model compares company queries with page chunks and returns similarity-ranked `matches` JSON. | Not used |
 
 `search` and `retrieve` do not read `focused.sqlite` or its `highlights.json` export. There is no automatic hybrid search or handoff from `retrieve` to Apertus. Use `company-report` for company matching and reporting over focused findings.
 
-For behavior, see the [CLI dispatch](navigator/__main__.py), [focused commands](navigator/focused/cli.py), [company reports](navigator/focused/company_report.py), [legacy company search](navigator/search.py), and [vector retrieval](navigator/retrieve.py). The [bulk collection technical plan](../Docs/Bern%20Data%20Collection%20%E2%80%93%20Technical%20Plan.md) is a historical design, not a description of the complete current implementation.
+For behavior, see the [CLI dispatch](navigator/__main__.py), [focused commands](navigator/focused/cli.py), [company reports](navigator/focused/company_report.py), [profile search](navigator/search.py), [legacy BM25 search](navigator/legacy_search.py), and [chunk retrieval](navigator/retrieve.py). The [bulk collection technical plan](../Docs/Bern%20Data%20Collection%20%E2%80%93%20Technical%20Plan.md) is a historical design, not a description of the complete current implementation.
 
 ## Focused research highlights
 
@@ -162,11 +163,11 @@ Company request ──► 1. understand (Apertus: need → terms + EN/DE synonym
                     3. judge      (Apertus: keep relevant units, write reason)
                  ──► SearchResponse (units, people, expertise, infra, reason, source URLs)
 
-Offline pipeline:  sources → crawl → data/raw/ → pages → data/pages.jsonl
+Offline archive pipeline:  sources → crawl-raw → data/raw/ → pages → data/pages.jsonl
                                                         └─► enrich → data/entities.jsonl
 ```
 
-## Run
+### Existing and archive workflows
 
 ```bash
 pip install -r src/requirements.txt
@@ -175,15 +176,44 @@ export LLM_NAME=swiss-ai/Apertus-v1.5-8B LLM_BASE_URL=http://<host>:8000/v1 LLM_
 # or: cp .env.example .env and add your Keera key (CSCS-hosted Apertus; loaded automatically, gitignored)
 
 python -m navigator sources                          # list the 42+ configured sites
-python -m navigator crawl --only artorg dcberne inf  # or no --only for everything
-python -m navigator pages                            # required: raw HTML -> pages.jsonl
-python -m navigator enrich                           # optional: Apertus structured extraction
-python -m navigator search "partner to validate a wearable glucose sensor"
+python -m navigator crawl --only artorg dcberne inf      # direct clean-page collection
+python -m navigator crawl-raw --only artorg dcberne inf  # archive raw HTML for offline processing
+python -m navigator pages                                # raw archive -> pages.jsonl
+python -m navigator enrich                               # optional: Apertus structured extraction
 
-uvicorn navigator.api:app --app-dir src --port 8000  # POST /search, GET /health
 ```
 
-`search` requires `pages.jsonl`; `entities.jsonl` is optional enrichment. Without `LLM_BASE_URL`, search uses the supplied need and keywords and explains matches by listing matching words. Apertus calls also fall back to keyword behavior if they fail. Neither case creates the missing page corpus.
+Four steps, one file each in [navigator/](navigator/):
+
+| Step | File | In → out |
+|---|---|---|
+| 1. crawl | `crawl.py` | websites from `sources.json` + the UniBE inventory → `data/pages.jsonl` (clean text per page) |
+| 2. enrich | `enrich.py` | Apertus reads each page → `data/entities.jsonl` (unit, people, roles, expertise, projects, infrastructure, EN/DE synonyms) |
+| 3. index | `index.py` | per-page records → one profile per person and per unit, embedded → `data/profiles.jsonl`, `data/vectors.npy` |
+| 4. search | `search.py` | Apertus rewrites the need → similarity search over profiles → Apertus keeps the units that fit and says why |
+
+`api.py` serves the web page (`static/index.html`) and `POST /search`. `llm.py` talks to any
+OpenAI-compatible Apertus endpoint; `models.py` is the request / response contract.
+
+### Four-step profile pipeline
+
+Python 3.12 (see `.python-version`).
+
+```bash
+uv venv && source .venv/bin/activate          # with conda: `conda deactivate` first
+uv pip install -r src/requirements.txt
+cp src/.env.example src/.env                  # fill in LLM_NAME, LLM_BASE_URL, LLM_API_KEY; loaded automatically
+cd src
+
+python -m navigator crawl                     # ~10 min for all sites; --only artorg dcberne for a subset
+python -m navigator enrich                    # ~35 min with 8 workers; resumable; --limit 20 for a test run
+python -m navigator index                     # ~1 min
+python -m navigator search "partner to validate a wearable glucose sensor"
+
+uvicorn navigator.api:app --port 8000         # web page on http://localhost:8000
+```
+
+Build the profile index with `python -m navigator index` after collecting and enriching pages. Without `LLM_BASE_URL`, `search` returns similarity-ranked profiles without query rewriting or LLM reasons. The prior BM25 workflow remains available as `search-legacy` and `POST /search/legacy`.
 
 ## Retrieval layer and test bench
 
@@ -193,6 +223,7 @@ python -m navigator cards        # net records + pages -> data/index/to_embed.js
 python -m navigator embed        # embeds only new lines (person cards first), GPU if available
 python -m navigator ask "who works on organ-on-chip models?"     # people, units, pages + evidence
 python -m navigator bench --label cards-rollup                   # score vs bench/gold.jsonl
+python -m navigator search-legacy "clinical validation of glucose sensors"
 ```
 
 - **cards**: one card per person and unit record from `data/net/net.sqlite`, plus 200-word chunks of
@@ -207,6 +238,8 @@ python -m navigator bench --label cards-rollup                   # score vs benc
 - Compare setups with flags: `--kinds page --no-rollup` (pages only), `--lead-boost 0`, `--floor 0.84`.
 - Gold answers marked `"status": "draft"` were drafted from the sites' own "Head/Leitung" statements.
   Open the `source` URL, confirm, and set `"checked"`.
+
+If `data/pages.jsonl` and `data/entities.jsonl` are already there, only `index` and the server are needed.
 
 ## Company → queries
 
@@ -306,3 +339,13 @@ python -m navigator company-report bench/company-request.example.json --out data
 ```
 
 The entailment controls include ongoing/planned versus completed work, false radar-to-CGM validation, fabricated services, wrong-person achievements, compound overclaims, and valid weaker statements about joint work. They are labelled development regressions, not independent validation. Model replies and earlier failed runs are retained under `data/unified/report-repair/`.
+
+Append an entry to [sources.json](sources.json) (`id`, `name`, `url`, `institution`, optional `seed_paths`),
+then run `crawl`, `enrich` and `index` again. Each step only processes what is new.
+
+## Traceability
+
+- People, roles, emails, projects and infrastructure are kept only if they appear verbatim in the page text.
+- The judge can only pick candidates it was given; every result carries the source URLs it came from.
+- If no candidate fits, the response says `no_reliable_match: true` instead of guessing.
+- When a page exists in German and English, only the English version is indexed, so units are not listed twice.
