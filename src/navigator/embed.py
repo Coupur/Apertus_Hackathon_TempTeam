@@ -1,12 +1,13 @@
-"""Stage: data/pages.jsonl -> data/index/{chunks.jsonl, vectors.npy, meta.json}.
+"""Stage: data/index/to_embed.jsonl (written by `cards`) -> data/index/{chunks.jsonl, vectors.npy, meta.json}.
 
-Each page is split into overlapping word windows; each window gets one unit-length vector, so
-cosine similarity is a plain dot product. Similar texts point in similar directions (score near
-1), unrelated texts score lower. Vectors are not orthogonal, just far apart.
+Every line to embed (a person card, a unit card or a 200-word page chunk) gets one unit-length
+vector, so cosine similarity is a plain dot product. Similar texts point in similar directions
+(score near 1), unrelated texts score lower.
 
-Incremental: chunk_id = hash(model + text). Chunks already in the index keep their vector, only
-new chunks are embedded, and chunks of pages that disappeared are dropped. Changing the model
-changes every chunk_id, which forces a full rebuild.
+Incremental: each line carries chunk_id = hash(model + text). Lines already in the index keep their
+vector, only new ones are embedded, and lines that disappeared are dropped. Changing the model
+changes every chunk_id, which forces a full rebuild. Without to_embed.jsonl it falls back to
+chunking pages.jsonl directly, as before.
 """
 import hashlib
 import json
@@ -69,6 +70,10 @@ def split_words(text: str, size: int = CHUNK_WORDS, overlap: int = OVERLAP_WORDS
     return [" ".join(words[i:i + size]) for i in range(0, len(words) - overlap, step)]
 
 
+def _hash(s: str) -> str:
+    return hashlib.sha1(s.encode()).hexdigest()[:16]
+
+
 def make_chunks(page: dict) -> list[dict]:
     out = []
     for n, body in enumerate(split_words(page["text"])):
@@ -91,10 +96,18 @@ def load_index() -> tuple[list[dict], np.ndarray]:
     return chunks, vectors
 
 
+KIND_ORDER = {"person": 0, "unit": 1, "page": 2}  # embed the most useful lines first
+
+
 def build_index(batch_size: int = 64) -> dict:
-    pages = [json.loads(l) for l in open(config.PAGES_FILE, encoding="utf-8")]
-    wanted = [c for p in pages for c in make_chunks(p)]
+    to_embed = INDEX_DIR / "to_embed.jsonl"
+    if to_embed.exists():
+        wanted = [json.loads(l) for l in open(to_embed, encoding="utf-8")]
+    else:
+        wanted = [c for p in map(json.loads, open(config.PAGES_FILE, encoding="utf-8")) for c in make_chunks(p)]
     wanted = list({c["chunk_id"]: c for c in wanted}.values())  # same text twice -> one chunk
+    wanted.sort(key=lambda c: KIND_ORDER.get(c.get("kind", "page"), 9))
+    pages = {c.get("ref") or c.get("page_id") for c in wanted if c.get("kind", "page") == "page"}
 
     old_chunks, old_vecs = load_index()
     old_pos = {c["chunk_id"]: i for i, c in enumerate(old_chunks)}

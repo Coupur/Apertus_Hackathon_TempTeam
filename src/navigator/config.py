@@ -3,6 +3,21 @@ import os
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
+
+
+def _load_dotenv(path: Path) -> None:
+    """KEY=value lines from the repo's .env (gitignored, see .env.example). Real environment variables win."""
+    if not path.exists():
+        return
+    for line in path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if line and not line.startswith("#") and "=" in line:
+            key, value = line.split("=", 1)
+            os.environ.setdefault(key.strip(), value.strip().strip("\"'"))
+
+
+_load_dotenv(ROOT / ".env")
+
 DATA_DIR = Path(os.getenv("NAVIGATOR_DATA_DIR", ROOT / "data"))
 SOURCES_XLSX = ROOT / "Docs" / "unibe_sous_domaines_publics_etendus.xlsx"
 EXTRA_SOURCES = ROOT / "src" / "sources.json"

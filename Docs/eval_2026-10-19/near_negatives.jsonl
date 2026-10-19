@@ -1,0 +1,10 @@
+{"query": "automotive crash test facility", "lang": "en", "best_cos": 0.829, "why_unanswerable": "No vehicle crash-testing lab in Bern; top hits ARTORG biomechanics staff and DCB category pages (agent judgement, unchecked)"}
+{"query": "offshore wind turbine blade fatigue testing", "lang": "en", "best_cos": 0.841, "why_unanswerable": "No structural/wind-energy test rig; top hit an IEE ecology page on birds/bats vs wind turbines (agent judgement, unchecked)"}
+{"query": "semiconductor lithography fab for chip prototypes", "lang": "en", "best_cos": 0.855, "why_unanswerable": "No semiconductor fab/cleanroom lithography; top hits MIC microscopy and additive-manufacturing lab; one of 2 the 0.85 floor wrongly answers (agent judgement, unchecked)"}
+{"query": "aircraft jet engine maintenance and overhaul", "lang": "en", "best_cos": 0.841, "why_unanswerable": "No aerospace MRO capability (agent judgement, unchecked)"}
+{"query": "GMP cleanroom manufacturing of drug-delivery devices", "lang": "en", "best_cos": 0.838, "why_unanswerable": "No GMP device manufacturing found; Inselspital pharmacy/sitem-insel might partly cover it -> human check before strict negative"}
+{"query": "industrial injection moulding of plastic parts", "lang": "en", "best_cos": 0.865, "why_unanswerable": "No polymer processing/injection moulding found; hardest negative (0.002 below lowest positive); human should confirm ARTORG/sbpe prototyping labs don't cover it"}
+{"query": "commercial nuclear power plant decommissioning", "lang": "en", "best_cos": 0.84, "why_unanswerable": "No nuclear decommissioning expertise (agent judgement, unchecked)"}
+{"query": "high-speed train bogie testing", "lang": "en", "best_cos": 0.841, "why_unanswerable": "No rail-vehicle test facility (agent judgement, unchecked)"}
+{"query": "Halbleiterfertigung im Reinraum", "lang": "de", "best_cos": 0.85, "why_unanswerable": "DE twin of semiconductor fab need (agent judgement, unchecked)"}
+{"query": "Wartung von Flugzeugtriebwerken", "lang": "de", "best_cos": 0.839, "why_unanswerable": "DE twin of jet-engine maintenance (agent judgement, unchecked)"}

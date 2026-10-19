@@ -45,3 +45,4 @@ src/company_match/web/dist/
 
 # LLM profile cache
 src/company_match/data/llm_cache/
+/data
